@@ -737,24 +737,39 @@
     /* 8. RESPONSIVIDADE                                                         */
     /* ========================================================================= */
     @media (max-width: 992px) {
-      :root {
-        --hero-scroll-length: 360vh;
+      .hero-container {
+        height: auto !important;
+        min-height: 100vh;
+        min-height: 100dvh;
       }
-      .hero-header-nav, .hero-timeline {
-        display: none;
+      .hero-viewport {
+        position: relative !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+      }
+      .hero-header-nav, .hero-timeline, .scroll-prompt {
+        display: none !important;
       }
       .hero-canvas {
         filter: none !important;
       }
       .hero-content-layer {
-        top: 85px;
+        top: 75px;
+        bottom: 20px;
+        padding: 0 1.25rem;
       }
-      .phase-intro, .phase-blend, .phase-cheese, .phase-climax {
+      .phase-intro {
         left: 1.25rem;
         right: 1.25rem;
         max-width: 100%;
-        top: 54%;
-        margin-top: 15px;
+        top: 52%;
+        transform: translateY(-50%) !important;
+      }
+      .phase-intro.active {
+        transform: translateY(-50%) !important;
+      }
+      .phase-blend, .phase-cheese, .phase-climax {
+        display: none !important;
       }
       .glass-card {
         padding: 1.5rem 1.25rem;
@@ -766,9 +781,6 @@
     }
 
     @media (max-width: 580px) {
-      :root {
-        --hero-scroll-length: 330vh;
-      }
       .hero-header {
         height: 65px;
         padding: 0 1rem;
@@ -3728,12 +3740,12 @@
 
       function updateLayoutMetrics() {
         cachedVh = window.innerHeight;
-        isMobileDevice = window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        isMobileDevice = window.innerWidth <= 992;
         if (heroContainer) {
-          cachedHeroScrollable = Math.max(heroContainer.offsetHeight - cachedVh, 1);
+          cachedHeroScrollable = isMobileDevice ? 0 : Math.max(heroContainer.offsetHeight - cachedVh, 1);
         }
         if (camadasContainer) {
-          cachedCamadasTop = camadasContainer.offsetTop;
+          cachedCamadasTop = isMobileDevice && heroContainer ? heroContainer.offsetHeight : camadasContainer.offsetTop;
           cachedCamadasHeight = camadasContainer.offsetHeight;
           cachedCamadasScrollable = Math.max(cachedCamadasHeight - cachedVh, 1);
         }
@@ -3813,7 +3825,7 @@
       }
 
       // -----------------------------------------------------------------------
-      // 4. Inicialização Segura e Contínua do Vídeo da Hero (Desktop & Mobile)
+      // 4. Inicialização Segura e Contínua do Vídeo da Hero (Dual Mode: Mobile Autoplay / Desktop Scroll)
       // -----------------------------------------------------------------------
       function initHeroVideo() {
         if (!heroVideo) return;
@@ -3821,8 +3833,14 @@
         heroVideo.playsInline = true;
         heroVideo.preload = 'auto';
 
-        if (isMobileDevice && !heroVideo.src.includes('hamburguer_mobile.mp4')) {
-          heroVideo.src = 'imagens/hamburguer_mobile.mp4';
+        if (isMobileDevice) {
+          heroVideo.loop = true;
+          heroVideo.autoplay = true;
+          if (!heroVideo.src.includes('hamburguer_mobile.mp4')) {
+            heroVideo.src = 'imagens/hamburguer_mobile.mp4';
+          }
+        } else {
+          heroVideo.loop = false;
         }
 
         const onLoaded = function() {
@@ -3833,6 +3851,9 @@
           resizeCanvases();
           drawFrame(heroCtx, heroVideo, heroCanvas, true);
           if (heroLoader) heroLoader.classList.add('hidden');
+          if (isMobileDevice) {
+            heroVideo.play().catch(() => {});
+          }
         };
 
         heroVideo.addEventListener('loadedmetadata', onLoaded);
@@ -3883,11 +3904,15 @@
         const p = heroVideo.play();
         if (p !== undefined) {
           p.then(() => {
-            heroVideo.pause();
-            heroVideo.currentTime = 0.001;
+            if (!isMobileDevice) {
+              heroVideo.pause();
+              heroVideo.currentTime = 0.001;
+            }
             onLoaded();
           }).catch(() => {
-            heroVideo.currentTime = 0.001;
+            if (!isMobileDevice) {
+              heroVideo.currentTime = 0.001;
+            }
             onLoaded();
           });
         }
@@ -3908,20 +3933,20 @@
       }
 
       // -----------------------------------------------------------------------
-      // 5. Seeking Ultra Rápido Adaptado para Mobile e Desktop (0ms Keyframe Latency)
+      // 5. Seeking Ultra Rápido (Desktop)
       // -----------------------------------------------------------------------
       function applyHeroTime(time) {
-        if (!heroVideo) return;
+        if (!heroVideo || isMobileDevice) return;
         const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
         const clampedTime = Math.max(0.001, Math.min(time, dur - 0.03));
 
-        const minDelta = isMobileDevice ? 0.03 : 0.01;
+        const minDelta = 0.01;
         if (Math.abs(heroVideo.currentTime - clampedTime) < minDelta) {
           return;
         }
 
         const now = performance.now();
-        const minInterval = isMobileDevice ? 35 : 12;
+        const minInterval = 12;
         if (now - lastSeekTimestamp < minInterval) {
           heroPendingTime = clampedTime;
           return;
@@ -3941,7 +3966,7 @@
             heroPendingTime = null;
             applyHeroTime(next);
           }
-        }, isMobileDevice ? 75 : 50);
+        }, 50);
       }
 
       // -----------------------------------------------------------------------
@@ -3973,32 +3998,48 @@
         lastTimestamp = timestamp;
 
         const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        const speedFactor = isMobileDevice ? 8.5 : 12.0;
+        const speedFactor = 12.0;
 
         // --- A. HERO SECTION ---
         if (heroContainer) {
-          const inHeroRange = scrollY < cachedCamadasTop + cachedVh * 0.5;
-
-          heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
-          if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
-
-          if (inHeroRange) {
-            const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
-            if (dur > 0) {
-              applyHeroTime(heroSmooth * dur);
+          if (isMobileDevice) {
+            // MODO MOBILE: Reprodução automática fluida em loop a 60fps sem dependência de scroll
+            const inHeroRange = scrollY < cachedCamadasTop;
+            if (inHeroRange) {
+              if (heroVideo && heroVideo.paused) {
+                heroVideo.play().catch(() => {});
+              }
+              drawFrame(heroCtx, heroVideo, heroCanvas, false);
+            } else {
+              if (heroVideo && !heroVideo.paused) {
+                heroVideo.pause();
+              }
             }
-            drawFrame(heroCtx, heroVideo, heroCanvas, false);
-            updateHeroPhases(heroSmooth);
+          } else {
+            // MODO DESKTOP: Sincronização 100% Scroll-Driven Interativa
+            const inHeroRange = scrollY < cachedCamadasTop + cachedVh * 0.5;
 
-            if (heroProgressBar) {
-              heroProgressBar.style.width = (heroSmooth * 100).toFixed(2) + '%';
-            }
+            heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
+            if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
 
-            if (scrollPrompt) {
-              if (heroSmooth > 0.03) {
-                scrollPrompt.classList.add('fade-out');
-              } else {
-                scrollPrompt.classList.remove('fade-out');
+            if (inHeroRange) {
+              const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
+              if (dur > 0) {
+                applyHeroTime(heroSmooth * dur);
+              }
+              drawFrame(heroCtx, heroVideo, heroCanvas, false);
+              updateHeroPhases(heroSmooth);
+
+              if (heroProgressBar) {
+                heroProgressBar.style.width = (heroSmooth * 100).toFixed(2) + '%';
+              }
+
+              if (scrollPrompt) {
+                if (heroSmooth > 0.03) {
+                  scrollPrompt.classList.add('fade-out');
+                } else {
+                  scrollPrompt.classList.remove('fade-out');
+                }
               }
             }
           }
@@ -4299,6 +4340,10 @@
       // 11. Funções de Navegação e Scroll Suave
       // -----------------------------------------------------------------------
       window.scrollToStep = function(ratio) {
+        if (isMobileDevice) {
+          scrollToSection('camadas');
+          return;
+        }
         if (!heroContainer) return;
         const heroScrollable = heroContainer.offsetHeight - window.innerHeight;
         const targetY = ratio * heroScrollable;
@@ -4309,8 +4354,14 @@
         if (section === 'hero' || section === 'inicio') {
           window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (section === 'camadas') {
-          const top = heroContainer ? heroContainer.offsetHeight : window.innerHeight * 4;
-          window.scrollTo({ top: top, behavior: 'smooth' });
+          const el = document.getElementById('camadas');
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          } else {
+            const top = heroContainer ? heroContainer.offsetHeight : window.innerHeight;
+            window.scrollTo({ top: top, behavior: 'smooth' });
+          }
         } else if (section === 'os-styvy' || section === 'cardapio') {
           const el = document.getElementById('os-styvy');
           if (el) {

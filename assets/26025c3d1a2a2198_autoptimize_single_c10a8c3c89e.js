@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(event){let forms=document.querySelectorAll(".wpcf7-form");forms.forEach((form)=>{form.addEventListener('submit',function(){let botoes=document.querySelectorAll(".wpcf7-submit");botoes.forEach((e)=>{e.setAttribute('style','display: none;')})})})
+document.addEventListener('wpcf7invalid',function(event){let botoes=document.querySelectorAll(".wpcf7-submit");botoes.forEach((e)=>{e.removeAttribute('style')})},false);});

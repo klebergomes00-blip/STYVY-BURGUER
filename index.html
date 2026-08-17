@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
+  <title>STYVY BURGUER — O Sabor que Merece sua Fome</title>
+  <meta content="Hambúrguer artesanal feito na brasa viva. 100% carne nobre, queijo fundido, bacon crocante e pão brioche selado." name="description"/>
+  <link rel="icon" type="image/png" href="assets/46038296432225d7_cropped-cropped-Favicon-1-32x3.png" sizes="32x32"/>
+  <link rel="icon" type="image/png" href="assets/880893983299355c_cropped-cropped-Favicon-1-192x.png" sizes="192x192"/>
+
+  <!-- ========================================================================= -->
+  <!-- DESIGN TOKENS & TYPOGRAPHY ASSETS                                         -->
+  <!-- ========================================================================= -->
+  <link href="assets/0e7ea3b14a663991_css.css" id="ao_optimized_gfonts" media="all" rel="stylesheet"/>
+  <link href="assets/1be8d1e038a6ab2d_autoptimize_d6f2c4441d34016e86.css" media="all" rel="stylesheet"/>
+  <link href="assets/fd51497ce49b75cb_autoptimize_single_7c5d5641bb2.css" id="94-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="assets/af124fe426c1906b_autoptimize_single_496cdb91eaf.css" id="oxygen-cache-297-css" media="all" rel="stylesheet"/>
+  <link href="assets/d1dac701b3ec8e87_autoptimize_single_224ac597e66.css" id="oxygen-cache-802-css" media="all" rel="stylesheet"/>
+  <link href="assets/62c361088d18f169_autoptimize_single_ec57f9bc47d.css" id="oxygen-universal-styles-css" media="all" rel="stylesheet"/>
+  <link href="assets/5fbaeb9f8e25d7e0_animate.min.css" rel="stylesheet"/>
+
+  <!-- jQuery -->
+  <script src="assets/cb6f2d32c49d1c2b_jquery.min.js"></script>
+
+  <style>
+    /* ========================================================================= */
+    /* 1. DESIGN SYSTEM & TOKENS                                                 */
+    /* ========================================================================= */
+    :root {
+      --color-primary: #ff8900;
+      --color-primary-rgb: 255, 137, 0;
+      --color-accent-sweep: #f90c0c;
+      --color-bg-dark: #07080a;
+      --color-surface-glass: rgba(14, 15, 18, 0.78);
+      --color-border-glass: rgba(255, 255, 255, 0.14);
+      --color-text-white: #ffffff;
+      --color-text-ash: #eceeef;
+      --color-text-muted: #a1a1aa;
+
+      --font-display: 'Bebas Neue', 'Impact', sans-serif;
+      --font-artisanal: 'Calistoga', serif;
+      --font-body: 'Raleway', sans-serif;
+
+      --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-sweep: cubic-bezier(0.77, 0, 0.175, 1);
+
+      --hero-scroll-length: 500vh; /* Altura ideal para sensação analógica de alta precisão */
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      width: 100%;
+      height: auto;
+      min-height: 100%;
+      background-color: var(--color-bg-dark);
+      scroll-behavior: auto !important;
+    }
+
+    body {
+      width: 100%;
+      height: auto;
+      min-height: 100%;
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      overflow-y: visible;
+      position: relative;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #07080a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-primary);
+      border-radius: 3px;
+    }
+
+    /* ========================================================================= */
+    /* 2. HEADER TRANSPARENTE ULTRA REFINADO                                     */
+    /* ========================================================================= */
+    .hero-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 75px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.25rem, 4vw, 3.5rem);
+      background: linear-gradient(180deg, rgba(7, 8, 10, 0.9) 0%, rgba(7, 8, 10, 0.4) 65%, transparent 100%);
+      pointer-events: auto;
+      transition: background 0.3s ease;
+    }
+
+    .hero-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .hero-brand img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 12px rgba(255, 137, 0, 0.35)) drop-shadow(0 2px 8px rgba(0,0,0,0.9));
+      transition: transform 0.25s ease;
+    }
+
+    .hero-brand:hover img {
+      transform: scale(1.06);
+    }
+
+    .hero-brand-name {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      letter-spacing: 3px;
+      color: #ffffff;
+      line-height: 1;
+      transform: translateY(4px); /* Alinhamento óptico perfeito com o centro do hambúrguer */
+    }
+
+    .hero-brand-name span {
+      color: var(--color-primary);
+    }
+
+    .hero-header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .hero-header-link {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: var(--color-text-ash);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+
+    .hero-header-link:hover {
+      color: var(--color-primary);
+    }
+
+    /* ========================================================================= */
+    /* 3. BOTÕES CANÔNICOS DO DESIGN SYSTEM                                      */
+    /* ========================================================================= */
+    .btn-sweep {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 22px;
+      background-color: var(--color-primary);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--color-primary);
+      box-shadow: 0 4px 16px rgba(255, 137, 0, 0.4);
+      transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
+      z-index: 1;
+    }
+
+    .btn-sweep::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-accent-sweep);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s var(--ease-sweep);
+      z-index: -1;
+    }
+
+    .btn-sweep:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(249, 12, 12, 0.55);
+      border-color: var(--color-accent-sweep);
+      color: #fff;
+    }
+
+    .btn-sweep:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      background: rgba(14, 15, 18, 0.6);
+      color: var(--color-text-ash);
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s var(--ease-smooth);
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 137, 0, 0.18);
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 137, 0, 0.25);
+    }
+
+    /* ========================================================================= */
+    /* 4. SCROLL CONTAINER & CANVAS/VÍDEO ENGINE (100% FULLSCREEN)               */
+    /* ========================================================================= */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: var(--hero-scroll-length);
+      min-height: var(--hero-scroll-length);
+      background-color: var(--color-bg-dark);
+      display: block;
+    }
+
+    .hero-viewport {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #000000;
+      z-index: 10;
+    }
+
+    /* VÍDEO E CANVAS DE ALTA PERFORMANCE */
+    .hero-media-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      will-change: transform;
+      filter: contrast(1.05) brightness(0.98) saturate(1.1);
+    }
+
+    /* Vídeo oculto usado como buffer do decodificador */
+    .hero-video-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* MÁSCARAS CINEMATOGRÁFICAS SUAVES */
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(7, 8, 10, 0.88) 0%, rgba(7, 8, 10, 0.42) 36%, transparent 62%),
+        linear-gradient(180deg, rgba(7, 8, 10, 0.72) 0%, transparent 18%, transparent 82%, rgba(7, 8, 10, 0.88) 100%),
+        radial-gradient(circle at 60% 50%, transparent 45%, rgba(7, 8, 10, 0.55) 100%);
+    }
+
+    .hero-fire-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      bottom: -150px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(255, 137, 0, 0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ========================================================================= */
+    /* 5. FASES DE STORYTELLING POSICIONADAS LATERALMENTE                        */
+    /* ========================================================================= */
+    .hero-content-layer {
+      position: absolute;
+      top: 75px;
+      bottom: 35px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding: 0 clamp(1.5rem, 5vw, 5rem);
+      pointer-events: none;
+    }
+
+    .story-phase {
+      position: absolute;
+      max-width: 500px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.4s var(--ease-cinematic), transform 0.4s var(--ease-cinematic), visibility 0.4s;
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+
+    .story-phase.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    /* FASE 1: ABERTURA */
+    .phase-intro {
+      left: clamp(1.5rem, 5vw, 5rem);
+      top: 50%;
+      transform: translateY(calc(-50% + 15px));
+    }
+
+    .phase-intro.active {
+      transform: translateY(-50%);
+    }
+
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-display);
+      font-size: clamp(0.72rem, 1vw, 0.88rem);
+      letter-spacing: 2.5px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      background: rgba(255, 137, 0, 0.12);
+      border: 1px solid rgba(255, 137, 0, 0.35);
+      padding: 4px 13px;
+      border-radius: 50px;
+      margin-bottom: 0.65rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .eyebrow-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--color-primary);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.6vw, 4.4rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-headline .highlight {
+      color: var(--color-primary);
+    }
+
+    .hero-subheadline {
+      font-family: var(--font-body);
+      font-size: clamp(0.85rem, 1.15vw, 1rem);
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--color-text-ash);
+      margin-bottom: 1.15rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      max-width: 420px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* CARDS EM VIDRO FOSCO */
+    .glass-card {
+      background: var(--color-surface-glass);
+      border: 1px solid var(--color-border-glass);
+      border-radius: 12px;
+      padding: clamp(1.2rem, 2.2vw, 1.85rem);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7);
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+      line-height: 1.02;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .card-title span {
+      color: var(--color-primary);
+    }
+
+    .card-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: var(--color-text-muted);
+      margin-bottom: 1rem;
+    }
+
+    .card-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .card-badge {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* FASE 2 */
+    .phase-blend {
+      left: clamp(1.5rem, 5vw, 5rem);
+      top: 50%;
+      transform: translateY(calc(-50% + 15px));
+    }
+    .phase-blend.active {
+      transform: translateY(-50%);
+    }
+    .phase-blend .glass-card {
+      border-left: 4px solid var(--color-primary);
+    }
+
+    /* FASE 3 */
+    .phase-cheese {
+      right: clamp(1.5rem, 5vw, 5rem);
+      top: 50%;
+      transform: translateY(calc(-50% + 15px));
+    }
+    .phase-cheese.active {
+      transform: translateY(-50%);
+    }
+    .phase-cheese .glass-card {
+      border-right: 4px solid var(--color-primary);
+    }
+
+    /* FASE 4 */
+    .phase-climax {
+      left: clamp(1.5rem, 5vw, 5rem);
+      top: 50%;
+      transform: translateY(calc(-50% + 15px));
+    }
+    .phase-climax.active {
+      transform: translateY(-50%);
+    }
+    .phase-climax .glass-card {
+      border: 1px solid rgba(255, 137, 0, 0.4);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 20px rgba(255, 137, 0, 0.15);
+    }
+
+    /* ========================================================================= */
+    /* 6. HUD DE CONTROLE & SCROLL INDICATOR                                     */
+    /* ========================================================================= */
+    .scroll-prompt {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      opacity: 1;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .scroll-prompt.fade-out {
+      opacity: 0;
+      transform: translate(-50%, 15px);
+      pointer-events: none;
+    }
+
+    .mouse-frame {
+      width: 22px;
+      height: 36px;
+      border: 2px solid var(--color-primary);
+      border-radius: 11px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mouse-dot {
+      width: 4px;
+      height: 7px;
+      background-color: var(--color-primary);
+      border-radius: 2px;
+      position: absolute;
+      top: 5px;
+      animation: mouseScroll 1.5s infinite ease-in-out;
+    }
+
+    @keyframes mouseScroll {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(13px); opacity: 0; }
+    }
+
+    .scroll-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 2.5px;
+      color: var(--color-text-ash);
+      text-transform: uppercase;
+    }
+
+    /* TIMELINE LATERAL HUD */
+    .hero-timeline {
+      position: absolute;
+      right: clamp(1rem, 2.5vw, 2.5rem);
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: flex-end;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .timeline-text {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: #fff;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .timeline-bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transition: all 0.3s var(--ease-cinematic);
+    }
+
+    .timeline-item:hover .timeline-text,
+    .timeline-item.active .timeline-text {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-item.active .timeline-bullet {
+      width: 11px;
+      height: 11px;
+      background: var(--color-primary);
+      box-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .timeline-item.active .timeline-text {
+      color: var(--color-primary);
+    }
+
+    /* BARRA DE PROGRESSO */
+    .hero-progress-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      z-index: 30;
+    }
+
+    .hero-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--color-accent-sweep), var(--color-primary));
+      box-shadow: 0 0 8px var(--color-primary);
+    }
+
+    /* ========================================================================= */
+    /* 7. PRELOADER                                                              */
+    /* ========================================================================= */
+    .hero-loader {
+      position: fixed;
+      inset: 0;
+      background: #07080a;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      transition: opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .hero-loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-ring {
+      width: 46px;
+      height: 46px;
+      border: 3px solid rgba(255, 137, 0, 0.2);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spinRing 0.8s linear infinite;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+
+    /* ========================================================================= */
+    /* 8. RESPONSIVIDADE                                                         */
+    /* ========================================================================= */
+    @media (max-width: 992px) {
+      .hero-header-nav, .hero-timeline {
+        display: none;
+      }
+      .hero-content-layer {
+        top: 85px;
+      }
+      .phase-intro, .phase-blend, .phase-cheese, .phase-climax {
+        left: 1.25rem;
+        right: 1.25rem;
+        max-width: 100%;
+        top: 54%;
+        margin-top: 15px;
+      }
+      .glass-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .hero-vignette {
+        background:
+          linear-gradient(180deg, rgba(7, 8, 10, 0.85) 0%, rgba(7, 8, 10, 0.35) 30%, rgba(7, 8, 10, 0.55) 70%, rgba(7, 8, 10, 0.92) 100%);
+      }
+    }
+
+    @media (max-width: 580px) {
+      :root {
+        --hero-scroll-length: 420vh;
+      }
+      .hero-header {
+        height: 65px;
+        padding: 0 1rem;
+      }
+      .hero-headline {
+        font-size: 2.8rem;
+        margin-bottom: 0.75rem;
+      }
+      .hero-subheadline {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      .btn-sweep, .btn-ghost {
+        width: 100%;
+        padding: 11px 20px;
+        font-size: 1rem;
+      }
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+      }
+      .scroll-prompt {
+        bottom: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="hero-loader" id="heroLoader">
+    <div class="loader-ring"></div>
+    <div class="loader-title">Preparando a Brasa...</div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="hero-header">
+    <a href="#" class="hero-brand">
+      <img src="imagens/logo-styvy.png" alt="STYVY BURGUER"/>
+      <span class="hero-brand-name">STYVY <span>BURGUER</span></span>
+    </a>
+
+    <nav>
+      <ul class="hero-header-nav">
+        <li><a class="hero-header-link" onclick="scrollToStep(0.0)">Início</a></li>
+        <li><a class="hero-header-link" onclick="scrollToStep(0.35)">A Brasa</a></li>
+        <li><a class="hero-header-link" onclick="scrollToStep(0.65)">Camadas</a></li>
+        <li><a class="hero-header-link" onclick="scrollToStep(0.95)">Pedir</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank" style="padding: 8px 20px; font-size: 0.95rem;">
+        Pedir Agora
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO FULLSCREEN SCROLL-DRIVEN CONTAINER -->
+  <main class="hero-container" id="heroContainer">
+    <div class="hero-viewport" id="heroViewport">
+
+      <!-- CANVAS & VÍDEO EM TELA INTEIRA (100% Fullscreen) -->
+      <div class="hero-media-box">
+        <canvas id="heroCanvas" class="hero-canvas"></canvas>
+        <video
+          id="burgerVideo"
+          class="hero-video-element"
+          src="imagens/hamburguer.mp4"
+          muted
+          playsinline
+          webkit-playsinline
+          preload="auto"
+        ></video>
+      </div>
+
+      <!-- MÁSCARAS CINEMATOGRÁFICAS -->
+      <div class="hero-vignette"></div>
+      <div class="hero-fire-glow"></div>
+
+      <!-- ===================================================================== -->
+      <!-- FASES DE STORYTELLING SINCRONIZADAS AO SCROLL                         -->
+      <!-- ===================================================================== -->
+      <div class="hero-content-layer">
+
+        <!-- FASE 1: INTRODUÇÃO & IMPACTO (0% a 22% do scroll) -->
+        <section class="story-phase phase-intro active" id="phase1">
+          <div class="eyebrow-pill">Hambúrguer Artesanal na Brasa</div>
+          <h1 class="hero-headline">
+            O SABOR QUE <span class="highlight">MERECE</span><br/>SUA FOME.
+          </h1>
+          <p class="hero-subheadline">
+            Hambúrguer artesanal grelhado na brasa viva, ingredientes nobres e uma suculência monstruosa feita para marcar.
+          </p>
+          <div class="hero-actions">
+            <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank">
+              Pedir Agora
+            </a>
+            <button type="button" class="btn-ghost" onclick="scrollToStep(0.35)">
+              Conhecer o Burger ↓
+            </button>
+          </div>
+        </section>
+
+        <!-- FASE 2: ETAPA 01 - TUDO COMEÇA NA BRASA (22% a 54% do scroll) -->
+        <section class="story-phase phase-blend" id="phase2">
+          <div class="glass-card">
+            <div class="eyebrow-pill" style="margin-bottom: 0.65rem;">ETAPA 01 · TUDO COMEÇA NA BRASA</div>
+            <h2 class="card-title">
+              FOGO, CARNE <span>E PERFEIÇÃO.</span>
+            </h2>
+            <p class="card-desc">
+              O calor intenso sela cada hambúrguer artesanal, concentrando os sucos e criando um sabor profundo que só a verdadeira brasa consegue entregar.
+            </p>
+            <div class="card-badges">
+              <span class="card-badge">BRASA VIVA</span>
+              <span class="card-badge">BLEND EXCLUSIVO</span>
+              <span class="card-badge">SABOR INESQUECÍVEL</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- FASE 3: ETAPA 02 - A CAMADA PERFEITA (54% a 82% do scroll) -->
+        <section class="story-phase phase-cheese" id="phase3">
+          <div class="glass-card">
+            <div class="eyebrow-pill" style="margin-bottom: 0.65rem;">ETAPA 02 · A CAMADA PERFEITA</div>
+            <h2 class="card-title">
+              O ENCONTRO <span>DOS SABORES</span>
+            </h2>
+            <p class="card-desc">
+              Cheddar cremoso, bacon crocante e brioche dourado se encontram sobre a carne selada na brasa. Uma combinação cuidadosamente construída para entregar textura, intensidade e sabor em cada mordida.
+            </p>
+            <div class="card-badges" style="margin-bottom: 0.85rem;">
+              <span class="card-badge">BRIOCHE DOURADO</span>
+              <span class="card-badge">CHEDDAR CREMOSO</span>
+              <span class="card-badge">BACON DEFUMADO</span>
+            </div>
+            <div style="font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 2px; color: var(--color-primary); text-transform: uppercase;">
+              • Onde cada camada tem um propósito.
+            </div>
+          </div>
+        </section>
+
+        <!-- FASE 4: O CLÍMAX / CONVERSÃO (82% a 100% do scroll) -->
+        <section class="story-phase phase-climax" id="phase4">
+          <div class="glass-card">
+            <div class="eyebrow-pill" style="margin-bottom: 0.65rem;">O CLÍMAX · AGORA É COM VOCÊ</div>
+            <h2 class="card-title">
+              A SUA PRÓXIMA MORDIDA<br/><span>COMEÇA AQUI.</span>
+            </h2>
+            <p class="card-desc">
+              Uma experiência feita na brasa, construída com ingredientes selecionados e finalizada para entregar um hambúrguer que vai muito além da fome.
+            </p>
+            <div class="hero-actions">
+              <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank">
+                Peça Pelo Delivery
+              </a>
+              <a href="https://site.labrasaburger.com.br/onde-encontrar/" class="btn-ghost" target="_blank">
+                Ou Venha Viver a Experiência STYVY
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- HUD DE NAVEGAÇÃO & CONTROLES                                          -->
+      <!-- ===================================================================== -->
+
+      <!-- Scroll Indicator -->
+      <div class="scroll-prompt" id="scrollPrompt" onclick="scrollToStep(0.35)">
+        <div class="mouse-frame">
+          <div class="mouse-dot"></div>
+        </div>
+        <span class="scroll-label">Role para explorar</span>
+      </div>
+
+      <!-- Timeline HUD Lateral -->
+      <nav class="hero-timeline" id="heroTimeline">
+        <button class="timeline-item active" onclick="scrollToStep(0.0)">
+          <span class="timeline-text">Início</span>
+          <span class="timeline-bullet"></span>
+        </button>
+        <button class="timeline-item" onclick="scrollToStep(0.35)">
+          <span class="timeline-text">A Brasa</span>
+          <span class="timeline-bullet"></span>
+        </button>
+        <button class="timeline-item" onclick="scrollToStep(0.65)">
+          <span class="timeline-text">Camadas</span>
+          <span class="timeline-bullet"></span>
+        </button>
+        <button class="timeline-item" onclick="scrollToStep(0.95)">
+          <span class="timeline-text">O Clímax</span>
+          <span class="timeline-bullet"></span>
+        </button>
+      </nav>
+
+      <!-- Barra de Progresso no Rodapé -->
+      <div class="hero-progress-line">
+        <div class="hero-progress-bar" id="heroProgressBar"></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MOTOR DE ALTA PERFORMANCE EXCLUSIVAMENTE SCROLL-DRIVEN                    -->
+  <!-- ========================================================================= -->
+  <script>
+    (function() {
+      'use strict';
+
+      const canvas = document.getElementById('heroCanvas');
+      const ctx = canvas.getContext('2d', { alpha: false });
+      const video = document.getElementById('burgerVideo');
+      const loader = document.getElementById('heroLoader');
+      const progressBar = document.getElementById('heroProgressBar');
+      const scrollPrompt = document.getElementById('scrollPrompt');
+
+      const phases = [
+        document.getElementById('phase1'),
+        document.getElementById('phase2'),
+        document.getElementById('phase3'),
+        document.getElementById('phase4')
+      ];
+
+      const timelineItems = document.querySelectorAll('.timeline-item');
+
+      let videoDuration = 0;
+      let targetProgress = 0;
+      let smoothProgress = 0;
+      let isReady = false;
+      let isSeeking = false;
+      let pendingTime = null;
+
+      // 1. Redimensionamento e Ajuste do Canvas
+      function resizeCanvas() {
+        const dpr = window.devicePixelRatio || 1;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.scale(dpr, dpr);
+        drawVideoFrame();
+      }
+
+      function drawVideoFrame() {
+        if (!video || video.readyState < 2) return;
+
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const vw = video.videoWidth || 1920;
+        const vh = video.videoHeight || 1080;
+
+        // Cover math
+        const scale = Math.max(w / vw, h / vh);
+        const nw = vw * scale;
+        const nh = vh * scale;
+        const ox = (w - nw) / 2;
+        const oy = (h - nh) / 2;
+
+        ctx.drawImage(video, ox, oy, nw, nh);
+      }
+
+      // 2. Inicialização do Vídeo
+      function initVideo() {
+        video.muted = true;
+        video.playsInline = true;
+
+        const onLoaded = function() {
+          if (!isReady) {
+            isReady = true;
+            videoDuration = video.duration || 5;
+            resizeCanvas();
+            drawVideoFrame();
+            if (loader) loader.classList.add('hidden');
+          }
+        };
+
+        video.addEventListener('loadedmetadata', onLoaded);
+        video.addEventListener('loadeddata', onLoaded);
+        video.addEventListener('canplay', onLoaded);
+        video.addEventListener('canplaythrough', onLoaded);
+
+        // Destravar decoder
+        const p = video.play();
+        if (p !== undefined) {
+          p.then(() => {
+            video.pause();
+            video.currentTime = 0.001;
+            onLoaded();
+          }).catch(() => {
+            video.currentTime = 0.001;
+            onLoaded();
+          });
+        }
+
+        video.addEventListener('seeked', function() {
+          isSeeking = false;
+          drawVideoFrame();
+          if (pendingTime !== null) {
+            const next = pendingTime;
+            pendingTime = null;
+            applyTime(next);
+          }
+        });
+
+        setTimeout(onLoaded, 600);
+      }
+
+      // 3. Sistema de Busca de Alta Velocidade (Fast Seeking)
+      function applyTime(time) {
+        if (!isReady || !video.duration) return;
+
+        time = Math.max(0, Math.min(time, video.duration - 0.02));
+
+        if (isSeeking) {
+          pendingTime = time;
+          return;
+        }
+
+        if (Math.abs(video.currentTime - time) > 0.012) {
+          isSeeking = true;
+          if ('fastSeek' in video) {
+            try {
+              video.fastSeek(time);
+            } catch(e) {
+              video.currentTime = time;
+            }
+          } else {
+            video.currentTime = time;
+          }
+        }
+      }
+
+      // 4. Cálculo do Scroll
+      function getScrollProgress() {
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+        const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+        if (totalScrollable <= 0) return 0;
+        return Math.min(Math.max(scrollY / totalScrollable, 0), 1);
+      }
+
+      function onScrollUpdate() {
+        targetProgress = getScrollProgress();
+      }
+
+      // 5. Loop de Renderização a 60/120 FPS
+      let lastTimestamp = performance.now();
+
+      function animationLoop(timestamp) {
+        const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.1);
+        lastTimestamp = timestamp;
+
+        // LERP dinâmico com amortecimento físico ultra-suave
+        const speedFactor = 14.0;
+        smoothProgress += (targetProgress - smoothProgress) * (1 - Math.exp(-speedFactor * dt));
+
+        if (Math.abs(targetProgress - smoothProgress) < 0.0001) {
+          smoothProgress = targetProgress;
+        }
+
+        if (videoDuration > 0) {
+          const targetTime = smoothProgress * videoDuration;
+          applyTime(targetTime);
+        }
+
+        // Desenhar frame no canvas
+        drawVideoFrame();
+
+        // Atualizar Fases de Texto
+        updatePhases(smoothProgress);
+
+        // Barra de progresso
+        if (progressBar) {
+          progressBar.style.width = (smoothProgress * 100).toFixed(2) + '%';
+        }
+
+        // Scroll prompt
+        if (scrollPrompt) {
+          if (smoothProgress > 0.03) {
+            scrollPrompt.classList.add('fade-out');
+          } else {
+            scrollPrompt.classList.remove('fade-out');
+          }
+        }
+
+        requestAnimationFrame(animationLoop);
+      }
+
+      // 6. Atualização das Fases de Conteúdo
+      function updatePhases(progress) {
+        let activeIndex = 0;
+
+        if (progress < 0.22) {
+          activeIndex = 0; // Fase 1: Intro
+        } else if (progress >= 0.22 && progress < 0.54) {
+          activeIndex = 1; // Fase 2: Blend 200g
+        } else if (progress >= 0.54 && progress < 0.82) {
+          activeIndex = 2; // Fase 3: Queijo & Bacon
+        } else {
+          activeIndex = 3; // Fase 4: Clímax & Pedido
+        }
+
+        phases.forEach((p, idx) => {
+          if (p) {
+            if (idx === activeIndex) {
+              p.classList.add('active');
+            } else {
+              p.classList.remove('active');
+            }
+          }
+        });
+
+        timelineItems.forEach((item, idx) => {
+          if (idx === activeIndex) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+
+      // 7. Salto Suave para Etapas
+      window.scrollToStep = function(ratio) {
+        const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const targetY = ratio * totalScrollable;
+
+        window.scrollTo({
+          top: targetY,
+          behavior: 'smooth'
+        });
+      };
+
+      // 8. Event Listeners Globais
+      window.addEventListener('scroll', onScrollUpdate, { passive: true });
+      document.addEventListener('scroll', onScrollUpdate, { passive: true });
+      window.addEventListener('resize', () => {
+        resizeCanvas();
+        onScrollUpdate();
+      }, { passive: true });
+      window.addEventListener('wheel', onScrollUpdate, { passive: true });
+      window.addEventListener('touchmove', onScrollUpdate, { passive: true });
+
+      // Suporte a teclado
+      window.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+          targetProgress = Math.min(targetProgress + 0.25, 1);
+          scrollToStep(targetProgress);
+        } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+          targetProgress = Math.max(targetProgress - 0.25, 0);
+          scrollToStep(targetProgress);
+        }
+      });
+
+      // Inicialização imediata
+      resizeCanvas();
+      initVideo();
+      onScrollUpdate();
+      requestAnimationFrame(animationLoop);
+
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Design System &amp; Pattern Library — La Brasa Burger</title>
+  
+  <!-- Original Fonts & Stylesheets -->
+  <link href="assets/0e7ea3b14a663991_css.css" id="ao_optimized_gfonts" media="all" rel="stylesheet"/>
+  <link href="assets/1be8d1e038a6ab2d_autoptimize_d6f2c4441d34016e86.css" media="all" rel="stylesheet"/>
+  <link href="assets/fd51497ce49b75cb_autoptimize_single_7c5d5641bb2.css" id="94-css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="assets/af124fe426c1906b_autoptimize_single_496cdb91eaf.css" id="oxygen-cache-297-css" media="all" rel="stylesheet"/>
+  <link href="assets/d1dac701b3ec8e87_autoptimize_single_224ac597e66.css" id="oxygen-cache-802-css" media="all" rel="stylesheet"/>
+  <link href="assets/62c361088d18f169_autoptimize_single_ec57f9bc47d.css" id="oxygen-universal-styles-css" media="all" rel="stylesheet"/>
+  <link href="assets/5fbaeb9f8e25d7e0_animate.min.css" rel="stylesheet"/>
+  <link href="assets/6fdfce7f521a4e27_cookieBubble.min.css" rel="stylesheet"/>
+
+  <!-- jQuery and Scripts -->
+  <script src="assets/cb6f2d32c49d1c2b_jquery.min.js"></script>
+  <script src="assets/5274f11e6fb32ae0_jquery-migrate.min.js"></script>
+  <script src="assets/e9ab750cebbcd9ca_jquery.paroller.min.js"></script>
+  <script src="assets/da8b9c6562cee0ba_lottie-player.min.js"></script>
+
+  <style>
+    /* Design System Documentation Frame & Nav Styles */
+    :root {
+      --ds-primary: #ff8900;
+      --ds-dark: #121316;
+      --ds-surface: #1e2024;
+      --ds-surface-light: #2a2d34;
+      --ds-border: rgba(255, 255, 255, 0.1);
+      --ds-text: #e2e8f0;
+      --ds-muted: #94a3b8;
+      --ds-accent: #f90c0c;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body.ds-body {
+      background-color: #0f1013;
+      color: var(--ds-text);
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Top Horizontal Navigation */
+    .ds-top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
+      background: rgba(18, 19, 22, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 137, 0, 0.25);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 65px;
+    }
+
+    .ds-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .ds-nav-brand img {
+      height: 38px;
+      width: auto;
+    }
+
+    .ds-nav-brand span {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      color: var(--ds-primary);
+    }
+
+    .ds-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .ds-nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      font-family: 'Raleway', sans-serif;
+    }
+
+    .ds-nav-links a:hover,
+    .ds-nav-links a.active {
+      color: #fff;
+      background: rgba(255, 137, 0, 0.18);
+      border-bottom: 2px solid var(--ds-primary);
+    }
+
+    .ds-badge {
+      background: var(--ds-primary);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Documentation Section Containers */
+    .ds-doc-section {
+      padding: 5rem 2rem 4rem;
+      max-width: 1440px;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--ds-border);
+    }
+
+    .ds-section-header {
+      margin-bottom: 2.5rem;
+      border-left: 4px solid var(--ds-primary);
+      padding-left: 1.25rem;
+    }
+
+    .ds-section-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      color: var(--ds-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .ds-section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.75rem;
+      color: #fff;
+      margin: 0 0 0.5rem;
+      letter-spacing: 1.5px;
+      line-height: 1.1;
+    }
+
+    .ds-section-desc {
+      color: var(--ds-muted);
+      font-size: 0.95rem;
+      max-width: 780px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Canvas / Showcase Box */
+    .ds-canvas {
+      background: #18191d;
+      border: 1px solid var(--ds-border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .ds-canvas-light {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .ds-canvas-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .ds-canvas-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      color: var(--ds-primary);
+      letter-spacing: 1.5px;
+    }
+
+    .ds-meta-tag {
+      font-size: 0.75rem;
+      font-family: monospace;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #cbd5e1;
+    }
+
+    /* Typography Spec Table */
+    .ds-typo-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 1rem;
+    }
+
+    .ds-typo-row {
+      display: grid;
+      grid-template-columns: 240px 1fr 180px;
+      align-items: center;
+      padding: 1.5rem 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: background 0.15s ease;
+    }
+
+    .ds-typo-row:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .ds-typo-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ds-typo-name {
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .ds-typo-class {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--ds-primary);
+    }
+
+    .ds-typo-preview {
+      overflow: hidden;
+      padding-right: 1.5rem;
+    }
+
+    .ds-typo-metrics {
+      text-align: right;
+      font-family: monospace;
+      font-size: 0.85rem;
+      color: var(--ds-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ds-typo-metrics-main {
+      font-weight: 700;
+      color: #cbd5e1;
+    }
+
+    /* Color Grid */
+    .ds-color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .ds-color-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .ds-color-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--ds-primary);
+    }
+
+    .ds-color-swatch {
+      height: 110px;
+      width: 100%;
+      position: relative;
+    }
+
+    .ds-color-info {
+      padding: 1rem;
+    }
+
+    .ds-color-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .ds-color-hex {
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: var(--ds-primary);
+      margin-bottom: 6px;
+    }
+
+    .ds-color-role {
+      font-size: 0.75rem;
+      color: var(--ds-muted);
+      line-height: 1.4;
+    }
+
+    /* Component State Matrix */
+    .ds-component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .ds-component-item {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .ds-component-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ds-muted);
+      font-weight: 700;
+    }
+
+    /* Motion Gallery */
+    .ds-motion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .ds-motion-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .ds-motion-box {
+      width: 100%;
+      height: 100px;
+      background: #141518;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Icons Gallery */
+    .ds-icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .ds-icon-card {
+      background: var(--ds-surface);
+      border: 1px solid var(--ds-border);
+      border-radius: 8px;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .ds-icon-card:hover {
+      border-color: var(--ds-primary);
+      transform: translateY(-2px);
+    }
+
+    .ds-icon-name {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: var(--ds-muted);
+      text-align: center;
+    }
+
+    /* Layout Visualizer Box */
+    .ds-layout-box {
+      background: #111215;
+      border: 1px dashed rgba(255, 137, 0, 0.4);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .ds-layout-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: var(--ds-primary);
+      background: rgba(255, 137, 0, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 900px) {
+      .ds-typo-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      .ds-typo-metrics {
+        text-align: left;
+      }
+      .ds-top-nav {
+        padding: 0 1rem;
+      }
+      .ds-nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="ds-body oxygen-body">
+
+  <!-- SVG Global Symbol Definitions (Exact from index.html) -->
+  <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+      <symbol id="FontAwesomeicon-map-marker" viewbox="0 0 16 28"><title>map-marker</title><path d="M12 10c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zM16 10c0 0.953-0.109 1.937-0.516 2.797l-5.688 12.094c-0.328 0.688-1.047 1.109-1.797 1.109s-1.469-0.422-1.781-1.109l-5.703-12.094c-0.406-0.859-0.516-1.844-0.516-2.797 0-4.422 3.578-8 8-8s8 3.578 8 8z"></path></symbol>
+      <symbol id="FontAwesomeicon-chevron-left" viewbox="0 0 21 28"><title>chevron-left</title><path d="M18.297 4.703l-8.297 8.297 8.297 8.297c0.391 0.391 0.391 1.016 0 1.406l-2.594 2.594c-0.391 0.391-1.016 0.391-1.406 0l-11.594-11.594c-0.391-0.391-0.391-1.016 0-1.406l11.594-11.594c0.391-0.391 1.016-0.391 1.406 0l2.594 2.594c0.391 0.391 0.391 1.016 0 1.406z"></path></symbol>
+      <symbol id="FontAwesomeicon-chevron-right" viewbox="0 0 19 28"><title>chevron-right</title><path d="M17.297 13.703l-11.594 11.594c-0.391 0.391-1.016 0.391-1.406 0l-2.594-2.594c-0.391-0.391-0.391-1.016 0-1.406l8.297-8.297-8.297-8.297c-0.391-0.391-0.391-1.016 0-1.406l2.594-2.594c0.391-0.391 1.016-0.391 1.406 0l11.594 11.594c0.391 0.391 0.391 1.016 0 1.406z"></path></symbol>
+      <symbol id="FontAwesomeicon-facebook-square" viewbox="0 0 24 28"><title>facebook-square</title><path d="M19.5 2c2.484 0 4.5 2.016 4.5 4.5v15c0 2.484-2.016 4.5-4.5 4.5h-2.938v-9.297h3.109l0.469-3.625h-3.578v-2.312c0-1.047 0.281-1.75 1.797-1.75l1.906-0.016v-3.234c-0.328-0.047-1.469-0.141-2.781-0.141-2.766 0-4.672 1.687-4.672 4.781v2.672h-3.125v3.625h3.125v9.297h-8.313c-2.484 0-4.5-2.016-4.5-4.5v-15c0-2.484 2.016-4.5 4.5-4.5h15z"></path></symbol>
+      <symbol id="FontAwesomeicon-phone" viewbox="0 0 22 28"><title>phone</title><path d="M22 19.375c0 0.562-0.25 1.656-0.484 2.172-0.328 0.766-1.203 1.266-1.906 1.656-0.922 0.5-1.859 0.797-2.906 0.797-1.453 0-2.766-0.594-4.094-1.078-0.953-0.344-1.875-0.766-2.734-1.297-2.656-1.641-5.859-4.844-7.5-7.5-0.531-0.859-0.953-1.781-1.297-2.734-0.484-1.328-1.078-2.641-1.078-4.094 0-1.047 0.297-1.984 0.797-2.906 0.391-0.703 0.891-1.578 1.656-1.906 0.516-0.234 1.609-0.484 2.172-0.484 0.109 0 0.219 0 0.328 0.047 0.328 0.109 0.672 0.875 0.828 1.188 0.5 0.891 0.984 1.797 1.5 2.672 0.25 0.406 0.719 0.906 0.719 1.391 0 0.953-2.828 2.344-2.828 3.187 0 0.422 0.391 0.969 0.609 1.344 1.578 2.844 3.547 4.813 6.391 6.391 0.375 0.219 0.922 0.609 1.344 0.609 0.844 0 2.234-2.828 3.187-2.828 0.484 0 0.984 0.469 1.391 0.719 0.875 0.516 1.781 1 2.672 1.5 0.313 0.156 1.078 0.5 1.188 0.828 0.047 0.109 0.047 0.219 0.047 0.328z"></path></symbol>
+      <symbol id="FontAwesomeicon-envelope" viewbox="0 0 28 28"><title>envelope</title><path d="M28 11.094v12.406c0 1.375-1.125 2.5-2.5 2.5h-23c-1.375 0-2.5-1.125-2.5-2.5v-12.406c0.469 0.516 1 0.969 1.578 1.359 2.594 1.766 5.219 3.531 7.766 5.391 1.313 0.969 2.938 2.156 4.641 2.156h0.031c1.703 0 3.328-1.188 4.641-2.156 2.547-1.844 5.172-3.625 7.781-5.391 0.562-0.391 1.094-0.844 1.563-1.359zM28 6.5c0 1.75-1.297 3.328-2.672 4.281-2.438 1.687-4.891 3.375-7.313 5.078-1.016 0.703-2.734 2.141-4 2.141h-0.031c-1.266 0-2.984-1.437-4-2.141-2.422-1.703-4.875-3.391-7.297-5.078-1.109-0.75-2.688-2.516-2.688-3.938 0-1.531 0.828-2.844 2.5-2.844h23c1.359 0 2.5 1.125 2.5 2.5z"></path></symbol>
+      <symbol id="FontAwesomeicon-instagram" viewbox="0 0 24 28"><title>instagram</title><path d="M16 14c0-2.203-1.797-4-4-4s-4 1.797-4 4 1.797 4 4 4 4-1.797 4-4zM18.156 14c0 3.406-2.75 6.156-6.156 6.156s-6.156-2.75-6.156-6.156 2.75-6.156 6.156-6.156 6.156 2.75 6.156 6.156zM19.844 7.594c0 0.797-0.641 1.437-1.437 1.437s-1.437-0.641-1.437-1.437 0.641-1.437 1.437-1.437 1.437 0.641 1.437 1.437zM12 4.156c-1.75 0-5.5-0.141-7.078 0.484-0.547 0.219-0.953 0.484-1.375 0.906s-0.688 0.828-0.906 1.375c-0.625 1.578-0.484 5.328-0.484 7.078s-0.141 5.5 0.484 7.078c0.219 0.547 0.484 0.953 0.906 1.375s0.828 0.688 1.375 0.906c1.578 0.625 5.328 0.484 7.078 0.484s5.5 0.141 7.078-0.484c0.547-0.219 0.953-0.484 1.375-0.906s0.688-0.828 0.906-1.375c0.625-1.578 0.484-5.328 0.484-7.078s0.141-5.5-0.484-7.078c-0.219-0.547-0.484-0.953-0.906-1.375s-0.828-0.688-1.375-0.906c-1.578-0.625-5.328-0.484-7.078-0.484zM24 14c0 1.656 0.016 3.297-0.078 4.953-0.094 1.922-0.531 3.625-1.937 5.031s-3.109 1.844-5.031 1.937c-1.656 0.094-3.297 0.078-4.953 0.078s-3.297 0.016-4.953-0.078c-1.922-0.094-3.625-0.531-5.031-1.937s-1.844-3.109-1.937-5.031c-0.094-1.656-0.078-3.297-0.078-4.953s-0.016-3.297 0.078-4.953c0.094-1.922 0.531-3.625 1.937-5.031s3.109-1.844 5.031-1.937c1.656-0.094 3.297-0.078 4.953-0.078s3.297-0.016 4.953 0.078c1.922 0.094 3.625 0.531 5.031 1.937s1.844 3.109 1.937 5.031c0.094 1.656 0.078 3.297 0.078 4.953z"></path></symbol>
+    </defs>
+  </svg>
+
+  <!-- Top Horizontal Navigation (Rule 6) -->
+  <nav class="ds-top-nav" id="ds-nav">
+    <a href="#hero" class="ds-nav-brand">
+      <img src="assets/b12646c562aea820_logo.png" alt="La Brasa Burger"/>
+      <span>DESIGN SYSTEM <span class="ds-badge">v2.0</span></span>
+    </a>
+    <ul class="ds-nav-links">
+      <li><a href="#hero">0. Hero Clone</a></li>
+      <li><a href="#typography">1. Tipografia</a></li>
+      <li><a href="#colors">2. Cores &amp; Superfícies</a></li>
+      <li><a href="#components">3. Componentes UI</a></li>
+      <li><a href="#layout">4. Layout &amp; Espaçamento</a></li>
+      <li><a href="#motion">5. Motion &amp; Interação</a></li>
+      <li><a href="#icons">6. Ícones</a></li>
+    </ul>
+  </nav>
+
+  <!-- Original Sticky Header Clone -->
+  <header class="oxy-header-wrapper oxy-sticky-header oxy-overlay-header oxy-header" id="_header-10-19">
+    <div class="oxygen-hide-in-sticky oxygen-only-show-in-overlay oxy-header-row" id="_header_row-11-19">
+      <div class="oxy-header-container">
+        <div class="oxy-header-left" id="_header_left-12-19">
+          <img alt="logo" class="ct-image lazyloaded" id="image-15-19" src="assets/b12646c562aea820_logo.png"/>
+        </div>
+        <div class="oxy-header-center" id="_header_center-13-19"></div>
+        <div class="oxy-header-right" id="_header_right-14-19">
+          <nav class="oxy-nav-menu oxy-nav-menu-dropdowns oxy-nav-menu-dropdown-arrow" id="_nav_menu-16-19">
+            <div class="oxy-menu-toggle">
+              <div class="oxy-nav-menu-hamburger-wrap">
+                <div class="oxy-nav-menu-hamburger">
+                  <div class="oxy-nav-menu-hamburger-line"></div>
+                  <div class="oxy-nav-menu-hamburger-line"></div>
+                  <div class="oxy-nav-menu-hamburger-line"></div>
+                </div>
+              </div>
+            </div>
+            <div class="menu-menu-principal-container">
+              <ul class="oxy-nav-menu-list" id="menu-menu-principal">
+                <li class="menu-item current-menu-item"><a href="#hero">Início</a></li>
+                <li class="menu-item"><a href="#typography">Tipografia</a></li>
+                <li class="menu-item"><a href="#colors">Cores</a></li>
+                <li class="menu-item"><a href="#components">Componentes</a></li>
+                <li class="menu-item"><a href="#layout">Layouts</a></li>
+              </ul>
+            </div>
+          </nav>
+          <div class="oxy-ou-ha-button oxy-ultimate-element" id="-ou_ha_button-18-19">
+            <div class="ou-ha-button-container hover-effect-sweep_right">
+              <a aria-label="Entre em Contato" class="ou-ha-button ou-button-effect" href="#components" role="button">
+                <span class="btn-text">Entre em Contato</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 0: HERO (EXACT CLONE, TEXT ADAPTED)                               -->
+  <!-- ========================================================================= -->
+  <section id="hero" style="position: relative;">
+    <section class="ct-section ct-section-with-shape-divider" id="section-2748-9">
+      <div class="ct-section-inner-wrap">
+        <a class="ct-link" href="#typography" id="link-2933-9" target="_self">
+          <div class="oxy-lottie-animation" id="-lottie-animation-2932-9">
+            <lottie-player autoplay="" background="transparent" data-click-trigger="self" data-end="60" data-offset="" data-src="assets/dc1e489a85cc65d7_lf30_tjtEEL.json" data-start="0" data-trigger="always" id="-lottie-animation-2932-9-lottie" loop="" renderer="svg" speed="1"></lottie-player>
+          </div>
+        </a>
+        <h1 class="ct-headline h1-banner" id="headline-2526-9">La Brasa Burger<br/></h1>
+        <div class="ct-slider ct_unique_slider_793" id="slider-2939-9">
+          <div class="oxygen-unslider-container">
+            <ul>
+              <li>
+                <div class="ct-slide" id="slide-2940-9">
+                  <img alt="logo" class="ct-image lazyloaded" id="image-2525-9" src="assets/b12646c562aea820_logo.png"/>
+                  <h2 class="ct-headline h1-banner" id="headline-3024-802">Design System &amp; Pattern Library<br/></h2>
+                  <div class="ct-text-block" id="text_block-2528-9">Design Tokens, Componentes e Layouts Monstruosos<br/></div>
+                  <a class="ct-link-button" href="#typography" id="link_button-2530-9">Explorar Sistema<br/></a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="oxy-shape-divider" id="-shape-divider-2953-9">
+          <div class="oxy_shape_divider">
+            <svg preserveaspectratio="none" viewbox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0,96L30,106.7C60,117,120,139,180,133.3C240,128,300,96,360,80C420,64,480,64,540,101.3C600,139,660,213,720,240C780,267,840,245,900,245.3C960,245,1020,267,1080,250.7C1140,235,1200,181,1260,176C1320,171,1380,213,1410,234.7L1440,256L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z" fill="currentColor" fill-opacity="1"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 1: TYPOGRAPHY (SPEC TABLE & VERTICAL LIST)                        -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="typography">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">01 / Foundation</div>
+      <h2 class="ds-section-title">Tipografia &amp; Escala de Texto</h2>
+      <p class="ds-section-desc">
+        Hierarquia visual e famílias tipográficas canônicas da marca: <strong>Bebas Neue</strong> para títulos de alto impacto e chamadas em caixa alta; <strong>Calistoga</strong> para títulos clássicos artesanais; e <strong>Raleway</strong> para textos corridos institucionais e metadados.
+      </p>
+    </div>
+
+    <!-- Typography Spec Table -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Tabela de Especificações Tipográficas</span>
+        <span class="ds-meta-tag">Exact CSS Computed Tokens</span>
+      </div>
+
+      <div class="ds-typo-table">
+
+        <!-- Heading 1: Banner / Hero Title -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 1 (Hero Banner)</span>
+            <span class="ds-typo-class">.ct-headline.h1-banner #headline-3024-802</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h2 class="ct-headline h1-banner" id="headline-3024-802" style="margin: 0;">La Brasa Burger</h2>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">65px / 1.0</span>
+            <span>Bebas Neue · Regular 400</span>
+            <span style="color: #ff8900;">#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Heading 1 Alt: Calistoga Headline -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 1 Alt (Calistoga)</span>
+            <span class="ds-typo-class">.ct-headline.h1-banner #headline-2526-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h1 class="ct-headline h1-banner" id="headline-2526-9" style="display: block; margin: 0;">La Brasa Burger</h1>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">65px / 1.0</span>
+            <span>Calistoga · Regular 400</span>
+            <span style="color: #ff8900;">#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Heading 2: Quem Somos White -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 2 (Quem Somos)</span>
+            <span class="ds-typo-class">.ct-headline.h2-text #headline-2584-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h2 class="ct-headline h2-text" id="headline-2584-9" style="margin: 0;">La Brasa Burger</h2>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">70px / 1.3</span>
+            <span>Bebas Neue · Black 900</span>
+            <span style="color: #ff8900;">#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Heading 2: Cupom Orange / White Span -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 2 (Cupom Destacado)</span>
+            <span class="ds-typo-class">.ct-headline.h2-text-large #headline-2564-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h2 class="ct-headline h2-text-large" id="headline-2564-9" style="margin: 0; text-align: left;">
+              Com cupom <span class="ct-span" id="span-2988-802">fica melhor</span>
+            </h2>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">53px / 1.3</span>
+            <span>Bebas Neue · Black 900</span>
+            <span style="color: #ff8900;">#ff8900 / #ffffff</span>
+          </div>
+        </div>
+
+        <!-- Heading 2: Unidades Orange -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 2 (Onde Encontrar)</span>
+            <span class="ds-typo-class">.ct-headline.h2-text #headline-2659-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h2 class="ct-headline h2-text" id="headline-2659-9" style="margin: 0;">Saiba onde nos encontrar</h2>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">55px / 1.0</span>
+            <span>Bebas Neue · Black 900</span>
+            <span style="color: #ff8900;">#ff8900</span>
+          </div>
+        </div>
+
+        <!-- Heading 2: Eyebrow Subtitle (Variedades) -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 2 (Eyebrow Tag)</span>
+            <span class="ds-typo-class">.ct-headline #headline-2958-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h2 class="ct-headline" id="headline-2958-9" style="margin: 0;">VARIEDADES</h2>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">13px / 1.2 · Spacing 4px</span>
+            <span>Bebas Neue · SemiBold 600</span>
+            <span style="color: #eceeef;">#eceeef</span>
+          </div>
+        </div>
+
+        <!-- Heading 3: Explosão de Sabor -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 3 (Explosão de Sabor)</span>
+            <span class="ds-typo-class">.ct-headline #headline-2962-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h3 class="ct-headline" id="headline-2962-9" style="margin: 0;">Explosão de Sabor</h3>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">70px / 1.0</span>
+            <span>Bebas Neue · Light 300</span>
+            <span style="color: #ff8900;">#ff8900</span>
+          </div>
+        </div>
+
+        <!-- Heading 4: Default Oxygen / Search & Filter -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Heading 4 (Default Theme)</span>
+            <span class="ds-typo-class">h4 / .searchandfilter h4</span>
+          </div>
+          <div class="ds-typo-preview">
+            <h4 style="font-family: 'Calistoga'; font-size: 24px; font-weight: 700; color: #fff; margin: 0;">Cardápio Artesanal Selecionado</h4>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">24px / 1.3</span>
+            <span>Calistoga · Bold 700</span>
+            <span style="color: #cbd5e1;">#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Bold L: Quem Somos Subtitle -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Bold L (Subtitle Monstruoso)</span>
+            <span class="ds-typo-class">.ct-text-block #text_block-2585-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="ct-text-block" id="text_block-2585-9" style="margin: 0; color: #fff;">
+              Porque somos monstruosos em exagero de sabor?
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">20px / 1.3</span>
+            <span>Bebas Neue · SemiBold 600</span>
+            <span>#000000 / #ffffff</span>
+          </div>
+        </div>
+
+        <!-- Bold M: Hero Subtitle -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Bold M (Hero Subtitle Spaced)</span>
+            <span class="ds-typo-class">.ct-text-block #text_block-2528-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="ct-text-block" id="text_block-2528-9" style="margin: 0;">
+              Hambúrgueres e Combos Artesanais Monstruosos
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">17px / 1.2 · Spacing 4px</span>
+            <span>Bebas Neue · Regular 400</span>
+            <span style="color: #ff8900;">#ff8900</span>
+          </div>
+        </div>
+
+        <!-- Bold S: Cupom Promo Subtitle -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Bold S (Cupom Eyebrow)</span>
+            <span class="ds-typo-class">.ct-text-block #text_block-2565-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="ct-text-block" id="text_block-2565-9" style="margin: 0; text-align: left;">
+              Imagine saborear seu pedido favorito com desconto? Temos!
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">15px / 1.0 · Spacing 4px</span>
+            <span>Bebas Neue · SemiBold 600</span>
+            <span>#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Paragraph: Quem Somos Institutional Body -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Paragraph (Institutional Body)</span>
+            <span class="ds-typo-class">.ct-text-block #text_block-2587-9</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="ct-text-block" id="text_block-2587-9" style="color: #e2e8f0; max-width: 100%;">
+              Somos uma rede de Franquias que nasceu na cidade de São José do Rio Preto, interior de São Paulo. Desenvolvemos as melhores receitas e trabalhamos com produtos de extrema qualidade em um ambiente familiar e confortável. Nosso sucesso nos impulsionou a formarmos uma Rede de Franquias em todo o Brasil.
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">14px / 2.0</span>
+            <span>Bebas Neue · SemiBold 600</span>
+            <span style="color: #7a4100;">#7a4100 / #e2e8f0</span>
+          </div>
+        </div>
+
+        <!-- Regular L: Counter Metric Digits -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Regular L (Metric Digits)</span>
+            <span class="ds-typo-class">.counter .oxy-counter_digit</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="counter" style="display: inline-flex; align-items: baseline;">
+              <span class="oxy-counter_prefix" style="font-size: 50px; color: #ff8900; font-family: 'Calistoga';">+</span>
+              <span class="oxy-counter_digit" style="font-size: 80px; color: #ff8900; font-family: 'Calistoga';">120</span>
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">80px / 1.0</span>
+            <span>Calistoga · Bold 700</span>
+            <span style="color: #ff8900;">#ff8900</span>
+          </div>
+        </div>
+
+        <!-- Regular M: Counter Label / Badges -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Regular M (Counter Metric Label)</span>
+            <span class="ds-typo-class">.ct-text-block.txtnumber</span>
+          </div>
+          <div class="ds-typo-preview">
+            <div class="ct-text-block txtnumber" style="margin: 0;">
+              Franquias em todo o brasil
+            </div>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">13px / 1.2 · Spacing 2px</span>
+            <span>Raleway · Medium 500</span>
+            <span>#ffffff</span>
+          </div>
+        </div>
+
+        <!-- Regular S: Subfooter Agency Credit -->
+        <div class="ds-typo-row">
+          <div class="ds-typo-meta">
+            <span class="ds-typo-name">Regular S (Agency Subfooter)</span>
+            <span class="ds-typo-class">.ct-link-text #link_text-8-19</span>
+          </div>
+          <div class="ds-typo-preview">
+            <a class="ct-link-text" href="https://www.prospecta.digital/" id="link_text-8-19" style="color: #ff8900; text-decoration: none;">
+              Desenvolvimento e Performance Prospecta Digital
+            </a>
+          </div>
+          <div class="ds-typo-metrics">
+            <span class="ds-typo-metrics-main">10px / 1.2 · Spacing 3px</span>
+            <span>Raleway · SemiBold 600</span>
+            <span style="color: #6d3800;">#6d3800</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 2: COLORS & SURFACES                                              -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="colors">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">02 / Design Tokens</div>
+      <h2 class="ds-section-title">Cores, Gradientes &amp; Superfícies</h2>
+      <p class="ds-section-desc">
+        Paleta cromática oficial da La Brasa Burger. Composta pelo Laranja Fogo característico, fundos escuros de churrasqueira e carvão, sobreposições fotográficas ricas e gradientes dinâmicos de transição de seções.
+      </p>
+    </div>
+
+    <!-- Core Brand Swatches -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Paleta de Cores da Marca (Brand Tokens)</span>
+        <span class="ds-meta-tag">Hex &amp; RGB Constants</span>
+      </div>
+
+      <div class="ds-color-grid">
+        <!-- Brand Orange -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #ff8900;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Brasa Orange Primary</div>
+            <div class="ds-color-hex">#ff8900</div>
+            <div class="ds-color-role">Cor primária de destaque, títulos principais, botões CTA, contadores e bordas ativas.</div>
+          </div>
+        </div>
+
+        <!-- Deep Crimson Sweep -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #f90c0c;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Fire Red (Sweep Hover)</div>
+            <div class="ds-color-hex">#f90c0c</div>
+            <div class="ds-color-role">Cor de preenchimento da animação sweep_right em hover dos botões de contato.</div>
+          </div>
+        </div>
+
+        <!-- Solid Black Pitch -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #000000;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Charcoal Black</div>
+            <div class="ds-color-hex">#000000</div>
+            <div class="ds-color-role">Estado hover dos botões laranja, divisórias de rodapé e fundos de contraste.</div>
+          </div>
+        </div>
+
+        <!-- Dark Neutral -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #333333;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Dark Surface Charcoal</div>
+            <div class="ds-color-hex">#333333</div>
+            <div class="ds-color-role">Superfície base do botão ou-ha-button, tooltips Tippy e fundos de popover.</div>
+          </div>
+        </div>
+
+        <!-- Off-white Neutral -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #eceeef;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Ash White Light</div>
+            <div class="ds-color-hex">#eceeef</div>
+            <div class="ds-color-role">Início do gradiente da Hero section e subtítulos claros em caixas escuras.</div>
+          </div>
+        </div>
+
+        <!-- Warm Brown -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #7a4100;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Toasted Brown Text</div>
+            <div class="ds-color-hex">#7a4100</div>
+            <div class="ds-color-role">Texto institucional de Quem Somos e créditos secundários de rodapé (#6d3800).</div>
+          </div>
+        </div>
+
+        <!-- Secondary Grey -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #7f8b93;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Steel Slate Grey</div>
+            <div class="ds-color-hex">#7f8b93</div>
+            <div class="ds-color-role">Botões secundários e detalhes de cards da rede de franquias.</div>
+          </div>
+        </div>
+
+        <!-- Cookie Blue -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-color: #00a4ff;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Cookie Bubble Blue</div>
+            <div class="ds-color-hex">#00a4ff</div>
+            <div class="ds-color-role">Botão de consentimento LGPD de cookies no rodapé.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gradients, Surfaces & Overlays -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Gradientes, Texturas &amp; Sobreposições (Surfaces)</span>
+        <span class="ds-meta-tag">Layout Backgrounds</span>
+      </div>
+
+      <div class="ds-color-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+
+        <!-- Hero Gradient -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-image: linear-gradient(180deg, #eceeef, #ff8900); height: 130px;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Hero Vertical Gradient</div>
+            <div class="ds-color-hex">linear-gradient(180deg, #eceeef, #ff8900)</div>
+            <div class="ds-color-role">Aplicado na Seção Hero (#section-2748-9) combinando claridade superior e energia da marca na base.</div>
+          </div>
+        </div>
+
+        <!-- Heavy Dark Overlay -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('assets/ec77787cb768c114_LA-BRASA-BLOCO-QUEM-SOMOS.jpg'); background-size: cover; background-position: center; height: 130px;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Heavy Dark Photo Overlay (85%)</div>
+            <div class="ds-color-hex">linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85))</div>
+            <div class="ds-color-role">Usado na Seção de Cupons (#section-2285-9) com efeito de fundo fixo (parallax) e alto contraste para o hambúrguer flutuante.</div>
+          </div>
+        </div>
+
+        <!-- Medium Dark Overlay -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background-image: linear-gradient(rgba(0,0,0,0.57), rgba(0,0,0,0.57)), url('assets/cb87c305090ba0b1_FOTOFUNDO-1.jpg'); background-size: cover; background-position: center; height: 130px;"></div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Medium Dark Photo Overlay (57%)</div>
+            <div class="ds-color-hex">linear-gradient(rgba(0,0,0,.57), rgba(0,0,0,.57))</div>
+            <div class="ds-color-role">Usado na Seção de Estatísticas (#section-2353-9) para destacar os números em Calistoga 80px sobre a foto do salão.</div>
+          </div>
+        </div>
+
+        <!-- Sticky Header Overlay -->
+        <div class="ds-color-card">
+          <div class="ds-color-swatch" style="background: #ffffff; box-shadow: 0px 0px 10px rgba(0,0,0,0.3); height: 130px; display: flex; align-items: center; justify-content: center;">
+            <span style="color: #333; font-weight: 700; font-size: 0.85rem;">Sticky Header Active Surface</span>
+          </div>
+          <div class="ds-color-info">
+            <div class="ds-color-name">Sticky Header Shadow Surface</div>
+            <div class="ds-color-hex">box-shadow: 0px 0px 10px rgba(0,0,0,0.30)</div>
+            <div class="ds-color-role">Fixação de cabeçalho no topo com z-index 214 e fundo translúcido/sólido.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 3: UI COMPONENTS                                                  -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="components">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">03 / Component Library</div>
+      <h2 class="ds-section-title">Componentes de Interface (UI Components)</h2>
+      <p class="ds-section-desc">
+        Catálogo completo dos componentes canônicos da plataforma: botões com efeitos de transição sweep-right, botões de ação sólida, marcadores de mapa interativo (Hotspots), contadores dinâmicos, cards de produtos e aviso de cookies LGPD.
+      </p>
+    </div>
+
+    <!-- 1. Sweep Right Button (Header CTA) -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">1. Botão Sweep-Right (.ou-ha-button)</span>
+        <span class="ds-meta-tag">Header Action CTA · Hover Interactive</span>
+      </div>
+
+      <p style="color: var(--ds-muted); font-size: 0.85rem; margin-top: 0;">
+        Passe o mouse sobre os botões para visualizar o efeito de transição deslizante vermelha (<code>#f90c0c</code>) da esquerda para a direita.
+      </p>
+
+      <div class="ds-component-grid">
+        <!-- Default State -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Default State</div>
+          <div class="oxy-ou-ha-button oxy-ultimate-element" id="-ou_ha_button-18-19" style="display: block;">
+            <div class="ou-ha-button-container hover-effect-sweep_right">
+              <a class="ou-ha-button ou-button-effect" href="javascript:void(0);" role="button">
+                <span class="btn-text">Entre em Contato</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hover Preview Hint -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Hover Transition Preview</div>
+          <div class="oxy-ou-ha-button oxy-ultimate-element" id="-ou_ha_button-27-19" style="display: block;">
+            <div class="ou-ha-button-container hover-effect-sweep_right">
+              <a class="ou-ha-button ou-button-effect" href="javascript:void(0);" role="button" style="background-color: #ff8900;">
+                <span class="btn-text" style="color: #000;">Hover State Active</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Focus / Active State -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Focus / Active State</div>
+          <div class="oxy-ou-ha-button oxy-ultimate-element" style="display: block;">
+            <div class="ou-ha-button-container hover-effect-sweep_right">
+              <a class="ou-ha-button ou-button-effect" href="javascript:void(0);" role="button" style="outline: 2px solid #fff; outline-offset: 2px;">
+                <span class="btn-text">Focado / Teclado</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Solid Action Link Buttons -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">2. Botões de Ação de Seção (.ct-link-button)</span>
+        <span class="ds-meta-tag">Orange / Black Hover · Grey / Purple Hover</span>
+      </div>
+
+      <div class="ds-component-grid">
+        <!-- Orange Primary Button -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Primary Orange (Default / Hover)</div>
+          <a class="ct-link-button" href="javascript:void(0);" id="link_button-2530-9" style="padding: 12px 30px; font-family: 'Bebas Neue'; font-size: 1.15rem; letter-spacing: 2px;">
+            Mais Delícias
+          </a>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Hover altera para fundo #000</span>
+        </div>
+
+        <!-- Cupom Action Button -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Cupom Action (Default / Hover)</div>
+          <a class="ct-link-button" href="javascript:void(0);" id="link_button-2567-9" style="padding: 12px 30px; font-family: 'Bebas Neue'; font-size: 1.15rem; letter-spacing: 2px;">
+            Cupom brasa
+          </a>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Borda 1px solid #ff8900</span>
+        </div>
+
+        <!-- Search Action Button -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Pesquisar Unidades</div>
+          <a class="ct-link-button" href="javascript:void(0);" id="link_button-2661-9" style="padding: 12px 30px; font-family: 'Bebas Neue'; font-size: 1.15rem; letter-spacing: 2px;">
+            Pesquisar
+          </a>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Hover com transição instantânea</span>
+        </div>
+
+        <!-- Secondary Grey Button -->
+        <div class="ds-component-item">
+          <div class="ds-component-label">Secondary Slate Grey</div>
+          <a class="ct-link-button" href="javascript:void(0);" id="link_button-2775-9" style="padding: 12px 30px; font-family: 'Bebas Neue'; font-size: 1.15rem; letter-spacing: 2px;">
+            Ver mais
+          </a>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Hover altera para fundo #fff e texto #6e00bd</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Hotspot Markers & Map Popovers -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">3. Marcadores de Mapa Interativos (.oxy-popover_marker)</span>
+        <span class="ds-meta-tag">SVG Pulse Animation · Interactive Pin</span>
+      </div>
+
+      <div class="ds-component-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div class="ds-component-item" style="background: #252830;">
+          <div class="ds-component-label">Pino Padrão (Pulse Animation)</div>
+          <div class="oxy-popover" style="position: relative; display: inline-block;">
+            <div class="oxy-popover_inner">
+              <button class="oxy-popover_marker" style="background: none; border: none; cursor: pointer; padding: 10px;">
+                <span class="oxy-popover_marker-inner">
+                  <span class="oxy-popover_icon" style="color: #ff8900;">
+                    <svg style="width: 24px; height: 28px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Possui animação de escala e pulse em hover</span>
+        </div>
+
+        <div class="ds-component-item" style="background: #252830;">
+          <div class="ds-component-label">Pino Selecionado / Hover</div>
+          <div class="oxy-popover" style="position: relative; display: inline-block;">
+            <div class="oxy-popover_inner">
+              <button class="oxy-popover_marker" style="background: none; border: none; cursor: pointer; padding: 10px; transform: scale(1.3);">
+                <span class="oxy-popover_marker-inner">
+                  <span class="oxy-popover_icon" style="color: #f90c0c;">
+                    <svg style="width: 28px; height: 32px; fill: #f90c0c;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--ds-muted);">Destaque de unidade em foco no mapa</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Counter Card Component -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">4. Card de Estatísticas &amp; Contadores (.oxy-counter)</span>
+        <span class="ds-meta-tag">Numbers Grid · Calistoga &amp; Raleway</span>
+      </div>
+
+      <div class="ds-component-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="ds-component-item" style="background: rgba(0,0,0,0.6); border-color: rgba(255,137,0,0.3);">
+          <div class="oxy-counter counter" style="display: flex; align-items: baseline;">
+            <span class="oxy-counter_prefix" style="font-size: 45px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">+</span>
+            <span class="oxy-counter_digit" style="font-size: 70px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">120</span>
+          </div>
+          <div class="ct-text-block txtnumber">Franquias em todo o brasil</div>
+        </div>
+
+        <div class="ds-component-item" style="background: rgba(0,0,0,0.6); border-color: rgba(255,137,0,0.3);">
+          <div class="oxy-counter counter" style="display: flex; align-items: baseline;">
+            <span class="oxy-counter_prefix" style="font-size: 45px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">+</span>
+            <span class="oxy-counter_digit" style="font-size: 70px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">60</span>
+          </div>
+          <div class="ct-text-block txtnumber">Opções irresistíveis</div>
+        </div>
+
+        <div class="ds-component-item" style="background: rgba(0,0,0,0.6); border-color: rgba(255,137,0,0.3);">
+          <div class="oxy-counter counter" style="display: flex; align-items: baseline;">
+            <span class="oxy-counter_prefix" style="font-size: 45px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">+</span>
+            <span class="oxy-counter_digit" style="font-size: 60px; color: #ff8900; font-family: 'Calistoga'; font-weight: 700;">2.000.000</span>
+          </div>
+          <div class="ct-text-block txtnumber">Hambúrgueres em 2021</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Cookie Bubble Notification -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">5. Notificação de Consentimento LGPD (.cookie-bubble)</span>
+        <span class="ds-meta-tag">Fixed Overlay Banner</span>
+      </div>
+
+      <div style="background: #121316; padding: 2rem; border-radius: 8px; display: flex; justify-content: center;">
+        <div class="cookie-bubble show" style="position: relative; left: auto; bottom: auto; margin: 0; max-width: 520px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+          <div class="cb-wrapper">
+            <div class="cb-row">
+              <div class="cb-image">
+                <svg viewbox="0 0 97.93 97.93" xmlns="http://www.w3.org/2000/svg" style="width: 48px; height: 48px; fill: #ff8900;">
+                  <g data-name="Layer 2" id="Layer_2">
+                    <g data-name="Layer 1" id="Layer_1-2">
+                      <path d="M44,23.76a2.47,2.47,0,1,0,.91,3.37A2.47,2.47,0,0,0,44,23.76Z"></path>
+                      <path d="M25.9,40.32a2.47,2.47,0,0,0,0,4.93h0a2.47,2.47,0,1,0,0-4.93Z"></path>
+                      <circle cx="32.08" cy="65.86" r="2.47"></circle>
+                      <path d="M56.38,69.91a2.47,2.47,0,1,0,1.14,1.49A2.47,2.47,0,0,0,56.38,69.91Z"></path>
+                      <path d="M72,52.68a2.47,2.47,0,0,0-2.38,1.83,2.44,2.44,0,0,0,.25,1.87,2.47,2.47,0,0,0,4.52-.59,2.44,2.44,0,0,0-.25-1.87A2.47,2.47,0,0,0,72,52.68Z"></path>
+                      <path style="fill: #ffffff !important;" d="M89.51,52.86A14,14,0,0,1,81,47.2,14.09,14.09,0,0,1,61,35.68,14.09,14.09,0,0,1,49.49,15.73a14,14,0,0,1-5.66-8.55,44,44,0,0,0-21.09,6.15A44.26,44.26,0,0,0,71.46,87.08,44.24,44.24,0,0,0,89.51,52.86ZM28.28,43.42a2.47,2.47,0,0,1-2.38,1.83h0a2.47,2.47,0,1,1,2.38-1.83Zm3.8,24.9a2.47,2.47,0,1,1,2.47-2.47A2.47,2.47,0,0,1,32.08,68.32ZM44.92,27.13A2.47,2.47,0,1,1,44,23.76,2.47,2.47,0,0,1,44.92,27.13ZM57.28,73.27a2.47,2.47,0,1,1-.9-3.36,2.47,2.47,0,0,1,.9,3.36ZM74.42,55.79a2.47,2.47,0,1,1-.25-1.87A2.45,2.45,0,0,1,74.42,55.79Z"></path>
+                      <path d="M97.93,48.52v-.2A2.35,2.35,0,0,0,95.7,46a9.37,9.37,0,0,1-8-5.45,2.35,2.35,0,0,0-3.49-.93,9.51,9.51,0,0,1-5.44,1.72A9.4,9.4,0,0,1,69.39,31.1a2.35,2.35,0,0,0-2.55-2.55c-.28,0-.57,0-.85,0a9.39,9.39,0,0,1-7.68-14.81,2.35,2.35,0,0,0-.93-3.49,9.37,9.37,0,0,1-5.45-8A2.35,2.35,0,0,0,49.61,0H49a49,49,0,1,0,49,49C97.93,48.82,97.93,48.67,97.93,48.52ZM71.46,87.08A44.26,44.26,0,0,1,22.74,13.33,44,44,0,0,1,47.53,4.72a14,14,0,0,0,5.66,8.55A14.09,14.09,0,0,0,64.71,33.22,14.09,14.09,0,0,0,84.66,44.75a14,14,0,0,0,8.56,5.66A44.3,44.3,0,0,1,71.46,87.08Z"></path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+              <div class="cb-row-content">
+                <span class="message" style="color: #cbd5e1;">Esse site usa cookies para melhorar sua experiência, ao continuar navegando você concorda com o uso de cookies.</span>
+                <div class="cb-controls" style="margin-top: 10px;">
+                  <button class="agreement-btn" style="background-color: #ff8900; color: #000; font-weight: 700;">OK</button>
+                  <a class="cookie-policy-btn" href="javascript:void(0);" style="color: #cbd5e1; text-decoration: underline;">Saiba mais</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 4: LAYOUT & SPACING PATTERNS                                      -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="layout">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">04 / Architecture &amp; Structure</div>
+      <h2 class="ds-section-title">Estrutura de Layout &amp; Espaçamento</h2>
+      <p class="ds-section-desc">
+        Apresentação de 3 padrões reais de grid, colunas e containers do website: o Split 2-Column com Mapa e Elementos Parallax, a Seção "Quem Somos" com Hambúrguer Gigante e o Rodapé Institucional com Grid de 4 Colunas.
+      </p>
+    </div>
+
+    <!-- Layout Pattern 1: Split 2-Column Showcase (Unidades / Mapa) -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Padrão 1: Split 2-Column com Mapa e Ingredientes Flutuantes</span>
+        <span class="ds-meta-tag">#section-2655-9 · Max-width 1380px</span>
+      </div>
+
+      <div class="ds-layout-box">
+        <span class="ds-layout-badge">Live Structural Pattern: 50% Text &amp; CTA + 50% Visual Interactive Map</span>
+        
+        <section class="ct-section" id="section-2655-9" style="background: #ffffff; border-radius: 8px; padding: 40px 20px; overflow: hidden; position: relative;">
+          <div class="ct-section-inner-wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            
+            <!-- Left Text Column -->
+            <div class="ct-div-block" id="div_block-2657-9" style="display: flex; align-items: center; width: 100%;">
+              <div class="ct-div-block" id="div_block-2658-9" style="flex: 1; min-width: 280px; padding-right: 20px;">
+                <h2 class="ct-headline h2-text" id="headline-2659-9">Saiba onde<br/>nos encontrar</h2>
+                <div class="ct-text-block" id="text_block-2660-9" style="margin-bottom: 25px;">Consulte as unidades La Brasa próximas a você</div>
+                <a class="ct-link-button" href="javascript:void(0);" id="link_button-2661-9" style="padding: 12px 30px;">Pesquisar</a>
+              </div>
+              
+              <!-- Right Map Column with Pins and Floating Assets -->
+              <div class="ct-div-block" id="div_block-2662-9" style="flex: 1.2; position: relative; min-width: 320px; display: flex; justify-content: center;">
+                <div class="oxy-hotspots" id="-hotspots-2801-9" style="position: relative; max-width: 100%;">
+                  <img alt="brazil" class="ct-image lazyloaded" id="image-2802-9" src="assets/bda29b51e8ca2c94_brazil.png" style="width: 100%; max-width: 440px; display: block;"/>
+                  
+                  <!-- Hotspot Pin 1 -->
+                  <div class="oxy-popover" style="position: absolute; top: 65%; left: 68%;">
+                    <button class="oxy-popover_marker" style="background: none; border: none; cursor: pointer;">
+                      <svg style="width: 20px; height: 24px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                    </button>
+                  </div>
+                  <!-- Hotspot Pin 2 -->
+                  <div class="oxy-popover" style="position: absolute; top: 72%; left: 60%;">
+                    <button class="oxy-popover_marker" style="background: none; border: none; cursor: pointer;">
+                      <svg style="width: 20px; height: 24px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                    </button>
+                  </div>
+                  <!-- Hotspot Pin 3 -->
+                  <div class="oxy-popover" style="position: absolute; top: 52%; left: 75%;">
+                    <button class="oxy-popover_marker" style="background: none; border: none; cursor: pointer;">
+                      <svg style="width: 20px; height: 24px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Floating Parallax Elements -->
+                <img alt="picles cebola" class="ct-image lazyloaded plax" id="image-2934-9" src="assets/d8d56e2faf2c2ccf_picles-cebola.png" style="position: absolute; top: -10px; right: -10px; width: 110px; z-index: 2; pointer-events: none;"/>
+                <img alt="folhas" class="ct-image lazyloaded plax" id="image-2935-9" src="assets/d7b53d61219fb9d6_folhas.png" style="position: absolute; bottom: -20px; left: -10px; width: 120px; z-index: 2; pointer-events: none;"/>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Layout Pattern 2: Quem Somos Split (Orange Background & Giant Burger) -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Padrão 2: Quem Somos — Fundo Laranja &amp; Visual de Produto</span>
+        <span class="ds-meta-tag">#section-2343-9 · Background #ff8900</span>
+      </div>
+
+      <div class="ds-layout-box">
+        <span class="ds-layout-badge">Live Structural Pattern: 60% Narrative Content + 40% Hero Product Shot</span>
+        
+        <section class="ct-section" id="section-2343-9" style="background-color: #ff8900; border-radius: 8px; padding: 50px 30px; position: relative; overflow: hidden;">
+          <div class="ct-section-inner-wrap" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+            
+            <!-- Left Text Content -->
+            <div class="ct-div-block" id="div_block-2582-9" style="flex: 1.2; min-width: 300px; padding-right: 30px;">
+              <h2 class="ct-headline h2-text" id="headline-2584-9" style="color: #ffffff; margin-bottom: 10px;">La Brasa Burger</h2>
+              <div class="ct-text-block" id="text_block-2585-9" style="color: #000000; font-size: 22px; margin-bottom: 20px;">Porque somos monstruosos em exagero de sabor?</div>
+              <div class="ct-text-block" id="text_block-2587-9" style="color: #000000; font-size: 15px; line-height: 1.8; max-width: 540px;">
+                Somos uma rede de Franquias que nasceu na cidade de São José do Rio Preto, interior de São Paulo. Desenvolvemos as melhores receitas e trabalhamos com produtos de extrema qualidade em um ambiente familiar e confortável.
+              </div>
+            </div>
+
+            <!-- Right Product Visual -->
+            <div class="ct-div-block" id="div_block-2583-9" style="flex: 1; min-width: 280px; display: flex; justify-content: center; align-items: center;">
+              <img alt="burguerok" class="ct-image lazyloaded" id="image-2768-9" src="assets/8364e48313934e1b_burguerok.png" style="max-width: 100%; height: auto; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.35));"/>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Layout Pattern 3: Multi-column Footer Layout -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Padrão 3: Rodapé Institucional Multi-coluna</span>
+        <span class="ds-meta-tag">#section-4-19 · 4 Columns Grid</span>
+      </div>
+
+      <div class="ds-layout-box">
+        <span class="ds-layout-badge">Live Structural Pattern: Logo + Menu + Endereço/Contato + Redes Sociais</span>
+        
+        <section class="ct-section" id="section-4-19" style="background: #111215; border-radius: 8px; padding: 40px 20px;">
+          <div class="ct-section-inner-wrap">
+            <div class="ct-div-block" id="div_block-28-19" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; align-items: start;">
+              
+              <!-- Col 1: Logo -->
+              <div class="ct-div-block" id="div_block-29-19">
+                <img alt="Logo La Brasa" class="ct-image lazyloaded" id="image-30-19" src="assets/a8b88289b89bd19c_Logo-La-Brasa-843x1024-1.png" style="max-width: 130px;"/>
+              </div>
+
+              <!-- Col 2: Institucional Menu -->
+              <div class="ct-div-block" id="div_block-33-19">
+                <div class="ct-text-block" id="text_block-72-297" style="font-family: 'Bebas Neue'; color: #ff8900; font-size: 20px; letter-spacing: 2px; margin-bottom: 15px;">Institucional</div>
+                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+                  <li><a href="#hero" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Início</a></li>
+                  <li><a href="#typography" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Quem Somos</a></li>
+                  <li><a href="#components" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Cupons</a></li>
+                  <li><a href="#layout" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Cardápio</a></li>
+                  <li><a href="#icons" style="color: #cbd5e1; text-decoration: none; font-size: 14px;">Unidades</a></li>
+                </ul>
+              </div>
+
+              <!-- Col 3: Contato & Endereço -->
+              <div class="ct-div-block" id="div_block-35-19">
+                <div class="ct-text-block" id="text_block-75-297" style="font-family: 'Bebas Neue'; color: #ff8900; font-size: 20px; letter-spacing: 2px; margin-bottom: 15px;">Entre em Contato</div>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                  <svg style="width: 16px; height: 16px; fill: #ff8900; flex-shrink: 0; margin-top: 3px;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+                  <div class="ct-text-block" style="color: #cbd5e1; font-size: 13px; line-height: 1.4;">Escritório Central<br/>São José do Rio Preto - SP</div>
+                </div>
+
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                  <svg style="width: 16px; height: 16px; fill: #ff8900; flex-shrink: 0; margin-top: 3px;"><use xlink:href="#FontAwesomeicon-phone"></use></svg>
+                  <div class="ct-text-block" style="color: #cbd5e1; font-size: 13px;">(17) 99271-9357</div>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                  <svg style="width: 16px; height: 16px; fill: #ff8900; flex-shrink: 0; margin-top: 3px;"><use xlink:href="#FontAwesomeicon-envelope"></use></svg>
+                  <div class="ct-text-block" style="color: #cbd5e1; font-size: 13px;">contato@labrasaburger.com.br</div>
+                </div>
+              </div>
+
+              <!-- Col 4: Redes Sociais -->
+              <div class="ct-div-block" id="div_block-87-297">
+                <div class="ct-text-block" id="text_block-88-297" style="font-family: 'Bebas Neue'; color: #ff8900; font-size: 20px; letter-spacing: 2px; margin-bottom: 15px;">Redes Sociais</div>
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                  <a href="https://www.facebook.com/labrasaburgeroficial" target="_blank" style="color: #ff8900;">
+                    <svg style="width: 26px; height: 26px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-facebook-square"></use></svg>
+                  </a>
+                  <a href="https://www.instagram.com/labrasaburgeroficial/" target="_blank" style="color: #ff8900;">
+                    <svg style="width: 26px; height: 26px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-instagram"></use></svg>
+                  </a>
+                </div>
+                <div class="ct-text-block" id="text_block-106-297" style="font-family: 'Bebas Neue'; color: #eceeef; letter-spacing: 2px; font-size: 16px;">#LABRASABURGER</div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 5: MOTION & INTERACTION                                           -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="motion">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">05 / Motion System</div>
+      <h2 class="ds-section-title">Comportamentos de Movimento &amp; Interação</h2>
+      <p class="ds-section-desc">
+        Catálogo de micro-interações, efeitos hover com pseudo-elementos, animações SVG Lottie, efeitos de rolagem Parallax via Paroller.js e animações com Animate.css e keyframes customizados.
+      </p>
+    </div>
+
+    <!-- Motion Gallery -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Galeria de Animações &amp; Transições (Motion Gallery)</span>
+        <span class="ds-meta-tag">CSS Keyframes &amp; JavaScript Controllers</span>
+      </div>
+
+      <div class="ds-motion-grid">
+
+        <!-- 1. Sweep Right Button Effect -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">1. Sweep Right Effect</div>
+          <div class="ds-motion-box">
+            <div class="ou-ha-button-container hover-effect-sweep_right">
+              <a class="ou-ha-button ou-button-effect" href="javascript:void(0);" role="button">
+                <span class="btn-text">Hover Me (Sweep)</span>
+              </a>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Transição cúbica do pseudo-elemento <code>:before</code> com preenchimento lateral suave em 0.3s.
+          </p>
+        </div>
+
+        <!-- 2. Sticky Header FadeIn Transition -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">2. Sticky Header FadeIn</div>
+          <div class="ds-motion-box">
+            <div style="background: #ffffff; padding: 10px 20px; border-radius: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); animation: oxy_sticky_header_fadein 1.5s infinite alternate;">
+              <span style="color: #000; font-weight: 700; font-size: 0.8rem;">Sticky Header Active</span>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Keyframe <code>@keyframes oxy_sticky_header_fadein</code> ativado quando o scroll passa de 300px.
+          </p>
+        </div>
+
+        <!-- 3. Hotspot Pulse Keyframe -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">3. Hotspot Popover Pulse</div>
+          <div class="ds-motion-box">
+            <div style="animation: oxy-popover_pulse 1.8s infinite ease-in-out; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 32px; height: 36px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Keyframe <code>@keyframes oxy-popover_pulse</code> com expansão de escala e opacidade cíclica.
+          </p>
+        </div>
+
+        <!-- 4. Lottie Vector Scroll Player -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">4. Lottie Vector Animation</div>
+          <div class="ds-motion-box">
+            <div style="width: 50px; height: 50px;">
+              <lottie-player autoplay="" background="transparent" data-src="assets/dc1e489a85cc65d7_lf30_tjtEEL.json" loop="" renderer="svg" speed="1"></lottie-player>
+            </div>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Animação vetorial contínua indicativa de scroll do Hero Banner através do LottiePlayer.
+          </p>
+        </div>
+
+        <!-- 5. Parallax Scroll Effect -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">5. Parallax Depth (Paroller.js)</div>
+          <div class="ds-motion-box" style="position: relative;">
+            <img src="assets/d8d56e2faf2c2ccf_picles-cebola.png" class="plax" alt="Parallax" style="width: 65px; transform: rotate(15deg); transition: transform 0.3s ease;"/>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Deslocamento proporcional em múltiplos eixos com <code>data-type="content"</code> e <code>.plax</code>.
+          </p>
+        </div>
+
+        <!-- 6. Button Hover Invert -->
+        <div class="ds-motion-card">
+          <div class="ds-component-label">6. Solid Button Color Invert</div>
+          <div class="ds-motion-box">
+            <a class="ct-link-button" href="javascript:void(0);" id="link_button-2530-9" style="padding: 10px 24px; font-family: 'Bebas Neue';">
+              Hover Transition
+            </a>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--ds-muted); text-align: center; margin: 0;">
+            Transição rápida entre #ff8900 e #000000 com preservação da borda de 1px sólida.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- SECTION 6: ICONS & GLYPHS                                                 -->
+  <!-- ========================================================================= -->
+  <section class="ds-doc-section" id="icons">
+    <div class="ds-section-header">
+      <div class="ds-section-tag">06 / Iconography</div>
+      <h2 class="ds-section-title">Sistema de Ícones &amp; Glifos (SVG)</h2>
+      <p class="ds-section-desc">
+        Conjunto de símbolos SVG integrados por <code>&lt;use xlink:href="#..."&gt;</code> para máxima fidelidade vetorial, suporte à herança de cores (<code>fill: currentColor</code>) e variações de escala padronizadas.
+      </p>
+    </div>
+
+    <!-- Icons Catalog -->
+    <div class="ds-canvas">
+      <div class="ds-canvas-header">
+        <span class="ds-canvas-title">Catálogo de Símbolos SVG da Marca</span>
+        <span class="ds-meta-tag">FontAwesome SVG Definitions</span>
+      </div>
+
+      <div class="ds-icon-grid">
+
+        <!-- Map Marker -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-map-marker</span>
+        </div>
+
+        <!-- Phone -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-phone"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-phone</span>
+        </div>
+
+        <!-- Envelope -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-envelope"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-envelope</span>
+        </div>
+
+        <!-- Facebook Square -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-facebook-square"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-facebook-square</span>
+        </div>
+
+        <!-- Instagram -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-instagram"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-instagram</span>
+        </div>
+
+        <!-- Chevron Left -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-chevron-left"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-chevron-left</span>
+        </div>
+
+        <!-- Chevron Right -->
+        <div class="ds-icon-card">
+          <svg style="width: 32px; height: 32px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-chevron-right"></use></svg>
+          <span class="ds-icon-name">#FontAwesomeicon-chevron-right</span>
+        </div>
+
+      </div>
+
+      <!-- Color Inheritance & Size Variants Demo -->
+      <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--ds-border);">
+        <div class="ds-canvas-header" style="border: none; padding: 0; margin-bottom: 1rem;">
+          <span class="ds-canvas-title" style="font-size: 1.1rem;">Variações de Escala &amp; Herança de Cores</span>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; justify-content: space-around; background: #121316; padding: 1.5rem; border-radius: 8px;">
+          
+          <!-- Size 16px (White) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg style="width: 16px; height: 16px; fill: #ffffff;"><use xlink:href="#FontAwesomeicon-map-marker"></use></svg>
+            <span style="font-size: 0.75rem; color: var(--ds-muted); font-family: monospace;">16px / #ffffff</span>
+          </div>
+
+          <!-- Size 24px (Orange) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg style="width: 24px; height: 24px; fill: #ff8900;"><use xlink:href="#FontAwesomeicon-phone"></use></svg>
+            <span style="font-size: 0.75rem; color: var(--ds-muted); font-family: monospace;">24px / #ff8900</span>
+          </div>
+
+          <!-- Size 32px (Crimson) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg style="width: 32px; height: 32px; fill: #f90c0c;"><use xlink:href="#FontAwesomeicon-instagram"></use></svg>
+            <span style="font-size: 0.75rem; color: var(--ds-muted); font-family: monospace;">32px / #f90c0c</span>
+          </div>
+
+          <!-- Size 48px (Gold / Amber) -->
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <svg style="width: 48px; height: 48px; fill: #fcb900;"><use xlink:href="#FontAwesomeicon-envelope"></use></svg>
+            <span style="font-size: 0.75rem; color: var(--ds-muted); font-family: monospace;">48px / #fcb900</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- DOCUMENTATION FOOTER                                                      -->
+  <!-- ========================================================================= -->
+  <footer style="background: #090a0c; border-top: 1px solid rgba(255, 137, 0, 0.2); padding: 3rem 2rem; text-align: center;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+      <img src="assets/b12646c562aea820_logo.png" alt="La Brasa Burger" style="height: 48px;"/>
+      <div style="font-family: 'Bebas Neue'; font-size: 1.4rem; letter-spacing: 2px; color: #ff8900;">
+        La Brasa Burger — Living Design System &amp; Pattern Library
+      </div>
+      <div style="font-size: 0.85rem; color: var(--ds-muted); max-width: 600px;">
+        Documentação canônica de tokens visuais, componentes de interface, tipografia e padrões estruturais extraídos diretamente do website oficial da marca.
+      </div>
+      <a class="ct-link-text" href="https://www.prospecta.digital/" id="link_text-8-19" style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; color: #ff8900; text-decoration: none; margin-top: 0.5rem;">
+        Desenvolvimento e Performance Prospecta Digital
+      </a>
+    </div>
+  </footer>
+
+  <!-- Paroller and Header Scripts -->
+  <script>
+    $(document).ready(function() {
+      // Initialize Parallax
+      if ($.fn.paroller) {
+        $('.plax').paroller();
+      }
+
+      // Smooth scroll for internal links
+      $('a[href^="#"]').on('click', function(e) {
+        var target = $(this.getAttribute('href'));
+        if (target.length) {
+          e.preventDefault();
+          $('html, body').stop().animate({
+            scrollTop: target.offset().top - 70
+          }, 600);
+        }
+      });
+
+      // Active state on scroll
+      $(window).on('scroll', function() {
+        var scrollPos = $(document).scrollTop() + 100;
+        $('.ds-nav-links a').each(function() {
+          var currLink = $(this);
+          var refElement = $(currLink.attr('href'));
+          if (refElement.length) {
+            if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+              $('.ds-nav-links a').removeClass('active');
+              currLink.addClass('active');
+            } else {
+              currLink.removeClass('active');
+            }
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

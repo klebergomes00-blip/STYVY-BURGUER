@@ -754,6 +754,1954 @@
         bottom: 1.25rem;
       }
     }
+
+    /* ========================================================================= */
+    /* 7. SEGUNDA DOBRA: CAMADAS (EXPERIÊNCIA CINEMATOGRÁFICA DO PRODUTO)        */
+    /* ========================================================================= */
+    .camadas-section {
+      position: relative;
+      width: 100%;
+      height: 480vh;
+      min-height: 480vh;
+      background-color: #000000;
+      display: block;
+    }
+
+    .camadas-viewport {
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #000000;
+      z-index: 15;
+    }
+
+    .camadas-video-element {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      pointer-events: none;
+      filter: contrast(1.08) brightness(0.92) saturate(1.15);
+      z-index: 1;
+    }
+
+    /* MÁSCARAS CINEMATOGRÁFICAS EQUILIBRADAS */
+    .camadas-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(7, 8, 10, 0.88) 0%, rgba(7, 8, 10, 0.45) 45%, rgba(7, 8, 10, 0.7) 100%),
+        linear-gradient(180deg, rgba(7, 8, 10, 0.75) 0%, transparent 20%, transparent 80%, rgba(7, 8, 10, 0.9) 100%),
+        radial-gradient(circle at 50% 50%, transparent 35%, rgba(7, 8, 10, 0.5) 100%);
+    }
+
+    .camadas-fire-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      bottom: -180px;
+      left: 10%;
+      background: radial-gradient(circle, rgba(255, 137, 0, 0.16) 0%, transparent 70%);
+      filter: blur(80px);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* GRID & CAMADA DE CONTEÚDO */
+    .camadas-content-layer {
+      position: absolute;
+      top: 75px;
+      bottom: 35px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 5rem);
+      gap: 2rem;
+      pointer-events: none;
+    }
+
+    /* COLUNA NARRATIVA ESQUERDA */
+    .camadas-narrative-box {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      min-height: 340px;
+      display: flex;
+      align-items: center;
+    }
+
+    .camadas-phase {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(calc(-50% + 22px)) scale(0.97);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.45s var(--ease-cinematic), transform 0.45s var(--ease-cinematic), visibility 0.45s;
+      pointer-events: none;
+      width: 100%;
+      will-change: opacity, transform;
+    }
+
+    .camadas-phase.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(-50%) scale(1);
+      pointer-events: auto;
+    }
+
+    .camadas-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.8vw, 4.4rem);
+      font-weight: 900;
+      line-height: 0.94;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+    }
+
+    .camadas-headline-sub {
+      display: block;
+      color: #ffffff;
+    }
+
+    .camadas-headline .highlight {
+      color: var(--color-primary);
+    }
+
+    .camadas-lead-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--color-text-ash);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      max-width: 460px;
+    }
+
+    /* CARD INDIVIDUAL DA CAMADA (MICROTIPOGRAFIA INTEGRADA) */
+    .layer-num-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 2.5px;
+      color: var(--color-primary);
+      background: rgba(255, 137, 0, 0.12);
+      border: 1px solid rgba(255, 137, 0, 0.35);
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .layer-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.6vw, 4.8rem);
+      font-weight: 900;
+      line-height: 0.92;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95);
+    }
+
+    .layer-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 1.35vw, 1.25rem);
+      letter-spacing: 2.5px;
+      color: var(--color-primary);
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+    }
+
+    .layer-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.92rem, 1.15vw, 1.05rem);
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--color-text-ash);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      max-width: 440px;
+    }
+
+    .camadas-brand-tag {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      letter-spacing: 3px;
+      color: var(--color-text-muted);
+      margin-top: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    /* COLUNA DIREITA: ARQUITETURA VISUAL DAS CAMADAS */
+    .camadas-stack-visual {
+      position: relative;
+      width: 290px;
+      max-width: 320px;
+      background: rgba(14, 15, 18, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 16px;
+      padding: 1.25rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(255, 137, 0, 0.1);
+      pointer-events: auto;
+    }
+
+    .stack-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stack-title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+    }
+
+    .stack-progress-indicator {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      letter-spacing: 1.5px;
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .stack-items-ladder {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 0.85rem;
+    }
+
+    .stack-slot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 9px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-family: var(--font-display);
+      transition: all 0.35s var(--ease-cinematic);
+      opacity: 0.35;
+      transform: translateY(8px);
+      filter: blur(1.5px);
+    }
+
+    .stack-slot .slot-num {
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      color: var(--color-text-muted);
+    }
+
+    .stack-slot .slot-name {
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .stack-slot .slot-status {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    /* Estado: Encaixado (Docked) */
+    .stack-slot.docked {
+      opacity: 0.85;
+      transform: translateY(0);
+      filter: blur(0);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .stack-slot.docked .slot-status {
+      background: var(--color-primary);
+      box-shadow: 0 0 8px var(--color-primary);
+    }
+
+    /* Estado: Foco Atual (Active) */
+    .stack-slot.active {
+      opacity: 1;
+      transform: translateY(0) scale(1.04);
+      filter: blur(0);
+      background: rgba(255, 137, 0, 0.18);
+      border: 1px solid var(--color-primary);
+      box-shadow: 0 0 18px rgba(255, 137, 0, 0.4);
+    }
+
+    .stack-slot.active .slot-num {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .stack-slot.active .slot-name {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .stack-slot.active .slot-status {
+      background: #ffffff;
+      box-shadow: 0 0 10px #ffffff, 0 0 18px var(--color-primary);
+      transform: scale(1.4);
+    }
+
+    /* BARRA DE PROGRESSO LOCAL DAS CAMADAS */
+    .camadas-progress-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      z-index: 25;
+    }
+
+    .camadas-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff8900 0%, #f90c0c 100%);
+      box-shadow: 0 0 10px rgba(255, 137, 0, 0.8);
+      transition: width 0.05s linear;
+    }
+
+    @media (max-width: 900px) {
+      .camadas-content-layer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0 1.25rem;
+        gap: 1.25rem;
+        top: 80px;
+        bottom: 25px;
+      }
+      .camadas-narrative-box {
+        max-width: 100%;
+        min-height: 260px;
+      }
+      .layer-title {
+        font-size: 2.8rem;
+      }
+      .camadas-headline {
+        font-size: 2.2rem;
+      }
+      .camadas-stack-visual {
+        width: 100%;
+        max-width: 100%;
+        padding: 0.85rem;
+      }
+      .stack-items-ladder {
+        flex-direction: row;
+        gap: 6px;
+      }
+      .stack-slot {
+        flex: 1;
+        padding: 6px 4px;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .stack-slot .slot-name {
+        font-size: 0.68rem;
+        letter-spacing: 0.5px;
+      }
+    }
+    /* ========================================================================= */
+    /* 8. TERCEIRA DOBRA: OS STYVY (FELLOW BURGERS LUXURY SHOWCASE STYLE)        */
+    /* ========================================================================= */
+    .fellow-showcase-section {
+      position: relative;
+      z-index: 25;
+      width: 100%;
+      min-height: 100vh;
+      background: radial-gradient(circle at 75% 45%, rgba(45, 20, 8, 0.6) 0%, rgba(12, 13, 16, 0.95) 50%, #07080a 100%), #07080a;
+      padding: clamp(4.5rem, 8vw, 7rem) 0 clamp(3.5rem, 6vw, 5rem);
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* BOKEH & BRILHOS CINEMATOGRÁFICOS */
+    .fellow-bokeh-glow {
+      position: absolute;
+      top: 10%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 137, 0, 0.22) 0%, rgba(249, 12, 12, 0.08) 45%, transparent 70%);
+      filter: blur(80px);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fellow-bokeh-particle-1 {
+      position: absolute;
+      top: 25%;
+      right: 40%;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 180, 50, 0.6);
+      filter: blur(4px);
+      box-shadow: 0 0 15px rgba(255, 180, 50, 0.8);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fellow-bokeh-particle-2 {
+      position: absolute;
+      top: 18%;
+      right: 22%;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(255, 120, 0, 0.5);
+      filter: blur(6px);
+      box-shadow: 0 0 20px rgba(255, 120, 0, 0.8);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .fellow-container {
+      max-width: 1360px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 4rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* GRID PRINCIPAL: 2 COLUNAS */
+    .fellow-showcase-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+      gap: clamp(2rem, 5vw, 4.5rem);
+    }
+
+    /* COLUNA ESQUERDA: TIPOGRAFIA + BOTÕES + CAROUSEL */
+    .fellow-left-column {
+      display: flex;
+      flex-direction: column;
+      z-index: 5;
+    }
+
+    .fellow-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .fellow-hero-title {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: clamp(3rem, 5.8vw, 5.4rem);
+      font-weight: 700;
+      line-height: 1.02;
+      color: #ffffff;
+      margin: 0 0 1rem;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .fellow-hero-title span {
+      color: var(--color-primary);
+    }
+
+    .fellow-hero-desc {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: #cfd3d8;
+      max-width: 520px;
+      margin-bottom: 1.4rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+      transition: opacity 0.3s ease;
+    }
+
+    /* BOTÕES DUPLOS (ESTILO FELLOW BURGERS) */
+    .fellow-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+    }
+
+    .fellow-btn-primary {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #f90c0c 0%, #ff8900 100%);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(249, 12, 12, 0.45), 0 0 20px rgba(255, 137, 0, 0.3);
+      transition: all 0.3s var(--ease-cinematic);
+    }
+
+    .fellow-btn-primary:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 12px 30px rgba(249, 12, 12, 0.6), 0 0 30px rgba(255, 137, 0, 0.5);
+    }
+
+    .fellow-btn-secondary {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      color: #ff3b30;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fellow-btn-secondary span {
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    .fellow-btn-secondary:hover {
+      color: var(--color-primary);
+      transform: translateX(3px);
+    }
+
+    /* GRADE DE 4 + 4 MINI-CARDS (SEM ROLAGEM) */
+    .fellow-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 560px;
+      margin-top: 0.5rem;
+    }
+
+    .fellow-mini-card {
+      background: rgba(22, 24, 30, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 10px 6px 10px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      cursor: pointer;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      user-select: none;
+    }
+
+    .fellow-mini-card:hover {
+      transform: translateY(-5px) scale(1.04);
+      border-color: rgba(255, 137, 0, 0.7);
+      background: rgba(35, 38, 48, 0.92);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.85), 0 0 15px rgba(255, 137, 0, 0.25);
+    }
+
+    .fellow-mini-card.active {
+      border-color: var(--color-primary);
+      background: rgba(255, 137, 0, 0.18);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95), 0 0 22px rgba(255, 137, 0, 0.4);
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    .fellow-mini-img-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: -16px;
+      margin-bottom: 6px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #111318;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .fellow-mini-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.28s ease;
+      pointer-events: none;
+      display: block;
+    }
+
+    .fellow-mini-card:hover .fellow-mini-img,
+    .fellow-mini-card.active .fellow-mini-img {
+      transform: scale(1.12);
+    }
+
+    .fellow-mini-name {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.78rem;
+      color: #ffffff;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 105px;
+      pointer-events: none;
+      line-height: 1.2;
+    }
+
+    .fellow-mini-sub {
+      font-family: var(--font-display);
+      font-size: 0.74rem;
+      letter-spacing: 0.5px;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      pointer-events: none;
+    }
+
+    .fellow-card-bottom-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 4px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .fellow-heart-icon {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.82rem;
+      transition: color 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+    }
+
+    .fellow-heart-icon:hover {
+      transform: scale(1.2);
+      color: #ff3b30;
+    }
+
+    .fellow-mini-card:hover .fellow-heart-icon,
+    .fellow-mini-card.active .fellow-heart-icon {
+      color: #ff3b30;
+    }
+
+    .fellow-plus-btn {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #07080a;
+      font-weight: 900;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+
+    .fellow-mini-card.active .fellow-plus-btn {
+      background: var(--color-primary);
+      color: #ffffff;
+    }
+
+    /* COLUNA DIREITA: QUADRO DE EXIBIÇÃO PADRONIZADO */
+    .fellow-right-column {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 420px;
+    }
+
+    .fellow-wood-deck {
+      position: absolute;
+      bottom: 15px;
+      width: 75%;
+      height: 90px;
+      background: radial-gradient(ellipse at center, rgba(60, 35, 18, 0.85) 0%, rgba(25, 14, 8, 0.45) 60%, transparent 80%);
+      border-radius: 50%;
+      filter: blur(8px);
+      z-index: 1;
+      transform: scaleY(0.45);
+    }
+
+    .fellow-hero-frame {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(255, 137, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: #0d0f13;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, filter 0.3s ease;
+      will-change: transform, opacity, filter;
+    }
+
+    .fellow-hero-burger {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .fellow-hero-frame:hover .fellow-hero-burger {
+      transform: scale(1.04);
+    }
+
+    /* ESTADO DE TROCA (LUXURY SWAP) */
+    .fellow-showcase-grid.is-swapping .fellow-hero-frame {
+      opacity: 0;
+      transform: scale(0.93) translateY(12px);
+      filter: blur(6px);
+    }
+
+    .fellow-showcase-grid.is-swapping .fellow-hero-title,
+    .fellow-showcase-grid.is-swapping .fellow-hero-desc {
+      opacity: 0;
+    }
+
+    @media (max-width: 960px) {
+      .fellow-showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .fellow-right-column {
+        order: -1;
+        min-height: 300px;
+      }
+      .fellow-hero-frame {
+        max-width: 300px;
+      }
+      .fellow-cards-grid {
+        max-width: 100%;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .fellow-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+      .fellow-mini-img-wrap {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    /* ========================================================================= */
+    /* 9. QUARTA DOBRA: PROVA SOCIAL (QUEM PROVA, FALA.)                        */
+    /* ========================================================================= */
+    .social-proof-section {
+      position: relative;
+      padding: clamp(5rem, 8vw, 7.5rem) 0 clamp(4rem, 6vw, 6rem);
+      background: #07080a;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .proof-bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center right;
+      opacity: 0.72;
+      filter: saturate(1.1) brightness(0.92);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .proof-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 72% 48%, rgba(7, 8, 10, 0.1) 0%, rgba(7, 8, 10, 0.65) 60%, #07080a 100%),
+        linear-gradient(180deg, #07080a 0%, transparent 12%, transparent 85%, #07080a 100%),
+        linear-gradient(90deg, #07080a 0%, rgba(7, 8, 10, 0.88) 32%, rgba(7, 8, 10, 0.2) 65%, rgba(7, 8, 10, 0.7) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .proof-ambient-glow {
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 75vw;
+      max-width: 900px;
+      height: 450px;
+      background: radial-gradient(ellipse at center, rgba(255, 184, 0, 0.07) 0%, rgba(255, 137, 0, 0.03) 50%, transparent 75%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .proof-ambient-bokeh {
+      position: absolute;
+      bottom: 20%;
+      right: 10%;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(249, 12, 12, 0.05) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .proof-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* CABEÇALHO DA SEÇÃO + SCORECARD GOOGLE */
+    .proof-header-block {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2.5rem;
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      flex-wrap: wrap;
+    }
+
+    .proof-header-left {
+      max-width: 620px;
+    }
+
+    .proof-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+    }
+
+    .proof-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      box-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .proof-headline {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.04;
+      color: #ffffff;
+      margin: 0 0 1rem;
+      text-shadow: 0 4px 25px rgba(0, 0, 0, 0.9);
+    }
+
+    .proof-headline-highlight {
+      color: var(--color-primary);
+      position: relative;
+      display: inline-block;
+    }
+
+    .proof-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.15vw, 1.12rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: #9da3af;
+      margin: 0;
+    }
+
+    /* SCORECARD GOOGLE REVIEWS */
+    .proof-google-card {
+      background: rgba(22, 25, 32, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 22px;
+      padding: 20px 24px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 25px rgba(255, 184, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 260px;
+      transition: all 0.3s ease;
+    }
+
+    .proof-google-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 184, 0, 0.4);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 184, 0, 0.2);
+    }
+
+    .proof-google-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .proof-google-icon {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .proof-google-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .proof-score-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .proof-score-number {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 900;
+      line-height: 1;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .proof-score-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .proof-stars-row {
+      display: flex;
+      gap: 2px;
+      color: #ffb800;
+      font-size: 1.15rem;
+      line-height: 1;
+      text-shadow: 0 0 8px rgba(255, 184, 0, 0.6);
+    }
+
+    .proof-reviews-count {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+
+    .proof-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.76rem;
+      color: #22c55e;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 8px;
+    }
+
+    .proof-check-icon {
+      font-weight: 900;
+      font-size: 0.85rem;
+    }
+
+    /* MARQUEE LATERAL CONTÍNUO DE AVALIAÇÕES (SEM TRAVAR O SCROLL DA PÁGINA) */
+    .proof-marquee-container {
+      position: relative;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50%);
+      overflow: hidden;
+      margin: 1rem 0 3.5rem;
+      padding: 16px 0 24px;
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      pointer-events: auto;
+    }
+
+    .proof-marquee-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+      animation: proofMarqueeScroll 45s linear infinite;
+      will-change: transform;
+    }
+
+    .proof-marquee-container:hover .proof-marquee-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes proofMarqueeScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .proof-card {
+      flex: 0 0 380px;
+      width: 380px;
+      background: rgba(18, 20, 26, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 22px;
+      padding: 28px 24px 24px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .proof-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: rgba(255, 184, 0, 0.5);
+      background: rgba(26, 29, 38, 0.95);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 137, 0, 0.22);
+    }
+
+    .proof-card-featured {
+      background: linear-gradient(145deg, rgba(28, 32, 42, 0.9) 0%, rgba(18, 20, 26, 0.85) 100%);
+      border-color: rgba(255, 137, 0, 0.3);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.75), 0 0 20px rgba(255, 137, 0, 0.1);
+    }
+
+    .proof-quote-watermark {
+      position: absolute;
+      top: 10px;
+      right: 22px;
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: 5.5rem;
+      line-height: 1;
+      color: rgba(255, 184, 0, 0.08);
+      pointer-events: none;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+
+    .proof-card:hover .proof-quote-watermark {
+      color: rgba(255, 184, 0, 0.18);
+    }
+
+    .proof-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .proof-card-stars {
+      color: #ffb800;
+      font-size: 1.05rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(255, 184, 0, 0.5);
+    }
+
+    .proof-badge-theme {
+      font-family: var(--font-display);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 50px;
+      background: rgba(255, 137, 0, 0.12);
+      border: 1px solid rgba(255, 137, 0, 0.25);
+      color: var(--color-primary);
+    }
+
+    .proof-card-quote {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      line-height: 1.45;
+      color: #ffffff;
+      margin: 0 0 1rem;
+      position: relative;
+      z-index: 2;
+      font-style: normal;
+    }
+
+    .proof-card-featured .proof-card-quote {
+      font-size: 1.3rem;
+      color: #fff9f5;
+    }
+
+    .proof-card-highlight {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #a1a7b4;
+      margin: 0 0 1.5rem;
+      position: relative;
+      z-index: 2;
+      flex-grow: 1;
+    }
+
+    .proof-card-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .proof-author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .proof-avatar-1 {
+      background: linear-gradient(135deg, #ff8900 0%, #f90c0c 100%);
+    }
+
+    .proof-avatar-2 {
+      background: linear-gradient(135deg, #ffb800 0%, #ff8900 100%);
+    }
+
+    .proof-avatar-3 {
+      background: linear-gradient(135deg, #f90c0c 0%, #991b1b 100%);
+    }
+
+    .proof-avatar-4 {
+      background: linear-gradient(135deg, #ffb800 0%, #e11d48 100%);
+    }
+
+    .proof-avatar-5 {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .proof-avatar-6 {
+      background: linear-gradient(135deg, #ff8900 0%, #4f46e5 100%);
+    }
+
+    .proof-author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .proof-author-name {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.94rem;
+      color: #ffffff;
+    }
+
+    .proof-author-platform {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: #9da3af;
+    }
+
+    .proof-platform-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34A853;
+    }
+
+    /* FOOTER BANNER DA SEÇÃO DE PROVA SOCIAL */
+    .proof-cta-banner {
+      background: linear-gradient(90deg, rgba(22, 25, 34, 0.9) 0%, rgba(35, 22, 18, 0.9) 100%);
+      border: 1px solid rgba(255, 137, 0, 0.25);
+      border-radius: 20px;
+      padding: 24px 36px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      backdrop-filter: blur(18px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 137, 0, 0.12);
+      flex-wrap: wrap;
+    }
+
+    .proof-cta-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .proof-cta-title {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: 1.35rem;
+      color: #ffffff;
+    }
+
+    .proof-cta-sub {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: #9da3af;
+    }
+
+    @media (max-width: 1024px) {
+      .proof-header-block {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .proof-google-card {
+        width: 100%;
+        max-width: 360px;
+      }
+      .proof-cta-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 24px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .proof-card {
+        flex: 0 0 310px;
+        width: 310px;
+        padding: 22px 20px 20px;
+      }
+      .proof-card-quote {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* ========================================================================= */
+    /* 10. QUINTA DOBRA: SUA VEZ (MOMENTO DE CONVERSÃO)                          */
+    /* ========================================================================= */
+    .conversion-section {
+      position: relative;
+      padding: clamp(6rem, 10vw, 9rem) 0 clamp(5rem, 8vw, 7.5rem);
+      background: radial-gradient(circle at 75% 45%, rgba(255, 137, 0, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 20% 80%, rgba(249, 12, 12, 0.05) 0%, transparent 50%),
+                  #050608;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .conversion-ambient-glow {
+      position: absolute;
+      top: 30%;
+      right: 15%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 137, 0, 0.12) 0%, rgba(255, 184, 0, 0.04) 40%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .conversion-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* GRID ASSIMÉTRICO DE CONVERSÃO */
+    .conversion-layout {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      align-items: center;
+      gap: clamp(3rem, 6vw, 5.5rem);
+      margin-bottom: clamp(4rem, 7vw, 6.5rem);
+    }
+
+    /* COLUNA ESQUERDA: TEXTOS E BOTÃO DE AÇÃO */
+    .conversion-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 2;
+    }
+
+    .conversion-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .conversion-headline {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: clamp(2.8rem, 5.2vw, 4.6rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: #ffffff;
+      margin: 0 0 1.4rem;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.95);
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.12s;
+    }
+
+    .conv-line-1 {
+      display: block;
+      color: #f3f4f6;
+    }
+
+    .conv-line-2 {
+      display: block;
+      color: #ffffff;
+    }
+
+    .conversion-highlight {
+      color: var(--color-primary);
+      position: relative;
+      display: inline-block;
+      text-shadow: 0 0 25px rgba(255, 137, 0, 0.4);
+    }
+
+    .conversion-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1.05rem, 1.25vw, 1.22rem);
+      font-weight: 300;
+      line-height: 1.6;
+      color: #b0b7c3;
+      margin: 0 0 2.4rem;
+      max-width: 480px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.22s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.22s;
+    }
+
+    /* CTA PRINCIPAL DE CONVERSÃO */
+    .conversion-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.32s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.32s;
+    }
+
+    .conversion-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 42px;
+      background: linear-gradient(135deg, #ff8900 0%, #f90c0c 100%);
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 12px 35px rgba(249, 12, 12, 0.45), 0 0 25px rgba(255, 137, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      width: fit-content;
+    }
+
+    .conversion-cta-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .conversion-cta-btn:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 18px 45px rgba(249, 12, 12, 0.6), 0 0 35px rgba(255, 137, 0, 0.5);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .conversion-cta-btn:hover::before {
+      left: 100%;
+    }
+
+    .conversion-cta-btn svg {
+      transition: transform 0.3s ease;
+    }
+
+    .conversion-cta-btn:hover svg {
+      transform: translateX(5px);
+    }
+
+    /* INFORMAÇÕES SECUNDÁRIAS (DELIVERY / NA CASA) */
+    .conversion-service-options {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 6px;
+    }
+
+    .conversion-service-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .service-tag {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .service-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: #9da3af;
+    }
+
+    .conversion-service-divider {
+      width: 1px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    /* COLUNA DIREITA: IMAGEM HERO EM GRANDE ESCALA */
+    .conversion-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .conversion-image-glow {
+      position: absolute;
+      inset: -5%;
+      background: radial-gradient(circle at center, rgba(255, 137, 0, 0.25) 0%, rgba(249, 12, 12, 0.12) 45%, transparent 75%);
+      filter: blur(50px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .conversion-image-frame {
+      position: relative;
+      width: 100%;
+      max-width: 560px;
+      aspect-ratio: 1 / 1;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(255, 137, 0, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: #0d0f14;
+      z-index: 2;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+      will-change: transform;
+    }
+
+    .conversion-image-frame:hover {
+      box-shadow: 0 35px 80px rgba(0, 0, 0, 0.98), 0 0 50px rgba(255, 137, 0, 0.3);
+      border-color: rgba(255, 184, 0, 0.35);
+    }
+
+    .conversion-burger-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .conversion-image-frame:hover .conversion-burger-img {
+      transform: scale(1.04);
+    }
+
+    /* ESTADO ANIMADO (INTERSECTION REVEAL) */
+    .conversion-section.is-visible .conversion-eyebrow,
+    .conversion-section.is-visible .conversion-headline,
+    .conversion-section.is-visible .conversion-subtitle,
+    .conversion-section.is-visible .conversion-cta-wrap {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .conversion-section.is-visible .conversion-image-frame {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* CTA FINAL / ASSINATURA DE ENCERRAMENTO */
+    .conversion-closing-block {
+      text-align: center;
+      padding-top: clamp(2.5rem, 4vw, 3.5rem);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .conversion-closing-quote {
+      font-family: var(--font-artisanal), 'Calistoga', serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+      color: #ffffff;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .conversion-brand-signature {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+
+    /* RESPONSIVIDADE MOBILE & TABLET */
+    @media (max-width: 960px) {
+      .conversion-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 2.2rem;
+        text-align: center;
+      }
+      .conversion-content {
+        align-items: center;
+        width: 100%;
+      }
+      .conversion-eyebrow {
+        margin: 0 auto 1rem;
+      }
+      .conversion-headline {
+        margin-bottom: 1rem;
+      }
+      .conversion-visual {
+        width: 100%;
+        margin: 0.5rem 0 1rem;
+      }
+      .conversion-image-frame {
+        max-width: 360px;
+      }
+      .conversion-subtitle {
+        margin: 0 auto 1.8rem;
+      }
+      .conversion-cta-btn {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 340px;
+      }
+      .conversion-service-options {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .conversion-image-frame {
+        max-width: 100%;
+        border-radius: 24px;
+      }
+      .conversion-service-options {
+        gap: 16px;
+      }
+      .service-tag {
+        font-size: 0.75rem;
+      }
+      .service-desc {
+        font-size: 0.78rem;
+      }
+    }
+
+    /* ========================================================================= */
+    /* 11. FOOTER (RODAPÉ OFICIAL STYVY BURGUER)                                */
+    /* ========================================================================= */
+    .site-footer {
+      background: #040507;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+      overflow: hidden;
+      padding: clamp(4.5rem, 7vw, 6.5rem) 0 2.5rem;
+    }
+
+    .footer-ambient-glow {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60vw;
+      max-width: 800px;
+      height: 250px;
+      background: radial-gradient(ellipse at bottom, rgba(255, 137, 0, 0.06) 0%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+
+    .footer-container {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 4vw, 3.5rem);
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.1fr 1fr 1fr;
+      gap: clamp(2rem, 4vw, 3.5rem);
+      margin-bottom: clamp(3rem, 5vw, 4.5rem);
+    }
+
+    /* COLUNA 1: BRAND */
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .footer-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .footer-brand-logo img {
+      width: 46px;
+      height: auto;
+      filter: drop-shadow(0 0 10px rgba(255, 137, 0, 0.5));
+    }
+
+    .footer-brand-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .footer-brand-title span {
+      color: var(--color-primary);
+    }
+
+    .footer-brand-desc {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: #9da3af;
+      max-width: 320px;
+      margin: 0;
+    }
+
+    .footer-social-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-social-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 50px;
+      color: #ffffff;
+      text-decoration: none;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social-btn:hover {
+      background: linear-gradient(135deg, rgba(225, 48, 108, 0.2) 0%, rgba(255, 137, 0, 0.2) 100%);
+      border-color: #e1306c;
+      color: #ffffff;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(225, 48, 108, 0.35);
+    }
+
+    .footer-social-btn-wa:hover {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.2) 0%, rgba(18, 140, 126, 0.2) 100%);
+      border-color: #25D366;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    }
+
+    /* TÍTULOS DE COLUNA */
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      margin: 0 0 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-col-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      max-width: 40px;
+    }
+
+    /* COLUNA 2: LOCALIZAÇÃO */
+    .footer-info-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-info-icon {
+      color: var(--color-primary);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .footer-info-text {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #c3cad5;
+      margin: 0;
+    }
+
+    .footer-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      text-decoration: none;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 6px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-map-link:hover {
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    /* COLUNA 3: HORÁRIOS */
+    .footer-hours-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-hour-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 10px 14px;
+      border-radius: 12px;
+    }
+
+    .footer-day {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .footer-time {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: #ffb800;
+      font-weight: 600;
+    }
+
+    /* COLUNA 4: LINKS RÁPIDOS */
+    .footer-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-nav-link {
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      color: #9da3af;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .footer-nav-link:hover {
+      color: var(--color-primary);
+      transform: translateX(5px);
+    }
+
+    .footer-nav-link::before {
+      content: '›';
+      font-size: 1.1rem;
+      color: var(--color-primary);
+    }
+
+    /* BOTTOM BAR */
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-copyright {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      color: #6b7280;
+      margin: 0;
+    }
+
+    .footer-craft-tag {
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      color: #9da3af;
+      text-transform: uppercase;
+    }
+
+    .footer-craft-tag span {
+      color: var(--color-primary);
+    }
+
+    @media (max-width: 1024px) {
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2.2rem;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -766,22 +2714,23 @@
 
   <!-- HEADER -->
   <header class="hero-header">
-    <a href="#" class="hero-brand">
+    <a href="#" class="hero-brand" onclick="scrollToSection('hero')">
       <img src="imagens/logo-styvy.png" alt="STYVY BURGUER"/>
       <span class="hero-brand-name">STYVY <span>BURGUER</span></span>
     </a>
 
     <nav>
       <ul class="hero-header-nav">
-        <li><a class="hero-header-link" onclick="scrollToStep(0.0)">Início</a></li>
-        <li><a class="hero-header-link" onclick="scrollToStep(0.35)">A Brasa</a></li>
-        <li><a class="hero-header-link" onclick="scrollToStep(0.65)">Camadas</a></li>
-        <li><a class="hero-header-link" onclick="scrollToStep(0.95)">Pedir</a></li>
+        <li><a class="hero-header-link" onclick="scrollToSection('hero')">Início</a></li>
+        <li><a class="hero-header-link" onclick="scrollToSection('camadas')">Camadas</a></li>
+        <li><a class="hero-header-link" onclick="scrollToSection('os-styvy')">Os Styvy</a></li>
+        <li><a class="hero-header-link" onclick="scrollToSection('quem-prova')">Avaliações</a></li>
+        <li><a class="hero-header-link" onclick="scrollToSection('sua-vez')">Pedir</a></li>
       </ul>
     </nav>
 
     <div>
-      <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank" style="padding: 8px 20px; font-size: 0.95rem;">
+      <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" class="btn-sweep" target="_blank" style="padding: 8px 20px; font-size: 0.95rem;">
         Pedir Agora
       </a>
     </div>
@@ -824,7 +2773,7 @@
             Hambúrguer artesanal grelhado na brasa viva, ingredientes nobres e uma suculência monstruosa feita para marcar.
           </p>
           <div class="hero-actions">
-            <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank">
+            <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" class="btn-sweep" target="_blank">
               Pedir Agora
             </a>
             <button type="button" class="btn-ghost" onclick="scrollToStep(0.35)">
@@ -883,7 +2832,7 @@
               Uma experiência feita na brasa, construída com ingredientes selecionados e finalizada para entregar um hambúrguer que vai muito além da fome.
             </p>
             <div class="hero-actions">
-              <a href="https://site.labrasaburger.com.br/cardapio/" class="btn-sweep" target="_blank">
+              <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" class="btn-sweep" target="_blank">
                 Peça Pelo Delivery
               </a>
               <a href="https://site.labrasaburger.com.br/onde-encontrar/" class="btn-ghost" target="_blank">
@@ -936,56 +2885,834 @@
   </main>
 
   <!-- ========================================================================= -->
-  <!-- MOTOR DE ALTA PERFORMANCE EXCLUSIVAMENTE SCROLL-DRIVEN                    -->
+  <!-- SEGUNDA DOBRA: CAMADAS (CONSTRUÇÃO CINEMATOGRÁFICA DO BURGER)             -->
+  <!-- ========================================================================= -->
+  <section class="camadas-section" id="camadas">
+    <div class="camadas-viewport" id="camadasViewport">
+
+      <!-- VÍDEO CINEMATOGRÁFICO DE ATMOSFERA EM AUTOPLAY LOOP (100% Fullscreen) -->
+      <video
+        id="camadasVideo"
+        class="camadas-video-element"
+        src="imagens/hamburguernabrasa.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      ></video>
+
+      <!-- MÁSCARAS CINEMATOGRÁFICAS EQUILIBRADAS -->
+      <div class="camadas-vignette"></div>
+      <div class="camadas-fire-glow"></div>
+
+      <!-- GRID DE CONTEÚDO EM CAMADAS -->
+      <div class="camadas-content-layer">
+
+        <!-- COLUNA ESQUERDA: FASES NARRATIVAS (Intro, Foco da Camada, Clímax) -->
+        <div class="camadas-narrative-box">
+
+          <!-- FASE 0: ABERTURA (0% - 15%) -->
+          <div class="camadas-phase phase-opening active" id="cPhaseIntro">
+            <div class="eyebrow-pill">● CAMADAS</div>
+            <h2 class="camadas-headline">
+              NÃO É APENAS UM HAMBÚRGUER.<br/>
+              <span class="camadas-headline-sub">É UMA EXPERIÊNCIA EM <span class="highlight">CAMADAS.</span></span>
+            </h2>
+            <p class="camadas-lead-desc">
+              Cada ingrediente entra no momento certo para transformar uma combinação de ingredientes em uma mordida memorável.
+            </p>
+          </div>
+
+          <!-- FASE 1: 01 - BRIOCHE (15% - 30%) -->
+          <div class="camadas-phase phase-layer" id="cPhase1">
+            <div class="layer-num-badge">CAMADA 01</div>
+            <h3 class="layer-title">BRIOCHE</h3>
+            <div class="layer-tagline">DOURADO. MACIO. IRRESISTÍVEL.</div>
+            <p class="layer-desc">Pão brioche dourado por fora e macio por dentro.</p>
+          </div>
+
+          <!-- FASE 2: 02 - CARNE (30% - 45%) -->
+          <div class="camadas-phase phase-layer" id="cPhase2">
+            <div class="layer-num-badge">CAMADA 02</div>
+            <h3 class="layer-title">CARNE</h3>
+            <div class="layer-tagline">O CORAÇÃO DO STYVY.</div>
+            <p class="layer-desc">Carne artesanal, suculenta e preparada para entregar sabor em cada mordida.</p>
+          </div>
+
+          <!-- FASE 3: 03 - CHEDDAR (45% - 60%) -->
+          <div class="camadas-phase phase-layer" id="cPhase3">
+            <div class="layer-num-badge">CAMADA 03</div>
+            <h3 class="layer-title">CHEDDAR</h3>
+            <div class="layer-tagline">DERRETIDO NO PONTO.</div>
+            <p class="layer-desc">Cremosidade que envolve a carne e completa cada camada.</p>
+          </div>
+
+          <!-- FASE 4: 04 - BACON (60% - 75%) -->
+          <div class="camadas-phase phase-layer" id="cPhase4">
+            <div class="layer-num-badge">CAMADA 04</div>
+            <h3 class="layer-title">BACON</h3>
+            <div class="layer-tagline">CROCANTE. DEFUMADO. INTENSO.</div>
+            <p class="layer-desc">Bacon preparado para trazer textura e aquele sabor marcante.</p>
+          </div>
+
+          <!-- FASE 5: 05 - MOLHO (75% - 90%) -->
+          <div class="camadas-phase phase-layer" id="cPhase5">
+            <div class="layer-num-badge">CAMADA 05</div>
+            <h3 class="layer-title">MOLHO</h3>
+            <div class="layer-tagline">O TOQUE QUE FECHA TUDO.</div>
+            <p class="layer-desc">Uma camada de sabor que conecta todos os ingredientes.</p>
+          </div>
+
+          <!-- FASE 6: CLÍMAX FINAL (90% - 100%) -->
+          <div class="camadas-phase phase-climax" id="cPhaseClimax">
+            <div class="eyebrow-pill">● HAMBÚRGUER COMPLETO</div>
+            <h2 class="camadas-headline">
+              CADA CAMADA.<br/>
+              UM MOTIVO PARA <span class="highlight">VOLTAR.</span>
+            </h2>
+            <div class="camadas-brand-tag">STYVY BURGUER</div>
+            <a onclick="scrollToSection('os-styvy')" class="btn-sweep" style="margin-top: 1rem; display: inline-flex; cursor: pointer;">
+              Descubra os STYVY ↓
+            </a>
+          </div>
+
+        </div>
+
+        <!-- COLUNA DIREITA: STACK VISUAL PROGRESSIVO (A Construção Física das Camadas) -->
+        <aside class="camadas-stack-visual" id="camadasStackVisual">
+          <div class="stack-header">
+            <span class="stack-title">ARQUITETURA DO SABOR</span>
+            <span class="stack-progress-indicator" id="stackCount">0/5</span>
+          </div>
+
+          <div class="stack-items-ladder">
+            <!-- 05. MOLHO -->
+            <div class="stack-slot" id="slot5" data-layer="5">
+              <span class="slot-num">05</span>
+              <span class="slot-name">MOLHO ESPECIAL</span>
+              <span class="slot-status"></span>
+            </div>
+
+            <!-- 04. BACON -->
+            <div class="stack-slot" id="slot4" data-layer="4">
+              <span class="slot-num">04</span>
+              <span class="slot-name">BACON ARTESANAL</span>
+              <span class="slot-status"></span>
+            </div>
+
+            <!-- 03. CHEDDAR -->
+            <div class="stack-slot" id="slot3" data-layer="3">
+              <span class="slot-num">03</span>
+              <span class="slot-name">CHEDDAR CREMOSO</span>
+              <span class="slot-status"></span>
+            </div>
+
+            <!-- 02. CARNE -->
+            <div class="stack-slot" id="slot2" data-layer="2">
+              <span class="slot-num">02</span>
+              <span class="slot-name">CARNE SUCULENTA</span>
+              <span class="slot-status"></span>
+            </div>
+
+            <!-- 01. BRIOCHE -->
+            <div class="stack-slot" id="slot1" data-layer="1">
+              <span class="slot-num">01</span>
+              <span class="slot-name">BRIOCHE DOURADO</span>
+              <span class="slot-status"></span>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Barra de Progresso no Rodapé das Camadas -->
+      <div class="camadas-progress-line">
+        <div class="camadas-progress-bar" id="camadasProgressBar"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- TERCEIRA DOBRA: OS STYVY (ESTILO FELLOW BURGERS / VITRINE PROTAGONISTA)   -->
+  <!-- ========================================================================= -->
+  <section class="fellow-showcase-section" id="os-styvy">
+    <!-- Ambient Bokeh Particles -->
+    <div class="fellow-bokeh-glow"></div>
+    <div class="fellow-bokeh-particle-1"></div>
+    <div class="fellow-bokeh-particle-2"></div>
+
+    <div class="fellow-container">
+      
+      <div class="fellow-showcase-grid" id="fellowGrid">
+        
+        <!-- COLUNA ESQUERDA: APRESENTAÇÃO + AÇÕES + MINI CARDS -->
+        <div class="fellow-left-column">
+          <div class="fellow-eyebrow">
+            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-primary);"></span>
+            OS STYVY
+          </div>
+
+          <h2 class="fellow-hero-title" id="fellowHeroTitle">Brasa Cheddar</h2>
+
+          <p class="fellow-hero-desc" id="fellowHeroDesc">
+            Pão brioche, alface e tomate, hambúrguer assado na brasa, queijo cheddar, maionese da casa.
+          </p>
+
+          <!-- LINHA DE AÇÃO: BOTÃO PRINCIPAL + PREÇO / APENAS O BURGER -->
+          <div class="fellow-actions-row">
+            <a
+              id="fellowBtnOrder"
+              href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F"
+              target="_blank"
+              class="fellow-btn-primary"
+            >
+              Pedir Agora
+            </a>
+
+            <a
+              id="fellowPriceTag"
+              href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F"
+              target="_blank"
+              class="fellow-btn-secondary"
+            >
+              Apenas o Burger • <span id="fellowPriceVal">R$ 28,00</span>
+            </a>
+          </div>
+
+          <!-- GRADE DE 4 + 4 MINI-CARDS (4 EM CIMA, 4 EMBAIXO - SEM ROLAGEM) -->
+          <div class="fellow-cards-grid" id="fellowCardsGrid"></div>
+
+        </div>
+
+        <!-- COLUNA DIREITA: QUADRO DE EXIBIÇÃO PADRONIZADO -->
+        <div class="fellow-right-column" id="fellowRightColumn">
+          <div class="fellow-wood-deck"></div>
+          <div class="fellow-hero-frame" id="fellowHeroFrame">
+            <img
+              id="fellowHeroBurger"
+              class="fellow-hero-burger"
+              src="imagens/brasa cheddar.png"
+              alt="Brasa Cheddar"
+            />
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- QUARTA DOBRA: PROVA SOCIAL (QUEM PROVA, FALA.)                            -->
+  <!-- ========================================================================= -->
+  <section class="social-proof-section" id="quem-prova">
+    <!-- Atmospheric Background Image -->
+    <img src="imagens/styvybacon.png" alt="Styvy Bacon Background" class="proof-bg-img" loading="eager" />
+    <div class="proof-bg-overlay"></div>
+    <!-- Ambient Background Lighting -->
+    <div class="proof-ambient-glow"></div>
+    <div class="proof-ambient-bokeh"></div>
+
+    <div class="proof-container">
+      
+      <!-- CABEÇALHO DA SEÇÃO + SCORECARD GOOGLE -->
+      <div class="proof-header-block">
+        <div class="proof-header-left">
+          <div class="proof-eyebrow">
+            <span class="proof-dot"></span>
+            QUEM JÁ PROVOU
+          </div>
+          <h2 class="proof-headline">
+            QUEM PROVA,<br/>
+            <span class="proof-headline-highlight">FALA.</span>
+          </h2>
+          <p class="proof-subtitle">
+            Não precisamos dizer que é bom. Quem experimenta conta por nós.
+          </p>
+        </div>
+
+        <!-- SCORECARD GOOGLE OFICIAL (CONTEÚDO EDITÁVEL) -->
+        <div class="proof-google-card">
+          <div class="proof-google-top">
+            <svg class="proof-google-icon" viewBox="0 0 24 24" width="22" height="22">
+              <path fill="#EA4335" d="M12 5c1.54 0 2.92.54 4.02 1.43l3.01-3.01C17.21 1.76 14.77 1 12 1 7.55 1 3.73 3.55 1.89 7.27l3.66 2.84C6.42 7.15 8.99 5 12 5z"/>
+              <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58l3.71 2.88c2.16-1.99 3.42-4.92 3.42-8.7z"/>
+              <path fill="#FBBC05" d="M5.55 14.89c-.24-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29L1.89 7.27C1.15 8.75.72 10.42.72 12s.43 3.25 1.17 4.73l3.66-2.84z"/>
+              <path fill="#34A853" d="M12 23c3.24 0 5.95-1.08 7.93-2.91l-3.71-2.88c-1.08.72-2.45 1.16-4.22 1.16-3.01 0-5.58-2.15-6.45-5.11L1.89 16.73C3.73 20.45 7.55 23 12 23z"/>
+            </svg>
+            <span class="proof-google-label">GOOGLE</span>
+          </div>
+
+          <div class="proof-score-row">
+            <div class="proof-score-number" id="proofScoreVal">5,0</div>
+            <div class="proof-score-meta">
+              <div class="proof-stars-row" title="5 de 5 estrelas">
+                <span class="proof-star">★</span>
+                <span class="proof-star">★</span>
+                <span class="proof-star">★</span>
+                <span class="proof-star">★</span>
+                <span class="proof-star">★</span>
+              </div>
+              <div class="proof-reviews-count" id="proofReviewsVal">20 AVALIAÇÕES</div>
+            </div>
+          </div>
+          <div class="proof-verified-badge">
+            <span class="proof-check-icon">✓</span> 100% Avaliações Verificadas
+          </div>
+        </div>
+      </div>
+
+      <!-- MARQUEE DE MOVIMENTO LATERAL CONTÍNUO (SEM TRAVAR O SCROLL VERTICAL DA PÁGINA) -->
+      <div class="proof-marquee-container" id="proofMarqueeContainer">
+        <div class="proof-marquee-track">
+          
+          <!-- SET 1: AS 6 AVALIAÇÕES REAIS -->
+          <!-- DEPOIMENTO 01 (CAPRICHO & ATENDIMENTO) -->
+          <article class="proof-card proof-card-featured">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Capricho & Atendimento</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Os sanduíches são muito bem feitos, no capricho.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Destacou o cuidado em cada detalhe do preparo artesanal e a atenção, carinho e simpatia do casal responsável pelo atendimento.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-1">L</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Lucas M.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 02 (PONTO DA BRASA & SUCULÊNCIA) -->
+          <article class="proof-card">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Ponto & Suculência</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “A carne estava no ponto certo, muito suculenta.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Elogiou o sabor autêntico da carne selada na brasa viva, preservando toda a suculência e o ponto exato do blend artesanal.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-2">R</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Renata S.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 03 (NOVA FAVORITA & EXPERIÊNCIA) -->
+          <article class="proof-card">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Nova Favorita</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Minha nova hamburgueria favorita. Sabor e atendimento impecáveis.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Ressaltou a experiência gastronômica memorável, elegendo a STYVY como a escolha número um para os momentos especiais.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-3">G</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Gabriel P.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 04 (BLEND & BACON CROCANTE) -->
+          <article class="proof-card">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Blend & Crocância</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “O blend na brasa tem um defumado perfeito e o bacon é crocante de verdade!”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Destacou a harmonia entre o pão brioche amanteigado, a crocância do bacon generoso e a carne na brasa.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-4">M</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Matheus F.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 05 (QUEIJO EMPANADO & MOLHO AUTORAL) -->
+          <article class="proof-card">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Queijo & Molho</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “O burger com queijo empanado é surreal de bom! Puxa-puxa irresistível.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Elogiou a textura e generosidade do queijo empanado crocante, perfeitamente equilibrado com os molhos autorais.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-5">C</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Camila R.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 06 (ENTREGA RÁPIDA & PADRÃO) -->
+          <article class="proof-card">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Entrega & Padrão</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Chegou super rápido, quentinho e impecavelmente embalado. Nota 10!”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Enfatizou a agilidade na entrega, o cuidado com a apresentação e o padrão artesanal que chega perfeito.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-6">R</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Rodrigo T.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- SET 2: DUPLICAÇÃO PERFEITA PARA LOOP INFINITO SEM CORTE -->
+          <!-- DEPOIMENTO 01 -->
+          <article class="proof-card proof-card-featured" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Capricho & Atendimento</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Os sanduíches são muito bem feitos, no capricho.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Destacou o cuidado em cada detalhe do preparo artesanal e a atenção, carinho e simpatia do casal responsável pelo atendimento.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-1">L</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Lucas M.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 02 -->
+          <article class="proof-card" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Ponto & Suculência</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “A carne estava no ponto certo, muito suculenta.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Elogiou o sabor autêntico da carne selada na brasa viva, preservando toda a suculência e o ponto exato do blend artesanal.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-2">R</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Renata S.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 03 -->
+          <article class="proof-card" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Nova Favorita</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Minha nova hamburgueria favorita. Sabor e atendimento impecáveis.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Ressaltou a experiência gastronômica memorável, elegendo a STYVY como a escolha número um para os momentos especiais.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-3">G</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Gabriel P.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 04 -->
+          <article class="proof-card" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Blend & Crocância</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “O blend na brasa tem um defumado perfeito e o bacon é crocante de verdade!”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Destacou a harmonia entre o pão brioche amanteigado, a crocância do bacon generoso e a carne na brasa.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-4">M</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Matheus F.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 05 -->
+          <article class="proof-card" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Queijo & Molho</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “O burger com queijo empanado é surreal de bom! Puxa-puxa irresistível.”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Elogiou a textura e generosidade do queijo empanado crocante, perfeitamente equilibrado com os molhos autorais.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-5">C</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Camila R.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+          <!-- DEPOIMENTO 06 -->
+          <article class="proof-card" aria-hidden="true">
+            <div class="proof-quote-watermark">“</div>
+            <div class="proof-card-header">
+              <div class="proof-card-stars">★★★★★</div>
+              <span class="proof-badge-theme">Entrega & Padrão</span>
+            </div>
+            <blockquote class="proof-card-quote">
+              “Chegou super rápido, quentinho e impecavelmente embalado. Nota 10!”
+            </blockquote>
+            <p class="proof-card-highlight">
+              Enfatizou a agilidade na entrega, o cuidado com a apresentação e o padrão artesanal que chega perfeito.
+            </p>
+            <div class="proof-card-author">
+              <div class="proof-author-avatar proof-avatar-6">R</div>
+              <div class="proof-author-info">
+                <div class="proof-author-name">Rodrigo T.</div>
+                <div class="proof-author-platform"><span class="proof-platform-dot"></span> Google Reviews</div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- FOOTER BANNER DA SEÇÃO DE PROVA SOCIAL -->
+      <div class="proof-cta-banner">
+        <div class="proof-cta-text">
+          <span class="proof-cta-title">Quer viver essa mesma experiência?</span>
+          <span class="proof-cta-sub">Peça agora seu STYVY e comprove na primeira mordida.</span>
+        </div>
+        <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" target="_blank" class="fellow-btn-primary" style="padding: 12px 28px; font-size: 0.95rem;">
+          Fazer Meu Pedido
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- QUINTA DOBRA: SUA VEZ (MOMENTO DE CONVERSÃO)                              -->
+  <!-- ========================================================================= -->
+  <section class="conversion-section" id="sua-vez">
+    <div class="conversion-ambient-glow"></div>
+
+    <div class="conversion-container">
+      <div class="conversion-layout">
+        
+        <!-- COLUNA ESQUERDA: TEXTOS E CTA DE ALTO IMPACTO -->
+        <div class="conversion-content">
+          <div class="conversion-eyebrow">
+            <span class="proof-dot"></span>
+            SUA VEZ
+          </div>
+
+          <h2 class="conversion-headline">
+            <span class="conv-line-1">FICOU COM FOME?</span>
+            <span class="conv-line-2">A GENTE <span class="conversion-highlight">RESOLVE.</span></span>
+          </h2>
+
+          <p class="conversion-subtitle">
+            Seu próximo STYVY está a poucos cliques de distância.
+          </p>
+
+          <div class="conversion-cta-wrap">
+            <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" target="_blank" class="conversion-cta-btn">
+              <span>Pedir Agora</span>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+
+            <!-- INFORMAÇÕES SECUNDÁRIAS (DELIVERY / NA CASA) -->
+            <div class="conversion-service-options">
+              <div class="conversion-service-item">
+                <span class="service-tag">DELIVERY</span>
+                <span class="service-desc">Receba seu STYVY.</span>
+              </div>
+              <div class="conversion-service-divider"></div>
+              <div class="conversion-service-item">
+                <span class="service-tag">NA CASA</span>
+                <span class="service-desc">Viva a experiência.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA DIREITA: FOTOGRAFIA CINEMATOGRÁFICA DO PRODUTO EM GRANDE ESCALA -->
+        <div class="conversion-visual">
+          <div class="conversion-image-glow"></div>
+          <div class="conversion-image-frame" id="conversionImageFrame">
+            <img
+              src="imagens/styvybacon.png"
+              alt="Hambúrguer Artesanal STYVY BURGUER"
+              class="conversion-burger-img"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA FINAL & ASSINATURA DE ENCERRAMENTO -->
+      <div class="conversion-closing-block">
+        <p class="conversion-closing-quote">
+          “QUANDO A FOME BATER, VOCÊ JÁ <span class="conversion-highlight">SABE.</span>”
+        </p>
+        <span class="conversion-brand-signature">STYVY BURGUER</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER (RODAPÉ OFICIAL STYVY BURGUER)                                     -->
+  <!-- ========================================================================= -->
+  <footer class="site-footer" id="contato">
+    <div class="footer-ambient-glow"></div>
+
+    <div class="footer-container">
+      <div class="footer-grid">
+        
+        <!-- COLUNA 1: MARCA & REDES SOCIAIS -->
+        <div class="footer-brand-col">
+          <a href="#" class="footer-brand-logo" onclick="scrollToSection('hero')">
+            <img src="imagens/logo-styvy.png" alt="STYVY BURGUER"/>
+            <span class="footer-brand-title">STYVY <span>BURGUER</span></span>
+          </a>
+          <p class="footer-brand-desc">
+            Hambúrguer artesanal autêntico feito na brasa viva. A experiência gastronômica premium que merece a sua fome.
+          </p>
+          <div class="footer-social-links">
+            <a
+              href="https://www.instagram.com/styvyburguer"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-social-btn"
+              title="Instagram STYVY BURGUER"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              <span>@styvyburguer</span>
+            </a>
+
+            <a
+              href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="footer-social-btn footer-social-btn-wa"
+              title="WhatsApp STYVY BURGUER"
+            >
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.23 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.06 0 1.21.89 2.39 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.18-.47-.3z"/>
+              </svg>
+              <span>(62) 9549-9257</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- COLUNA 2: LOCALIZAÇÃO -->
+        <div class="footer-loc-col">
+          <h4 class="footer-col-title">Localização</h4>
+          <div class="footer-info-item">
+            <svg class="footer-info-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <div>
+              <p class="footer-info-text">
+                R. Miguel do Carmo, 1244-1316<br/>
+                Condomínio Rio Formoso<br/>
+                Goiânia - GO, 74370-025, Brasil
+              </p>
+              <a
+                href="https://maps.google.com/?q=R.+Miguel+do+Carmo,+1244-1316+-+Condom%C3%ADnio+Rio+Formoso,+Goi%C3%A2nia+-+GO,+74370-025"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-map-link"
+              >
+                Abrir no Google Maps →
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3: DIAS E HORÁRIOS -->
+        <div class="footer-hours-col">
+          <h4 class="footer-col-title">Horário</h4>
+          <div class="footer-hours-list">
+            <div class="footer-hour-entry">
+              <span class="footer-day">Terça a Quinta</span>
+              <span class="footer-time">19:30 às 23:00</span>
+            </div>
+            <div class="footer-hour-entry">
+              <span class="footer-day">Domingo</span>
+              <span class="footer-time">20:30 às 23:30</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 4: NAVEGAÇÃO RÁPIDA -->
+        <div class="footer-nav-col">
+          <h4 class="footer-col-title">Navegação</h4>
+          <ul class="footer-nav-list">
+            <li><a class="footer-nav-link" onclick="scrollToSection('hero')">Início</a></li>
+            <li><a class="footer-nav-link" onclick="scrollToSection('camadas')">Experiência em Camadas</a></li>
+            <li><a class="footer-nav-link" onclick="scrollToSection('os-styvy')">Os Hambúrgueres</a></li>
+            <li><a class="footer-nav-link" onclick="scrollToSection('quem-prova')">Avaliações de Clientes</a></li>
+            <li><a class="footer-nav-link" onclick="scrollToSection('sua-vez')">Fazer Pedido</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- BARRA DE ENCERRAMENTO -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2026 STYVY BURGUER. Todos os direitos reservados.
+        </p>
+        <div class="footer-craft-tag">
+          Hambúrguer Artesanal Selado na <span>Brasa Viva</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================= -->
+  <!-- MOTOR DE ALTA PERFORMANCE MULTI-SEÇÃO EXCLUSIVAMENTE SCROLL-DRIVEN         -->
   <!-- ========================================================================= -->
   <script>
     (function() {
       'use strict';
 
-      const canvas = document.getElementById('heroCanvas');
-      const ctx = canvas.getContext('2d', { alpha: false });
-      const video = document.getElementById('burgerVideo');
-      const loader = document.getElementById('heroLoader');
-      const progressBar = document.getElementById('heroProgressBar');
+      // -----------------------------------------------------------------------
+      // 1. Elementos da HERO SECTION
+      // -----------------------------------------------------------------------
+      const heroContainer = document.getElementById('heroContainer');
+      const heroCanvas = document.getElementById('heroCanvas');
+      const heroCtx = heroCanvas ? heroCanvas.getContext('2d', { alpha: false }) : null;
+      const heroVideo = document.getElementById('burgerVideo');
+      const heroLoader = document.getElementById('heroLoader');
+      const heroProgressBar = document.getElementById('heroProgressBar');
       const scrollPrompt = document.getElementById('scrollPrompt');
-
-      const phases = [
+      const heroPhases = [
         document.getElementById('phase1'),
         document.getElementById('phase2'),
         document.getElementById('phase3'),
         document.getElementById('phase4')
       ];
+      const heroTimelineItems = document.querySelectorAll('.timeline-item');
 
-      const timelineItems = document.querySelectorAll('.timeline-item');
+      let heroDuration = 0;
+      let heroTarget = 0;
+      let heroSmooth = 0;
+      let heroReady = false;
+      let heroSeeking = false;
+      let heroPendingTime = null;
 
-      let videoDuration = 0;
-      let targetProgress = 0;
-      let smoothProgress = 0;
-      let isReady = false;
-      let isSeeking = false;
-      let pendingTime = null;
+      // -----------------------------------------------------------------------
+      // 2. Elementos da SEGUNDA DOBRA (CAMADAS)
+      // -----------------------------------------------------------------------
+      const camadasContainer = document.getElementById('camadas');
+      const camadasVideo = document.getElementById('camadasVideo');
+      const camadasProgressBar = document.getElementById('camadasProgressBar');
+      const stackCount = document.getElementById('stackCount');
 
-      // 1. Redimensionamento e Ajuste do Canvas
-      function resizeCanvas() {
-        const dpr = window.devicePixelRatio || 1;
-        const w = window.innerWidth;
-        const h = window.innerHeight;
+      const cPhases = [
+        document.getElementById('cPhaseIntro'),
+        document.getElementById('cPhase1'),
+        document.getElementById('cPhase2'),
+        document.getElementById('cPhase3'),
+        document.getElementById('cPhase4'),
+        document.getElementById('cPhase5'),
+        document.getElementById('cPhaseClimax')
+      ];
 
-        canvas.width = w * dpr;
-        canvas.height = h * dpr;
-        ctx.scale(dpr, dpr);
-        drawVideoFrame();
-      }
+      const stackSlots = [
+        document.getElementById('slot1'),
+        document.getElementById('slot2'),
+        document.getElementById('slot3'),
+        document.getElementById('slot4'),
+        document.getElementById('slot5')
+      ];
 
-      function drawVideoFrame() {
-        if (!video || video.readyState < 2) return;
+      let camadasTarget = 0;
+      let camadasSmooth = 0;
 
+      // -----------------------------------------------------------------------
+      // 3. Renderização Universal em Canvas (Cover Math - Hero)
+      // -----------------------------------------------------------------------
+      function drawFrame(ctx, video, canvas) {
+        if (!ctx || !video || video.readyState < 2) return;
         const w = window.innerWidth;
         const h = window.innerHeight;
         const vw = video.videoWidth || 1920;
         const vh = video.videoHeight || 1080;
 
-        // Cover math
         const scale = Math.max(w / vw, h / vh);
         const nw = vw * scale;
         const nh = vh * scale;
@@ -995,181 +3722,529 @@
         ctx.drawImage(video, ox, oy, nw, nh);
       }
 
-      // 2. Inicialização do Vídeo
-      function initVideo() {
-        video.muted = true;
-        video.playsInline = true;
+      function resizeCanvases() {
+        const dpr = window.devicePixelRatio || 1;
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+
+        if (heroCanvas && heroCtx) {
+          heroCanvas.width = w * dpr;
+          heroCanvas.height = h * dpr;
+          heroCtx.scale(dpr, dpr);
+          drawFrame(heroCtx, heroVideo, heroCanvas);
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 4. Inicialização dos Vídeos
+      // -----------------------------------------------------------------------
+      function initHeroVideo() {
+        if (!heroVideo) return;
+        heroVideo.muted = true;
+        heroVideo.playsInline = true;
 
         const onLoaded = function() {
-          if (!isReady) {
-            isReady = true;
-            videoDuration = video.duration || 5;
-            resizeCanvas();
-            drawVideoFrame();
-            if (loader) loader.classList.add('hidden');
+          if (!heroReady) {
+            heroReady = true;
+            heroDuration = heroVideo.duration || 5;
+            resizeCanvases();
+            drawFrame(heroCtx, heroVideo, heroCanvas);
+            if (heroLoader) heroLoader.classList.add('hidden');
           }
         };
 
-        video.addEventListener('loadedmetadata', onLoaded);
-        video.addEventListener('loadeddata', onLoaded);
-        video.addEventListener('canplay', onLoaded);
-        video.addEventListener('canplaythrough', onLoaded);
+        heroVideo.addEventListener('loadedmetadata', onLoaded);
+        heroVideo.addEventListener('loadeddata', onLoaded);
+        heroVideo.addEventListener('canplay', onLoaded);
+        heroVideo.addEventListener('canplaythrough', onLoaded);
 
-        // Destravar decoder
-        const p = video.play();
+        const p = heroVideo.play();
         if (p !== undefined) {
           p.then(() => {
-            video.pause();
-            video.currentTime = 0.001;
+            heroVideo.pause();
+            heroVideo.currentTime = 0.001;
             onLoaded();
           }).catch(() => {
-            video.currentTime = 0.001;
+            heroVideo.currentTime = 0.001;
             onLoaded();
           });
         }
 
-        video.addEventListener('seeked', function() {
-          isSeeking = false;
-          drawVideoFrame();
-          if (pendingTime !== null) {
-            const next = pendingTime;
-            pendingTime = null;
-            applyTime(next);
+        heroVideo.addEventListener('seeked', function() {
+          heroSeeking = false;
+          drawFrame(heroCtx, heroVideo, heroCanvas);
+          if (heroPendingTime !== null) {
+            const next = heroPendingTime;
+            heroPendingTime = null;
+            applyHeroTime(next);
           }
         });
 
         setTimeout(onLoaded, 600);
       }
 
-      // 3. Sistema de Busca de Alta Velocidade (Fast Seeking)
-      function applyTime(time) {
-        if (!isReady || !video.duration) return;
+      function initCamadasVideo() {
+        if (!camadasVideo) return;
+        camadasVideo.muted = true;
+        camadasVideo.playsInline = true;
+        camadasVideo.loop = true;
 
-        time = Math.max(0, Math.min(time, video.duration - 0.02));
+        const playPromise = camadasVideo.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
+      }
 
-        if (isSeeking) {
-          pendingTime = time;
+      // -----------------------------------------------------------------------
+      // 5. Fast Seeking para a Hero
+      // -----------------------------------------------------------------------
+      function applyHeroTime(time) {
+        if (!heroReady || !heroVideo || !heroVideo.duration) return;
+        time = Math.max(0, Math.min(time, heroVideo.duration - 0.02));
+
+        if (heroSeeking) {
+          heroPendingTime = time;
           return;
         }
 
-        if (Math.abs(video.currentTime - time) > 0.012) {
-          isSeeking = true;
-          if ('fastSeek' in video) {
-            try {
-              video.fastSeek(time);
-            } catch(e) {
-              video.currentTime = time;
-            }
+        if (Math.abs(heroVideo.currentTime - time) > 0.012) {
+          heroSeeking = true;
+          if ('fastSeek' in heroVideo) {
+            try { heroVideo.fastSeek(time); } catch(e) { heroVideo.currentTime = time; }
           } else {
-            video.currentTime = time;
+            heroVideo.currentTime = time;
           }
         }
       }
 
-      // 4. Cálculo do Scroll
-      function getScrollProgress() {
+      // -----------------------------------------------------------------------
+      // 6. Cálculo de Progresso Multi-Seção
+      // -----------------------------------------------------------------------
+      function calculateScrollProgress() {
         const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-        const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
-        if (totalScrollable <= 0) return 0;
-        return Math.min(Math.max(scrollY / totalScrollable, 0), 1);
+        const vh = window.innerHeight;
+
+        // Hero: 0 -> heroContainer.offsetHeight - vh
+        if (heroContainer) {
+          const heroScrollable = heroContainer.offsetHeight - vh;
+          if (heroScrollable > 0) {
+            heroTarget = Math.min(Math.max(scrollY / heroScrollable, 0), 1);
+          }
+        }
+
+        // Camadas: camadasContainer.offsetTop -> camadasContainer.offsetHeight - vh
+        if (camadasContainer) {
+          const camadasTop = camadasContainer.offsetTop;
+          const camadasScrollable = camadasContainer.offsetHeight - vh;
+          if (camadasScrollable > 0) {
+            camadasTarget = Math.min(Math.max((scrollY - camadasTop) / camadasScrollable, 0), 1);
+          }
+        }
       }
 
       function onScrollUpdate() {
-        targetProgress = getScrollProgress();
+        calculateScrollProgress();
+        updateConversionSection();
       }
 
-      // 5. Loop de Renderização a 60/120 FPS
+      // -----------------------------------------------------------------------
+      // 7. Loop de Renderização a 60/120 FPS
+      // -----------------------------------------------------------------------
       let lastTimestamp = performance.now();
 
       function animationLoop(timestamp) {
         const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.1);
         lastTimestamp = timestamp;
 
-        // LERP dinâmico com amortecimento físico ultra-suave
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+        const vh = window.innerHeight;
         const speedFactor = 14.0;
-        smoothProgress += (targetProgress - smoothProgress) * (1 - Math.exp(-speedFactor * dt));
 
-        if (Math.abs(targetProgress - smoothProgress) < 0.0001) {
-          smoothProgress = targetProgress;
+        // --- A. HERO SECTION ---
+        if (heroContainer) {
+          const camadasTop = camadasContainer ? camadasContainer.offsetTop : heroContainer.offsetHeight;
+          const inHeroRange = scrollY < camadasTop + vh * 0.5;
+
+          heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
+          if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
+
+          if (inHeroRange) {
+            if (heroDuration > 0) {
+              applyHeroTime(heroSmooth * heroDuration);
+            }
+            drawFrame(heroCtx, heroVideo, heroCanvas);
+            updateHeroPhases(heroSmooth);
+
+            if (heroProgressBar) {
+              heroProgressBar.style.width = (heroSmooth * 100).toFixed(2) + '%';
+            }
+
+            if (scrollPrompt) {
+              if (heroSmooth > 0.03) {
+                scrollPrompt.classList.add('fade-out');
+              } else {
+                scrollPrompt.classList.remove('fade-out');
+              }
+            }
+          }
         }
 
-        if (videoDuration > 0) {
-          const targetTime = smoothProgress * videoDuration;
-          applyTime(targetTime);
-        }
+        // --- B. SEGUNDA DOBRA (CAMADAS - AUTOPLAY VÍDEO + SCROLL NARRATIVO) ---
+        if (camadasContainer) {
+          const camadasTop = camadasContainer.offsetTop;
+          const inCamadasRange = scrollY > camadasTop - vh * 0.8 && scrollY < camadasTop + camadasContainer.offsetHeight + vh * 0.5;
 
-        // Desenhar frame no canvas
-        drawVideoFrame();
+          camadasSmooth += (camadasTarget - camadasSmooth) * (1 - Math.exp(-speedFactor * dt));
+          if (Math.abs(camadasTarget - camadasSmooth) < 0.0001) camadasSmooth = camadasTarget;
 
-        // Atualizar Fases de Texto
-        updatePhases(smoothProgress);
+          if (inCamadasRange) {
+            if (camadasVideo && camadasVideo.paused) {
+              camadasVideo.play().catch(() => {});
+            }
+            updateCamadasPhases(camadasSmooth);
 
-        // Barra de progresso
-        if (progressBar) {
-          progressBar.style.width = (smoothProgress * 100).toFixed(2) + '%';
-        }
-
-        // Scroll prompt
-        if (scrollPrompt) {
-          if (smoothProgress > 0.03) {
-            scrollPrompt.classList.add('fade-out');
+            if (camadasProgressBar) {
+              camadasProgressBar.style.width = (camadasSmooth * 100).toFixed(2) + '%';
+            }
           } else {
-            scrollPrompt.classList.remove('fade-out');
+            if (camadasVideo && !camadasVideo.paused) {
+              camadasVideo.pause();
+            }
           }
         }
 
         requestAnimationFrame(animationLoop);
       }
 
-      // 6. Atualização das Fases de Conteúdo
-      function updatePhases(progress) {
+      // -----------------------------------------------------------------------
+      // 8. Storytelling da Hero
+      // -----------------------------------------------------------------------
+      function updateHeroPhases(progress) {
         let activeIndex = 0;
-
         if (progress < 0.22) {
-          activeIndex = 0; // Fase 1: Intro
+          activeIndex = 0;
         } else if (progress >= 0.22 && progress < 0.54) {
-          activeIndex = 1; // Fase 2: Blend 200g
+          activeIndex = 1;
         } else if (progress >= 0.54 && progress < 0.82) {
-          activeIndex = 2; // Fase 3: Queijo & Bacon
+          activeIndex = 2;
         } else {
-          activeIndex = 3; // Fase 4: Clímax & Pedido
+          activeIndex = 3;
         }
 
-        phases.forEach((p, idx) => {
+        heroPhases.forEach((p, idx) => {
           if (p) {
-            if (idx === activeIndex) {
-              p.classList.add('active');
+            if (idx === activeIndex) p.classList.add('active');
+            else p.classList.remove('active');
+          }
+        });
+
+        heroTimelineItems.forEach((item, idx) => {
+          if (idx === activeIndex) item.classList.add('active');
+          else item.classList.remove('active');
+        });
+      }
+
+      // -----------------------------------------------------------------------
+      // 9. Storytelling da Segunda Dobra (Camadas)
+      // -----------------------------------------------------------------------
+      function updateCamadasPhases(progress) {
+        let activePhase = 0;
+        let activeLayerIndex = 0; // 0 = none, 1 = Brioche, 2 = Carne, 3 = Cheddar, 4 = Bacon, 5 = Molho
+
+        if (progress < 0.15) {
+          activePhase = 0; // Intro
+          activeLayerIndex = 0;
+        } else if (progress >= 0.15 && progress < 0.30) {
+          activePhase = 1; // 01 Brioche
+          activeLayerIndex = 1;
+        } else if (progress >= 0.30 && progress < 0.45) {
+          activePhase = 2; // 02 Carne
+          activeLayerIndex = 2;
+        } else if (progress >= 0.45 && progress < 0.60) {
+          activePhase = 3; // 03 Cheddar
+          activeLayerIndex = 3;
+        } else if (progress >= 0.60 && progress < 0.75) {
+          activePhase = 4; // 04 Bacon
+          activeLayerIndex = 4;
+        } else if (progress >= 0.75 && progress < 0.90) {
+          activePhase = 5; // 05 Molho
+          activeLayerIndex = 5;
+        } else {
+          activePhase = 6; // Clímax / Hambúrguer Completo
+          activeLayerIndex = 5;
+        }
+
+        // Ativar cards de texto da fase
+        cPhases.forEach((p, idx) => {
+          if (p) {
+            if (idx === activePhase) p.classList.add('active');
+            else p.classList.remove('active');
+          }
+        });
+
+        // Atualizar Stack Visual Lateral
+        stackSlots.forEach((slot, idx) => {
+          if (!slot) return;
+          const slotLayer = idx + 1; // 1 to 5
+
+          slot.classList.remove('active', 'docked');
+
+          if (activeLayerIndex >= slotLayer) {
+            if (activeLayerIndex === slotLayer && activePhase !== 6) {
+              slot.classList.add('active');
             } else {
-              p.classList.remove('active');
+              slot.classList.add('docked');
             }
           }
         });
 
-        timelineItems.forEach((item, idx) => {
-          if (idx === activeIndex) {
-            item.classList.add('active');
-          } else {
-            item.classList.remove('active');
-          }
+        if (stackCount) {
+          stackCount.textContent = activeLayerIndex + '/5';
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 10. TERCEIRA DOBRA: Lógica Vitrine Fellow Burgers (OS STYVY - GRADE 4+4)
+      // -----------------------------------------------------------------------
+      const STYVY_PRODUCTS = [
+        {
+          id: 'brasa-cheddar',
+          name: 'Brasa Cheddar',
+          weight: '200g',
+          desc: 'Pão brioche, alface e tomate, hambúrguer assado na brasa, queijo cheddar, maionese da casa.',
+          price: 'R$ 28,00',
+          img: 'imagens/brasa cheddar.png'
+        },
+        {
+          id: 'styvy-gorgon',
+          name: 'Styvy Gorgon',
+          weight: '200g',
+          desc: 'Pão australiano, tomate e rúcula, geleia de abacaxi, hambúrguer assado na brasa, creme de queijo gorgonzola, maionese da casa.',
+          price: 'R$ 35,00',
+          img: 'imagens/styvy gorgon.png'
+        },
+        {
+          id: 'styvy-crock',
+          name: 'Styvy Crock',
+          weight: '200g',
+          desc: 'Pão brioche, alface e tomate, dois filés de frango empanados e creme de queijo fresco.',
+          price: 'R$ 35,00',
+          img: 'imagens/styvy crock.png'
+        },
+        {
+          id: 'brasa-bacon',
+          name: 'Brasa Bacon',
+          weight: '200g',
+          desc: 'Pão brioche, alface e tomate, hambúrguer assado na brasa, mussarela, fatias generosas de bacon, baconese.',
+          price: 'R$ 32,00',
+          img: 'imagens/brasa bacon.png'
+        },
+        {
+          id: 'queijo-rubi',
+          name: 'Queijo Rubi',
+          weight: '200g',
+          desc: 'Pão brioche, salada (alface e tomate), queijo mussarela de 70g empanado, hambúrguer de 130g, geleia de pimenta, maionese da casa.',
+          price: 'R$ 35,00',
+          img: 'imagens/queijo rubi.png'
+        },
+        {
+          id: 'mel-e-brasa',
+          name: 'Mel e Brasa',
+          weight: '200g',
+          desc: 'Pão brioche, alface e tomate, hambúrguer artesanal suculento assado na brasa, creme de queijo fresco derretido e mel, maionese da casa.',
+          price: 'R$ 32,00',
+          img: 'imagens/mel e brasa.png'
+        },
+        {
+          id: 'styvy-burguer',
+          name: 'Styvy Burguer',
+          weight: '200g',
+          desc: 'Pão brioche, alface e tomate, hambúrguer assado na brasa, queijo derretido, maionese especial da casa.',
+          price: 'R$ 28,00',
+          img: 'imagens/styvy burguer.png'
+        },
+        {
+          id: 'brasa-chicken',
+          name: 'Brasa Chicken',
+          weight: '180g',
+          desc: 'Pão brioche, alface e tomate, dois filés de frango grelhados, creme de queijo fresco, maionese da casa.',
+          price: 'R$ 28,00',
+          img: 'imagens/brasa chicken.png'
+        }
+      ];
+
+      let currentProductIndex = 0;
+      const fellowGrid = document.getElementById('fellowGrid');
+      const fellowHeroTitle = document.getElementById('fellowHeroTitle');
+      const fellowHeroDesc = document.getElementById('fellowHeroDesc');
+      const fellowPriceVal = document.getElementById('fellowPriceVal');
+      const fellowHeroBurger = document.getElementById('fellowHeroBurger');
+      const fellowHeroFrame = document.getElementById('fellowHeroFrame');
+      const fellowCardsGrid = document.getElementById('fellowCardsGrid');
+      const fellowRightColumn = document.getElementById('fellowRightColumn');
+
+      function renderFellowComponents() {
+        if (!fellowCardsGrid) return;
+        fellowCardsGrid.innerHTML = '';
+
+        STYVY_PRODUCTS.forEach((prod, index) => {
+          // Mini Card na grade 4x2 com imagem perfeitamente padronizada
+          const card = document.createElement('div');
+          card.className = `fellow-mini-card ${index === currentProductIndex ? 'active' : ''}`;
+          card.dataset.index = index;
+          card.innerHTML = `
+            <div class="fellow-mini-img-wrap">
+              <img src="${prod.img}" alt="${prod.name}" class="fellow-mini-img" loading="lazy" />
+            </div>
+            <div class="fellow-mini-name">${prod.name}</div>
+            <div class="fellow-mini-sub">${prod.weight}</div>
+            <div class="fellow-card-bottom-actions">
+              <span class="fellow-heart-icon" title="Favoritar">♥</span>
+              <span class="fellow-plus-btn" title="Escolher">+</span>
+            </div>
+          `;
+
+          // Ao passar a seta (mouse hover) ou clicar, atualiza imediatamente em tamanho grande ao lado
+          card.addEventListener('mouseenter', () => {
+            if (currentProductIndex !== index) {
+              selectBurger(index, true);
+            }
+          });
+
+          card.addEventListener('click', (e) => {
+            if (e.target.classList.contains('fellow-heart-icon')) {
+              e.stopPropagation();
+              e.target.style.color = e.target.style.color === 'rgb(255, 59, 48)' ? 'rgba(255, 255, 255, 0.4)' : '#ff3b30';
+              return;
+            }
+            selectBurger(index, true);
+          });
+
+          fellowCardsGrid.appendChild(card);
         });
       }
 
-      // 7. Salto Suave para Etapas
-      window.scrollToStep = function(ratio) {
-        const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
-        const targetY = ratio * totalScrollable;
+      function selectBurger(index, animate = true) {
+        if (index < 0 || index >= STYVY_PRODUCTS.length) return;
+        currentProductIndex = index;
+        const prod = STYVY_PRODUCTS[index];
 
-        window.scrollTo({
-          top: targetY,
-          behavior: 'smooth'
+        // Atualizar destaque visual na grade
+        if (fellowCardsGrid) {
+          const cards = fellowCardsGrid.querySelectorAll('.fellow-mini-card');
+          cards.forEach((c, idx) => {
+            if (idx === index) {
+              c.classList.add('active');
+            } else {
+              c.classList.remove('active');
+            }
+          });
+        }
+
+        if (!animate || !fellowGrid) {
+          applyFellowData(prod);
+          return;
+        }
+
+        // Transição suave e dinâmica para exibir o produto em tamanho grande
+        fellowGrid.classList.add('is-swapping');
+        setTimeout(() => {
+          applyFellowData(prod);
+          setTimeout(() => {
+            fellowGrid.classList.remove('is-swapping');
+          }, 40);
+        }, 160);
+      }
+
+      function applyFellowData(prod) {
+        if (fellowHeroBurger) {
+          fellowHeroBurger.src = prod.img;
+          fellowHeroBurger.alt = prod.name;
+        }
+        if (fellowHeroTitle) fellowHeroTitle.textContent = prod.name;
+        if (fellowHeroDesc) fellowHeroDesc.textContent = prod.desc;
+        if (fellowPriceVal) fellowPriceVal.textContent = prod.price;
+      }
+
+      // Parallax 3D Suave no Quadro de Exibição (Desktop)
+      if (fellowRightColumn && fellowHeroFrame) {
+        fellowRightColumn.addEventListener('mousemove', (e) => {
+          if (window.innerWidth <= 960) return;
+          const rect = fellowRightColumn.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          fellowHeroFrame.style.transform = `translate(${x * 18}px, ${y * 14}px) rotate(${x * 2.5}deg)`;
         });
+
+        fellowRightColumn.addEventListener('mouseleave', () => {
+          fellowHeroFrame.style.transform = 'translate(0px, 0px) rotate(0deg)';
+        });
+      }
+
+      // -----------------------------------------------------------------------
+      // 11. Funções de Navegação e Scroll Suave
+      // -----------------------------------------------------------------------
+      window.scrollToStep = function(ratio) {
+        if (!heroContainer) return;
+        const heroScrollable = heroContainer.offsetHeight - window.innerHeight;
+        const targetY = ratio * heroScrollable;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
       };
 
-      // 8. Event Listeners Globais
+      window.scrollToSection = function(section) {
+        if (section === 'hero' || section === 'inicio') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else if (section === 'camadas') {
+          const top = heroContainer ? heroContainer.offsetHeight : window.innerHeight * 4;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        } else if (section === 'os-styvy' || section === 'cardapio') {
+          const el = document.getElementById('os-styvy');
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        } else if (section === 'quem-prova' || section === 'avaliacoes' || section === 'depoimentos') {
+          const el = document.getElementById('quem-prova');
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        } else if (section === 'sua-vez' || section === 'pedir' || section === 'conversao') {
+          const el = document.getElementById('sua-vez');
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }
+      };
+
+      // -----------------------------------------------------------------------
+      // 12. Revelação e Parallax da Quinta Dobra (Sua Vez)
+      // -----------------------------------------------------------------------
+      const convSection = document.getElementById('sua-vez');
+      const convBurgerFrame = document.getElementById('conversionImageFrame');
+
+      function updateConversionSection() {
+        if (!convSection) return;
+        const rect = convSection.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh * 0.88 && rect.bottom > 0) {
+          convSection.classList.add('is-visible');
+          if (convBurgerFrame && window.innerWidth > 960) {
+            const progress = (vh - rect.top) / (vh + rect.height);
+            const parallaxOffset = (progress - 0.5) * 32;
+            convBurgerFrame.style.transform = `translateY(${parallaxOffset.toFixed(1)}px) scale(1)`;
+          }
+        }
+      }
+
+      // -----------------------------------------------------------------------
+      // 12. Event Listeners Globais
+      // -----------------------------------------------------------------------
       window.addEventListener('scroll', onScrollUpdate, { passive: true });
       document.addEventListener('scroll', onScrollUpdate, { passive: true });
       window.addEventListener('resize', () => {
-        resizeCanvas();
+        resizeCanvases();
         onScrollUpdate();
       }, { passive: true });
       window.addEventListener('wheel', onScrollUpdate, { passive: true });
@@ -1178,17 +4253,24 @@
       // Suporte a teclado
       window.addEventListener('keydown', function(e) {
         if (e.key === 'ArrowDown' || e.key === 'PageDown') {
-          targetProgress = Math.min(targetProgress + 0.25, 1);
-          scrollToStep(targetProgress);
+          window.scrollBy({ top: window.innerHeight * 0.4, behavior: 'smooth' });
         } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-          targetProgress = Math.max(targetProgress - 0.25, 0);
-          scrollToStep(targetProgress);
+          window.scrollBy({ top: -window.innerHeight * 0.4, behavior: 'smooth' });
+        } else if (e.key === 'ArrowLeft') {
+          const prevIndex = (currentProductIndex - 1 + STYVY_PRODUCTS.length) % STYVY_PRODUCTS.length;
+          selectBurger(prevIndex);
+        } else if (e.key === 'ArrowRight') {
+          const nextIndex = (currentProductIndex + 1) % STYVY_PRODUCTS.length;
+          selectBurger(nextIndex);
         }
       });
 
       // Inicialização imediata
-      resizeCanvas();
-      initVideo();
+      resizeCanvases();
+      initHeroVideo();
+      initCamadasVideo();
+      renderFellowComponents();
+      selectBurger(0, false);
       onScrollUpdate();
       requestAnimationFrame(animationLoop);
 

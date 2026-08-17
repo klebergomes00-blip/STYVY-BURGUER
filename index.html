@@ -754,29 +754,37 @@
         filter: none !important;
       }
       .hero-content-layer {
-        top: 75px;
-        bottom: 20px;
+        top: 70px;
+        bottom: 25px;
+        left: 0;
+        right: 0;
         padding: 0 1.25rem;
+        pointer-events: none;
       }
-      .phase-intro {
-        left: 1.25rem;
-        right: 1.25rem;
-        max-width: 100%;
-        top: 52%;
+      .story-phase {
+        position: absolute;
+        left: 1.25rem !important;
+        right: 1.25rem !important;
+        max-width: 100% !important;
+        top: 50% !important;
         transform: translateY(-50%) !important;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity 0.5s ease, transform 0.5s ease;
       }
-      .phase-intro.active {
+      .story-phase.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
         transform: translateY(-50%) !important;
-      }
-      .phase-blend, .phase-cheese, .phase-climax {
-        display: none !important;
       }
       .glass-card {
-        padding: 1.5rem 1.25rem;
+        padding: 1.35rem 1.15rem;
       }
       .hero-vignette {
         background:
-          linear-gradient(180deg, rgba(7, 8, 10, 0.85) 0%, rgba(7, 8, 10, 0.35) 30%, rgba(7, 8, 10, 0.55) 70%, rgba(7, 8, 10, 0.92) 100%);
+          linear-gradient(180deg, rgba(7, 8, 10, 0.88) 0%, rgba(7, 8, 10, 0.4) 30%, rgba(7, 8, 10, 0.6) 70%, rgba(7, 8, 10, 0.95) 100%);
       }
     }
 
@@ -3832,15 +3840,13 @@
         heroVideo.muted = true;
         heroVideo.playsInline = true;
         heroVideo.preload = 'auto';
+        heroVideo.loop = false; // Não deixar em loop infinito
 
         if (isMobileDevice) {
-          heroVideo.loop = true;
           heroVideo.autoplay = true;
           if (!heroVideo.src.includes('hamburguer_mobile.mp4')) {
             heroVideo.src = 'imagens/hamburguer_mobile.mp4';
           }
-        } else {
-          heroVideo.loop = false;
         }
 
         const onLoaded = function() {
@@ -3863,6 +3869,13 @@
         heroVideo.addEventListener('durationchange', () => {
           if (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) {
             heroDuration = heroVideo.duration;
+          }
+        });
+
+        heroVideo.addEventListener('ended', function() {
+          if (isMobileDevice) {
+            updateHeroPhases(1.0);
+            drawFrame(heroCtx, heroVideo, heroCanvas, true);
           }
         });
 
@@ -4003,13 +4016,22 @@
         // --- A. HERO SECTION ---
         if (heroContainer) {
           if (isMobileDevice) {
-            // MODO MOBILE: Reprodução automática fluida em loop a 60fps sem dependência de scroll
+            // MODO MOBILE: Reprodução automática fluida sem dependência de scroll
             const inHeroRange = scrollY < cachedCamadasTop;
             if (inHeroRange) {
-              if (heroVideo && heroVideo.paused) {
+              if (heroVideo && heroVideo.paused && !heroVideo.ended) {
                 heroVideo.play().catch(() => {});
               }
               drawFrame(heroCtx, heroVideo, heroCanvas, false);
+
+              // Sincronização automática dos textos/fases com o tempo do vídeo
+              const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
+              const progress = dur > 0 ? Math.min(Math.max(heroVideo.currentTime / dur, 0), 1) : 0;
+              updateHeroPhases(progress);
+
+              if (heroProgressBar) {
+                heroProgressBar.style.width = (progress * 100).toFixed(2) + '%';
+              }
             } else {
               if (heroVideo && !heroVideo.paused) {
                 heroVideo.pause();

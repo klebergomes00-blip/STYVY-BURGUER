@@ -3691,12 +3691,13 @@
       ];
       const heroTimelineItems = document.querySelectorAll('.timeline-item');
 
-      let heroDuration = 0;
+      let heroDuration = 19.56;
       let heroTarget = 0;
       let heroSmooth = 0;
       let heroReady = false;
       let heroSeeking = false;
       let heroPendingTime = null;
+      let heroSeekTimeout = null;
 
       // -----------------------------------------------------------------------
       // 2. Elementos da SEGUNDA DOBRA (CAMADAS)
@@ -3770,41 +3771,70 @@
       }
 
       // -----------------------------------------------------------------------
-      // 4. Inicialização dos Vídeos com Cache de Memória (Blob)
+      // 4. Inicialização Segura e Contínua do Vídeo da Hero (Sem Conflitos de Blob)
       // -----------------------------------------------------------------------
       function initHeroVideo() {
         if (!heroVideo) return;
         heroVideo.muted = true;
         heroVideo.playsInline = true;
+        heroVideo.preload = 'auto';
 
         const onLoaded = function() {
-          if (!heroReady) {
-            heroReady = true;
-            heroDuration = heroVideo.duration || 5;
-            resizeCanvases();
-            drawFrame(heroCtx, heroVideo, heroCanvas, true);
-            if (heroLoader) heroLoader.classList.add('hidden');
+          if (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) {
+            heroDuration = heroVideo.duration;
           }
+          heroReady = true;
+          resizeCanvases();
+          drawFrame(heroCtx, heroVideo, heroCanvas, true);
+          if (heroLoader) heroLoader.classList.add('hidden');
         };
 
         heroVideo.addEventListener('loadedmetadata', onLoaded);
         heroVideo.addEventListener('loadeddata', onLoaded);
         heroVideo.addEventListener('canplay', onLoaded);
         heroVideo.addEventListener('canplaythrough', onLoaded);
+        heroVideo.addEventListener('durationchange', () => {
+          if (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) {
+            heroDuration = heroVideo.duration;
+          }
+        });
 
-        // Preload memory blob for instantaneous seek performance without disk latency
-        fetch('imagens/hamburguer.mp4')
-          .then(res => {
-            if (!res.ok) throw new Error('Network response not ok');
-            return res.blob();
-          })
-          .then(blob => {
-            const blobUrl = URL.createObjectURL(blob);
-            heroVideo.src = blobUrl;
-            heroVideo.load();
-          })
-          .catch(() => {});
+        heroVideo.addEventListener('seeked', function() {
+          heroSeeking = false;
+          if (heroSeekTimeout) {
+            clearTimeout(heroSeekTimeout);
+            heroSeekTimeout = null;
+          }
+          drawFrame(heroCtx, heroVideo, heroCanvas, true);
+          if (heroPendingTime !== null) {
+            const next = heroPendingTime;
+            heroPendingTime = null;
+            applyHeroTime(next);
+          }
+        });
 
+        heroVideo.addEventListener('seeking', function() {
+          if (heroSeekTimeout) clearTimeout(heroSeekTimeout);
+          heroSeekTimeout = setTimeout(() => {
+            heroSeeking = false;
+            heroSeekTimeout = null;
+            if (heroPendingTime !== null) {
+              const next = heroPendingTime;
+              heroPendingTime = null;
+              applyHeroTime(next);
+            }
+          }, 80);
+        });
+
+        if ('requestVideoFrameCallback' in heroVideo) {
+          const onFrame = () => {
+            drawFrame(heroCtx, heroVideo, heroCanvas, false);
+            heroVideo.requestVideoFrameCallback(onFrame);
+          };
+          heroVideo.requestVideoFrameCallback(onFrame);
+        }
+
+        // Tentar play/pause inicial para desbloquear decodificação em segundo plano
         const p = heroVideo.play();
         if (p !== undefined) {
           p.then(() => {
@@ -3817,25 +3847,7 @@
           });
         }
 
-        heroVideo.addEventListener('seeked', function() {
-          heroSeeking = false;
-          drawFrame(heroCtx, heroVideo, heroCanvas, true);
-          if (heroPendingTime !== null) {
-            const next = heroPendingTime;
-            heroPendingTime = null;
-            applyHeroTime(next);
-          }
-        });
-
-        if ('requestVideoFrameCallback' in heroVideo) {
-          const onFrame = () => {
-            drawFrame(heroCtx, heroVideo, heroCanvas, false);
-            heroVideo.requestVideoFrameCallback(onFrame);
-          };
-          heroVideo.requestVideoFrameCallback(onFrame);
-        }
-
-        setTimeout(onLoaded, 600);
+        setTimeout(onLoaded, 500);
       }
 
       function initCamadasVideo() {
@@ -3851,27 +3863,36 @@
       }
 
       // -----------------------------------------------------------------------
-      // 5. Fast Seeking Adaptativo para a Hero
+      // 5. Seeking Suave e com Proteção contra Deadlock
       // -----------------------------------------------------------------------
       function applyHeroTime(time) {
-        if (!heroReady || !heroVideo || !heroVideo.duration) return;
-        time = Math.max(0.001, Math.min(time, heroVideo.duration - 0.03));
+        if (!heroVideo) return;
+        const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
+        const clampedTime = Math.max(0.001, Math.min(time, dur - 0.03));
 
-        if (Math.abs(heroVideo.currentTime - time) < 0.018) {
+        if (Math.abs(heroVideo.currentTime - clampedTime) < 0.012) {
           return;
         }
 
         if (heroSeeking) {
-          heroPendingTime = time;
+          heroPendingTime = clampedTime;
           return;
         }
 
         heroSeeking = true;
-        if ('fastSeek' in heroVideo) {
-          try { heroVideo.fastSeek(time); } catch(e) { heroVideo.currentTime = time; }
-        } else {
-          heroVideo.currentTime = time;
-        }
+        heroVideo.currentTime = clampedTime;
+
+        if (heroSeekTimeout) clearTimeout(heroSeekTimeout);
+        heroSeekTimeout = setTimeout(() => {
+          heroSeeking = false;
+          heroSeekTimeout = null;
+          drawFrame(heroCtx, heroVideo, heroCanvas, true);
+          if (heroPendingTime !== null) {
+            const next = heroPendingTime;
+            heroPendingTime = null;
+            applyHeroTime(next);
+          }
+        }, 80);
       }
 
       // -----------------------------------------------------------------------

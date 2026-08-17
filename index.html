@@ -296,6 +296,17 @@
       backface-visibility: hidden;
     }
 
+    .hero-poster-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: url('imagens/styvybacon.png') center center / cover no-repeat;
+      z-index: 0;
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
     .hero-canvas {
       position: absolute;
       top: 0;
@@ -304,6 +315,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      z-index: 1;
       will-change: transform;
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
@@ -2771,6 +2783,7 @@
 
       <!-- CANVAS & VÍDEO EM TELA INTEIRA (100% Fullscreen) -->
       <div class="hero-media-box">
+        <div class="hero-poster-bg" id="heroPosterBg"></div>
         <canvas id="heroCanvas" class="hero-canvas"></canvas>
         <video
           id="burgerVideo"
@@ -3800,13 +3813,17 @@
       }
 
       // -----------------------------------------------------------------------
-      // 4. Inicialização Segura e Contínua do Vídeo da Hero
+      // 4. Inicialização Segura e Contínua do Vídeo da Hero (Desktop & Mobile)
       // -----------------------------------------------------------------------
       function initHeroVideo() {
         if (!heroVideo) return;
         heroVideo.muted = true;
         heroVideo.playsInline = true;
         heroVideo.preload = 'auto';
+
+        if (isMobileDevice && !heroVideo.src.includes('hamburguer_mobile.mp4')) {
+          heroVideo.src = 'imagens/hamburguer_mobile.mp4';
+        }
 
         const onLoaded = function() {
           if (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) {
@@ -3852,7 +3869,7 @@
               heroPendingTime = null;
               applyHeroTime(next);
             }
-          }, isMobileDevice ? 90 : 60);
+          }, isMobileDevice ? 75 : 50);
         });
 
         if ('requestVideoFrameCallback' in heroVideo) {
@@ -3875,7 +3892,7 @@
           });
         }
 
-        setTimeout(onLoaded, 500);
+        setTimeout(onLoaded, 300);
       }
 
       function initCamadasVideo() {
@@ -3891,20 +3908,20 @@
       }
 
       // -----------------------------------------------------------------------
-      // 5. Seeking Suave Adaptado para Mobile e Desktop (Sem Sobrecarga de Decodificador)
+      // 5. Seeking Ultra Rápido Adaptado para Mobile e Desktop (0ms Keyframe Latency)
       // -----------------------------------------------------------------------
       function applyHeroTime(time) {
         if (!heroVideo) return;
         const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
         const clampedTime = Math.max(0.001, Math.min(time, dur - 0.03));
 
-        const minDelta = isMobileDevice ? 0.045 : 0.015;
+        const minDelta = isMobileDevice ? 0.03 : 0.01;
         if (Math.abs(heroVideo.currentTime - clampedTime) < minDelta) {
           return;
         }
 
         const now = performance.now();
-        const minInterval = isMobileDevice ? 50 : 16;
+        const minInterval = isMobileDevice ? 35 : 12;
         if (now - lastSeekTimestamp < minInterval) {
           heroPendingTime = clampedTime;
           return;
@@ -3924,7 +3941,7 @@
             heroPendingTime = null;
             applyHeroTime(next);
           }
-        }, isMobileDevice ? 90 : 60);
+        }, isMobileDevice ? 75 : 50);
       }
 
       // -----------------------------------------------------------------------
@@ -4372,7 +4389,29 @@
         }
       });
 
-      // Inicialização imediata
+      // Desbloqueio imediato de vídeo em celulares (iOS/Android)
+      const unlockMobileMedia = () => {
+        if (heroVideo) {
+          heroVideo.play().then(() => {
+            heroVideo.pause();
+          }).catch(() => {});
+        }
+        if (camadasVideo && camadasVideo.paused) {
+          camadasVideo.play().catch(() => {});
+        }
+        window.removeEventListener('touchstart', unlockMobileMedia);
+        window.removeEventListener('scroll', unlockMobileMedia);
+      };
+      window.addEventListener('touchstart', unlockMobileMedia, { once: true, passive: true });
+      window.addEventListener('scroll', unlockMobileMedia, { once: true, passive: true });
+
+      // Inicialização imediata sem bloqueio de tela
+      if (heroLoader) {
+        setTimeout(() => {
+          heroLoader.classList.add('hidden');
+        }, 60);
+      }
+
       updateLayoutMetrics();
       resizeCanvases();
       initHeroVideo();

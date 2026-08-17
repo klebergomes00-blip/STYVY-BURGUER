@@ -737,29 +737,43 @@
     /* 8. RESPONSIVIDADE                                                         */
     /* ========================================================================= */
     @media (max-width: 992px) {
+      :root {
+        --hero-scroll-length: 300vh;
+      }
       .hero-container {
-        height: auto !important;
-        min-height: 100vh;
-        min-height: 100dvh;
+        position: relative;
+        width: 100%;
+        height: var(--hero-scroll-length);
+        min-height: var(--hero-scroll-length);
+        display: block;
       }
       .hero-viewport {
-        position: relative !important;
-        height: 100vh !important;
-        height: 100dvh !important;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        z-index: 10;
       }
-      .hero-header-nav, .hero-timeline, .scroll-prompt {
+      .hero-header-nav, .hero-timeline {
         display: none !important;
       }
       .hero-canvas {
         filter: none !important;
       }
       .hero-content-layer {
+        position: absolute;
+        inset: 0;
         top: 70px;
         bottom: 25px;
         left: 0;
         right: 0;
         padding: 0 1.25rem;
         pointer-events: none;
+        z-index: 5;
       }
       .story-phase {
         position: absolute;
@@ -771,7 +785,7 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition: opacity 0.4s ease, transform 0.4s ease;
       }
       .story-phase.active {
         opacity: 1 !important;
@@ -789,6 +803,9 @@
     }
 
     @media (max-width: 580px) {
+      :root {
+        --hero-scroll-length: 280vh;
+      }
       .hero-header {
         height: 65px;
         padding: 0 1rem;
@@ -3750,10 +3767,10 @@
         cachedVh = window.innerHeight;
         isMobileDevice = window.innerWidth <= 992;
         if (heroContainer) {
-          cachedHeroScrollable = isMobileDevice ? 0 : Math.max(heroContainer.offsetHeight - cachedVh, 1);
+          cachedHeroScrollable = Math.max(heroContainer.offsetHeight - cachedVh, 1);
         }
         if (camadasContainer) {
-          cachedCamadasTop = isMobileDevice && heroContainer ? heroContainer.offsetHeight : camadasContainer.offsetTop;
+          cachedCamadasTop = camadasContainer.offsetTop;
           cachedCamadasHeight = camadasContainer.offsetHeight;
           cachedCamadasScrollable = Math.max(cachedCamadasHeight - cachedVh, 1);
         }
@@ -3874,7 +3891,6 @@
 
         heroVideo.addEventListener('ended', function() {
           if (isMobileDevice) {
-            updateHeroPhases(1.0);
             drawFrame(heroCtx, heroVideo, heroCanvas, true);
           }
         });
@@ -3903,7 +3919,7 @@
               heroPendingTime = null;
               applyHeroTime(next);
             }
-          }, isMobileDevice ? 75 : 50);
+          }, 50);
         });
 
         if ('requestVideoFrameCallback' in heroVideo) {
@@ -4015,54 +4031,44 @@
 
         // --- A. HERO SECTION ---
         if (heroContainer) {
-          if (isMobileDevice) {
-            // MODO MOBILE: Reprodução automática fluida sem dependência de scroll
-            const inHeroRange = scrollY < cachedCamadasTop;
-            if (inHeroRange) {
+          const inHeroRange = scrollY < cachedCamadasTop + cachedVh * 0.5;
+
+          heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
+          if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
+
+          if (inHeroRange) {
+            if (isMobileDevice) {
+              // MODO MOBILE: Vídeo automático contínuo em segundo plano (sem travamentos de seek)
               if (heroVideo && heroVideo.paused && !heroVideo.ended) {
                 heroVideo.play().catch(() => {});
               }
               drawFrame(heroCtx, heroVideo, heroCanvas, false);
-
-              // Sincronização automática dos textos/fases com o tempo do vídeo
-              const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
-              const progress = dur > 0 ? Math.min(Math.max(heroVideo.currentTime / dur, 0), 1) : 0;
-              updateHeroPhases(progress);
-
-              if (heroProgressBar) {
-                heroProgressBar.style.width = (progress * 100).toFixed(2) + '%';
-              }
             } else {
-              if (heroVideo && !heroVideo.paused) {
-                heroVideo.pause();
-              }
-            }
-          } else {
-            // MODO DESKTOP: Sincronização 100% Scroll-Driven Interativa
-            const inHeroRange = scrollY < cachedCamadasTop + cachedVh * 0.5;
-
-            heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
-            if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
-
-            if (inHeroRange) {
+              // MODO DESKTOP: Sincronização 100% Scroll-Driven do vídeo
               const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
               if (dur > 0) {
                 applyHeroTime(heroSmooth * dur);
               }
               drawFrame(heroCtx, heroVideo, heroCanvas, false);
-              updateHeroPhases(heroSmooth);
+            }
 
-              if (heroProgressBar) {
-                heroProgressBar.style.width = (heroSmooth * 100).toFixed(2) + '%';
-              }
+            // TEXTOS DO STORYTELLING: Sincronizados 100% ao SCROLL do usuário (Mobile & Desktop)
+            updateHeroPhases(heroSmooth);
 
-              if (scrollPrompt) {
-                if (heroSmooth > 0.03) {
-                  scrollPrompt.classList.add('fade-out');
-                } else {
-                  scrollPrompt.classList.remove('fade-out');
-                }
+            if (heroProgressBar) {
+              heroProgressBar.style.width = (heroSmooth * 100).toFixed(2) + '%';
+            }
+
+            if (scrollPrompt) {
+              if (heroSmooth > 0.03) {
+                scrollPrompt.classList.add('fade-out');
+              } else {
+                scrollPrompt.classList.remove('fade-out');
               }
+            }
+          } else {
+            if (isMobileDevice && heroVideo && !heroVideo.paused) {
+              heroVideo.pause();
             }
           }
         }

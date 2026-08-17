@@ -5,8 +5,24 @@
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0" name="viewport"/>
   <title>STYVY BURGUER — O Sabor que Merece sua Fome</title>
   <meta content="Hambúrguer artesanal feito na brasa viva. 100% carne nobre, queijo fundido, bacon crocante e pão brioche selado." name="description"/>
+  <meta name="theme-color" content="#07080a"/>
+  
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="STYVY BURGUER — O Sabor que Merece sua Fome"/>
+  <meta property="og:description" content="Hambúrguer artesanal feito na brasa viva. 100% carne nobre, queijo fundido, bacon crocante e pão brioche selado."/>
+  <meta property="og:image" content="imagens/logo-styvy.png"/>
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="STYVY BURGUER — O Sabor que Merece sua Fome"/>
+  <meta name="twitter:description" content="Hambúrguer artesanal feito na brasa viva. 100% carne nobre, queijo fundido, bacon crocante e pão brioche selado."/>
+  <meta name="twitter:image" content="imagens/logo-styvy.png"/>
+
+  <!-- Favicons -->
   <link rel="icon" type="image/png" href="assets/46038296432225d7_cropped-cropped-Favicon-1-32x3.png" sizes="32x32"/>
   <link rel="icon" type="image/png" href="assets/880893983299355c_cropped-cropped-Favicon-1-192x.png" sizes="192x192"/>
+  <link rel="apple-touch-icon" href="assets/c989e6ba6c757d7d_cropped-cropped-Favicon-1-180x.png"/>
 
   <!-- ========================================================================= -->
   <!-- DESIGN TOKENS & TYPOGRAPHY ASSETS                                         -->
@@ -262,9 +278,12 @@
       overflow: hidden;
       background-color: #000000;
       z-index: 10;
+      contain: layout paint;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
     }
 
-    /* VÍDEO E CANVAS DE ALTA PERFORMANCE */
+    /* VÍDEO E CANVAS DE ALTA PERFORMANCE (GPU ACCELERATED) */
     .hero-media-box {
       position: absolute;
       top: 0;
@@ -273,6 +292,8 @@
       height: 100%;
       z-index: 1;
       overflow: hidden;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
     }
 
     .hero-canvas {
@@ -284,10 +305,12 @@
       object-fit: cover;
       display: block;
       will-change: transform;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
       filter: contrast(1.05) brightness(0.98) saturate(1.1);
     }
 
-    /* Vídeo oculto usado como buffer do decodificador */
+    /* Vídeo buffer do decodificador */
     .hero-video-element {
       position: absolute;
       top: 0;
@@ -298,6 +321,7 @@
       opacity: 0;
       pointer-events: none;
       visibility: hidden;
+      transform: translate3d(0, 0, 0);
     }
 
     /* MÁSCARAS CINEMATOGRÁFICAS SUAVES */
@@ -2835,9 +2859,9 @@
               <a href="https://wa.me/556295499257?text=Ol%C3%A1%2C%20STYVY!%20%F0%9F%94%A5%F0%9F%8D%94%0AVim%20pelo%20site%20e%20fiquei%20com%20vontade%20de%20experimentar.%20Quero%20fazer%20meu%20pedido!%20Podem%20me%20ajudar%3F" class="btn-sweep" target="_blank">
                 Peça Pelo Delivery
               </a>
-              <a href="https://site.labrasaburger.com.br/onde-encontrar/" class="btn-ghost" target="_blank">
+              <button type="button" class="btn-ghost" onclick="scrollToSection('contato')">
                 Ou Venha Viver a Experiência STYVY
-              </a>
+              </button>
             </div>
           </div>
         </section>
@@ -3704,10 +3728,15 @@
       let camadasSmooth = 0;
 
       // -----------------------------------------------------------------------
-      // 3. Renderização Universal em Canvas (Cover Math - Hero)
+      // 3. Renderização Universal em Canvas de Ultra Performance
       // -----------------------------------------------------------------------
-      function drawFrame(ctx, video, canvas) {
+      let lastDrawnTime = -1;
+
+      function drawFrame(ctx, video, canvas, force) {
         if (!ctx || !video || video.readyState < 2) return;
+        const curTime = video.currentTime;
+        if (!force && Math.abs(curTime - lastDrawnTime) < 0.001) return;
+
         const w = window.innerWidth;
         const h = window.innerHeight;
         const vw = video.videoWidth || 1920;
@@ -3720,23 +3749,28 @@
         const oy = (h - nh) / 2;
 
         ctx.drawImage(video, ox, oy, nw, nh);
+        lastDrawnTime = curTime;
       }
 
       function resizeCanvases() {
-        const dpr = window.devicePixelRatio || 1;
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
         const w = window.innerWidth;
         const h = window.innerHeight;
 
         if (heroCanvas && heroCtx) {
-          heroCanvas.width = w * dpr;
-          heroCanvas.height = h * dpr;
-          heroCtx.scale(dpr, dpr);
-          drawFrame(heroCtx, heroVideo, heroCanvas);
+          const targetW = Math.round(w * dpr);
+          const targetH = Math.round(h * dpr);
+          if (heroCanvas.width !== targetW || heroCanvas.height !== targetH) {
+            heroCanvas.width = targetW;
+            heroCanvas.height = targetH;
+            heroCtx.scale(dpr, dpr);
+          }
+          drawFrame(heroCtx, heroVideo, heroCanvas, true);
         }
       }
 
       // -----------------------------------------------------------------------
-      // 4. Inicialização dos Vídeos
+      // 4. Inicialização dos Vídeos com Cache de Memória (Blob)
       // -----------------------------------------------------------------------
       function initHeroVideo() {
         if (!heroVideo) return;
@@ -3748,7 +3782,7 @@
             heroReady = true;
             heroDuration = heroVideo.duration || 5;
             resizeCanvases();
-            drawFrame(heroCtx, heroVideo, heroCanvas);
+            drawFrame(heroCtx, heroVideo, heroCanvas, true);
             if (heroLoader) heroLoader.classList.add('hidden');
           }
         };
@@ -3757,6 +3791,19 @@
         heroVideo.addEventListener('loadeddata', onLoaded);
         heroVideo.addEventListener('canplay', onLoaded);
         heroVideo.addEventListener('canplaythrough', onLoaded);
+
+        // Preload memory blob for instantaneous seek performance without disk latency
+        fetch('imagens/hamburguer.mp4')
+          .then(res => {
+            if (!res.ok) throw new Error('Network response not ok');
+            return res.blob();
+          })
+          .then(blob => {
+            const blobUrl = URL.createObjectURL(blob);
+            heroVideo.src = blobUrl;
+            heroVideo.load();
+          })
+          .catch(() => {});
 
         const p = heroVideo.play();
         if (p !== undefined) {
@@ -3772,13 +3819,21 @@
 
         heroVideo.addEventListener('seeked', function() {
           heroSeeking = false;
-          drawFrame(heroCtx, heroVideo, heroCanvas);
+          drawFrame(heroCtx, heroVideo, heroCanvas, true);
           if (heroPendingTime !== null) {
             const next = heroPendingTime;
             heroPendingTime = null;
             applyHeroTime(next);
           }
         });
+
+        if ('requestVideoFrameCallback' in heroVideo) {
+          const onFrame = () => {
+            drawFrame(heroCtx, heroVideo, heroCanvas, false);
+            heroVideo.requestVideoFrameCallback(onFrame);
+          };
+          heroVideo.requestVideoFrameCallback(onFrame);
+        }
 
         setTimeout(onLoaded, 600);
       }
@@ -3796,24 +3851,26 @@
       }
 
       // -----------------------------------------------------------------------
-      // 5. Fast Seeking para a Hero
+      // 5. Fast Seeking Adaptativo para a Hero
       // -----------------------------------------------------------------------
       function applyHeroTime(time) {
         if (!heroReady || !heroVideo || !heroVideo.duration) return;
-        time = Math.max(0, Math.min(time, heroVideo.duration - 0.02));
+        time = Math.max(0.001, Math.min(time, heroVideo.duration - 0.03));
+
+        if (Math.abs(heroVideo.currentTime - time) < 0.018) {
+          return;
+        }
 
         if (heroSeeking) {
           heroPendingTime = time;
           return;
         }
 
-        if (Math.abs(heroVideo.currentTime - time) > 0.012) {
-          heroSeeking = true;
-          if ('fastSeek' in heroVideo) {
-            try { heroVideo.fastSeek(time); } catch(e) { heroVideo.currentTime = time; }
-          } else {
-            heroVideo.currentTime = time;
-          }
+        heroSeeking = true;
+        if ('fastSeek' in heroVideo) {
+          try { heroVideo.fastSeek(time); } catch(e) { heroVideo.currentTime = time; }
+        } else {
+          heroVideo.currentTime = time;
         }
       }
 
@@ -3858,7 +3915,7 @@
 
         const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
         const vh = window.innerHeight;
-        const speedFactor = 14.0;
+        const speedFactor = 12.0;
 
         // --- A. HERO SECTION ---
         if (heroContainer) {
@@ -3872,7 +3929,7 @@
             if (heroDuration > 0) {
               applyHeroTime(heroSmooth * heroDuration);
             }
-            drawFrame(heroCtx, heroVideo, heroCanvas);
+            drawFrame(heroCtx, heroVideo, heroCanvas, false);
             updateHeroPhases(heroSmooth);
 
             if (heroProgressBar) {
@@ -4211,6 +4268,12 @@
           }
         } else if (section === 'sua-vez' || section === 'pedir' || section === 'conversao') {
           const el = document.getElementById('sua-vez');
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.pageYOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        } else if (section === 'contato' || section === 'localizacao' || section === 'onde-encontrar' || section === 'footer') {
+          const el = document.getElementById('contato');
           if (el) {
             const y = el.getBoundingClientRect().top + window.pageYOffset;
             window.scrollTo({ top: y, behavior: 'smooth' });

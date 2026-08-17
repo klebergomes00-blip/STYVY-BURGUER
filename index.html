@@ -307,7 +307,6 @@
       will-change: transform;
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
-      filter: contrast(1.05) brightness(0.98) saturate(1.1);
     }
 
     /* Vídeo buffer do decodificador */
@@ -726,8 +725,14 @@
     /* 8. RESPONSIVIDADE                                                         */
     /* ========================================================================= */
     @media (max-width: 992px) {
+      :root {
+        --hero-scroll-length: 360vh;
+      }
       .hero-header-nav, .hero-timeline {
         display: none;
+      }
+      .hero-canvas {
+        filter: none !important;
       }
       .hero-content-layer {
         top: 85px;
@@ -750,7 +755,7 @@
 
     @media (max-width: 580px) {
       :root {
-        --hero-scroll-length: 420vh;
+        --hero-scroll-length: 330vh;
       }
       .hero-header {
         height: 65px;
@@ -3678,7 +3683,7 @@
       // -----------------------------------------------------------------------
       const heroContainer = document.getElementById('heroContainer');
       const heroCanvas = document.getElementById('heroCanvas');
-      const heroCtx = heroCanvas ? heroCanvas.getContext('2d', { alpha: false }) : null;
+      const heroCtx = heroCanvas ? heroCanvas.getContext('2d', { alpha: false, desynchronized: true }) : null;
       const heroVideo = document.getElementById('burgerVideo');
       const heroLoader = document.getElementById('heroLoader');
       const heroProgressBar = document.getElementById('heroProgressBar');
@@ -3698,6 +3703,28 @@
       let heroSeeking = false;
       let heroPendingTime = null;
       let heroSeekTimeout = null;
+      let lastSeekTimestamp = 0;
+
+      // Layout cache para evitar layout thrashing / forçar reflow em scroll
+      let cachedVh = window.innerHeight;
+      let cachedHeroScrollable = 0;
+      let cachedCamadasTop = 0;
+      let cachedCamadasHeight = 0;
+      let cachedCamadasScrollable = 0;
+      let isMobileDevice = false;
+
+      function updateLayoutMetrics() {
+        cachedVh = window.innerHeight;
+        isMobileDevice = window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        if (heroContainer) {
+          cachedHeroScrollable = Math.max(heroContainer.offsetHeight - cachedVh, 1);
+        }
+        if (camadasContainer) {
+          cachedCamadasTop = camadasContainer.offsetTop;
+          cachedCamadasHeight = camadasContainer.offsetHeight;
+          cachedCamadasScrollable = Math.max(cachedCamadasHeight - cachedVh, 1);
+        }
+      }
 
       // -----------------------------------------------------------------------
       // 2. Elementos da SEGUNDA DOBRA (CAMADAS)
@@ -3754,7 +3781,9 @@
       }
 
       function resizeCanvases() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        updateLayoutMetrics();
+        const maxDpr = isMobileDevice ? 1.0 : 1.5;
+        const dpr = Math.min(window.devicePixelRatio || 1, maxDpr);
         const w = window.innerWidth;
         const h = window.innerHeight;
 
@@ -3771,7 +3800,7 @@
       }
 
       // -----------------------------------------------------------------------
-      // 4. Inicialização Segura e Contínua do Vídeo da Hero (Sem Conflitos de Blob)
+      // 4. Inicialização Segura e Contínua do Vídeo da Hero
       // -----------------------------------------------------------------------
       function initHeroVideo() {
         if (!heroVideo) return;
@@ -3823,7 +3852,7 @@
               heroPendingTime = null;
               applyHeroTime(next);
             }
-          }, 80);
+          }, isMobileDevice ? 90 : 60);
         });
 
         if ('requestVideoFrameCallback' in heroVideo) {
@@ -3834,7 +3863,6 @@
           heroVideo.requestVideoFrameCallback(onFrame);
         }
 
-        // Tentar play/pause inicial para desbloquear decodificação em segundo plano
         const p = heroVideo.play();
         if (p !== undefined) {
           p.then(() => {
@@ -3863,23 +3891,27 @@
       }
 
       // -----------------------------------------------------------------------
-      // 5. Seeking Suave e com Proteção contra Deadlock
+      // 5. Seeking Suave Adaptado para Mobile e Desktop (Sem Sobrecarga de Decodificador)
       // -----------------------------------------------------------------------
       function applyHeroTime(time) {
         if (!heroVideo) return;
         const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
         const clampedTime = Math.max(0.001, Math.min(time, dur - 0.03));
 
-        if (Math.abs(heroVideo.currentTime - clampedTime) < 0.012) {
+        const minDelta = isMobileDevice ? 0.045 : 0.015;
+        if (Math.abs(heroVideo.currentTime - clampedTime) < minDelta) {
           return;
         }
 
-        if (heroSeeking) {
+        const now = performance.now();
+        const minInterval = isMobileDevice ? 50 : 16;
+        if (now - lastSeekTimestamp < minInterval) {
           heroPendingTime = clampedTime;
           return;
         }
 
         heroSeeking = true;
+        lastSeekTimestamp = now;
         heroVideo.currentTime = clampedTime;
 
         if (heroSeekTimeout) clearTimeout(heroSeekTimeout);
@@ -3892,37 +3924,26 @@
             heroPendingTime = null;
             applyHeroTime(next);
           }
-        }, 80);
+        }, isMobileDevice ? 90 : 60);
       }
 
       // -----------------------------------------------------------------------
-      // 6. Cálculo de Progresso Multi-Seção
+      // 6. Cálculo de Progresso Multi-Seção Otimizado (Zero Reflows)
       // -----------------------------------------------------------------------
       function calculateScrollProgress() {
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-        const vh = window.innerHeight;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
 
-        // Hero: 0 -> heroContainer.offsetHeight - vh
-        if (heroContainer) {
-          const heroScrollable = heroContainer.offsetHeight - vh;
-          if (heroScrollable > 0) {
-            heroTarget = Math.min(Math.max(scrollY / heroScrollable, 0), 1);
-          }
+        if (cachedHeroScrollable > 0) {
+          heroTarget = Math.min(Math.max(scrollY / cachedHeroScrollable, 0), 1);
         }
 
-        // Camadas: camadasContainer.offsetTop -> camadasContainer.offsetHeight - vh
-        if (camadasContainer) {
-          const camadasTop = camadasContainer.offsetTop;
-          const camadasScrollable = camadasContainer.offsetHeight - vh;
-          if (camadasScrollable > 0) {
-            camadasTarget = Math.min(Math.max((scrollY - camadasTop) / camadasScrollable, 0), 1);
-          }
+        if (cachedCamadasScrollable > 0) {
+          camadasTarget = Math.min(Math.max((scrollY - cachedCamadasTop) / cachedCamadasScrollable, 0), 1);
         }
       }
 
       function onScrollUpdate() {
         calculateScrollProgress();
-        updateConversionSection();
       }
 
       // -----------------------------------------------------------------------
@@ -3934,21 +3955,20 @@
         const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.1);
         lastTimestamp = timestamp;
 
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
-        const vh = window.innerHeight;
-        const speedFactor = 12.0;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const speedFactor = isMobileDevice ? 8.5 : 12.0;
 
         // --- A. HERO SECTION ---
         if (heroContainer) {
-          const camadasTop = camadasContainer ? camadasContainer.offsetTop : heroContainer.offsetHeight;
-          const inHeroRange = scrollY < camadasTop + vh * 0.5;
+          const inHeroRange = scrollY < cachedCamadasTop + cachedVh * 0.5;
 
           heroSmooth += (heroTarget - heroSmooth) * (1 - Math.exp(-speedFactor * dt));
           if (Math.abs(heroTarget - heroSmooth) < 0.0001) heroSmooth = heroTarget;
 
           if (inHeroRange) {
-            if (heroDuration > 0) {
-              applyHeroTime(heroSmooth * heroDuration);
+            const dur = (heroVideo.duration && !isNaN(heroVideo.duration) && heroVideo.duration > 0) ? heroVideo.duration : (heroDuration || 19.56);
+            if (dur > 0) {
+              applyHeroTime(heroSmooth * dur);
             }
             drawFrame(heroCtx, heroVideo, heroCanvas, false);
             updateHeroPhases(heroSmooth);
@@ -3967,10 +3987,9 @@
           }
         }
 
-        // --- B. SEGUNDA DOBRA (CAMADAS - AUTOPLAY VÍDEO + SCROLL NARRATIVO) ---
+        // --- B. SEGUNDA DOBRA (CAMADAS) ---
         if (camadasContainer) {
-          const camadasTop = camadasContainer.offsetTop;
-          const inCamadasRange = scrollY > camadasTop - vh * 0.8 && scrollY < camadasTop + camadasContainer.offsetHeight + vh * 0.5;
+          const inCamadasRange = scrollY > cachedCamadasTop - cachedVh * 0.8 && scrollY < cachedCamadasTop + cachedCamadasHeight + cachedVh * 0.5;
 
           camadasSmooth += (camadasTarget - camadasSmooth) * (1 - Math.exp(-speedFactor * dt));
           if (Math.abs(camadasTarget - camadasSmooth) < 0.0001) camadasSmooth = camadasTarget;
@@ -4303,36 +4322,40 @@
       };
 
       // -----------------------------------------------------------------------
-      // 12. Revelação e Parallax da Quinta Dobra (Sua Vez)
+      // 12. Revelação Suave via IntersectionObserver (Zero Custo de CPU em Scroll)
       // -----------------------------------------------------------------------
       const convSection = document.getElementById('sua-vez');
       const convBurgerFrame = document.getElementById('conversionImageFrame');
 
-      function updateConversionSection() {
-        if (!convSection) return;
-        const rect = convSection.getBoundingClientRect();
-        const vh = window.innerHeight;
-        if (rect.top < vh * 0.88 && rect.bottom > 0) {
+      if (convSection) {
+        if ('IntersectionObserver' in window) {
+          const convObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                convSection.classList.add('is-visible');
+              }
+            });
+          }, { threshold: 0.1 });
+          convObserver.observe(convSection);
+        } else {
           convSection.classList.add('is-visible');
-          if (convBurgerFrame && window.innerWidth > 960) {
-            const progress = (vh - rect.top) / (vh + rect.height);
-            const parallaxOffset = (progress - 0.5) * 32;
-            convBurgerFrame.style.transform = `translateY(${parallaxOffset.toFixed(1)}px) scale(1)`;
-          }
         }
       }
 
       // -----------------------------------------------------------------------
-      // 12. Event Listeners Globais
+      // 13. Event Listeners Globais Ultra Leves (Sem Duplicações)
       // -----------------------------------------------------------------------
       window.addEventListener('scroll', onScrollUpdate, { passive: true });
-      document.addEventListener('scroll', onScrollUpdate, { passive: true });
       window.addEventListener('resize', () => {
         resizeCanvases();
         onScrollUpdate();
       }, { passive: true });
-      window.addEventListener('wheel', onScrollUpdate, { passive: true });
-      window.addEventListener('touchmove', onScrollUpdate, { passive: true });
+      window.addEventListener('orientationchange', () => {
+        setTimeout(() => {
+          resizeCanvases();
+          onScrollUpdate();
+        }, 150);
+      }, { passive: true });
 
       // Suporte a teclado
       window.addEventListener('keydown', function(e) {
@@ -4350,6 +4373,7 @@
       });
 
       // Inicialização imediata
+      updateLayoutMetrics();
       resizeCanvases();
       initHeroVideo();
       initCamadasVideo();
